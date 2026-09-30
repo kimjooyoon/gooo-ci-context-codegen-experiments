@@ -1,0 +1,38 @@
+{
+  "schema": "gooo/body-codegen-ir-search-plan/v1",
+  "intent": "Use Go precedence: input < 0 OR (input >= 10 AND input != 12). Return one hundred when that condition holds; otherwise preserve input.",
+  "hole_id": "branch_value",
+  "candidates": [
+    {
+      "id": "identity",
+      "expression": "input"
+    },
+    {
+      "id": "zero",
+      "expression": "0"
+    },
+    {
+      "id": "hundred",
+      "expression": "100"
+    }
+  ],
+  "test_cases": [
+    {
+      "input": -1,
+      "expected": 100
+    },
+    {
+      "input": 10,
+      "expected": 100
+    },
+    {
+      "input": 11,
+      "expected": 100
+    },
+    {
+      "input": 13,
+      "expected": 100
+    }
+  ],
+  "max_attempts": 1
+}

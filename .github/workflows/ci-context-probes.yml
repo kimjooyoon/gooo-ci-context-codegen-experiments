@@ -1,0 +1,79 @@
+name: Gooo CI failure-context probes
+
+on:
+  push:
+    paths-ignore:
+      - 'audit/**'
+  pull_request:
+    paths-ignore:
+      - 'audit/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  known-bad-training-probes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      GOOO_LAYA_URL: ''
+      GOOO_LAYA_API_KEY: ''
+      HF_HUB_OFFLINE: '1'
+      TRANSFORMERS_OFFLINE: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.27.0'
+
+      - uses: actions/checkout@v4
+        with:
+          repository: kimjooyoon/meta-ontology-go
+          ref: 29d44bc778d85aee03b9af500bd83dc98f368189
+          path: gooo
+
+      - name: Verify compiler source pin and build Gooo
+        run: |
+          test "$(git -C gooo rev-parse HEAD)" = '29d44bc778d85aee03b9af500bd83dc98f368189'
+          (cd gooo && go build -trimpath -o "$RUNNER_TEMP/gooo" ./cmd/gooo)
+
+      - name: Generate bodies and reproduce only declared training failures
+        if: always()
+        run: |
+          if [ -x "$RUNNER_TEMP/gooo" ]; then
+            python3 scripts/run_known_bad_probes.py \
+              --gooo-bin "$RUNNER_TEMP/gooo" \
+              --compiler-revision '29d44bc778d85aee03b9af500bd83dc98f368189' \
+              --out "$RUNNER_TEMP/ci-context-probe"
+          else
+            echo 'Pinned Gooo build did not produce an executable; no probe artifact was generated.' >&2
+            exit 1
+          fi
+
+      - name: Summarize bounded training evidence
+        if: always()
+        run: |
+          if [ -f "$RUNNER_TEMP/ci-context-probe/run.json" ]; then
+            python3 - "$RUNNER_TEMP/ci-context-probe/run.json" >> "$GITHUB_STEP_SUMMARY" <<'PY'
+          import json, sys
+          run = json.load(open(sys.argv[1]))
+          print('## Bounded Gooo CI failure-context probes')
+          print()
+          print(f"Status: `{run['status']}`. These are intentional finite training mismatches, not a claim of full-domain correctness.")
+          print()
+          print('| Intent | Training cases | Expected mismatches | Evidence binding |')
+          print('|---|---:|---:|---|')
+          for row in run['intents']:
+              print(f"| {row['intent_id']} | {row['training_case_count']} | {row['mismatch_count']} | `{row['binding_sha256']}` |")
+          PY
+          fi
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ci-context-probe-${{ github.sha }}
+          path: ${{ runner.temp }}/ci-context-probe
+          if-no-files-found: warn

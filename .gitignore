@@ -1,0 +1,3 @@
+/.local-smoke/
+__pycache__/
+*.py[cod]
