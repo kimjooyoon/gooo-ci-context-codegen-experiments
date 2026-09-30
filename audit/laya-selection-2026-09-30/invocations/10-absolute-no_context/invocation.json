@@ -1,0 +1,38 @@
+{
+  "activity": "AbsWrapInt64",
+  "argv": [
+    "/private/tmp/gooo-ir-search-20260930",
+    "body-codegen",
+    "--json",
+    "--fill-search",
+    "/Users/alice/meta-go/research/metaprogramming/gooo-ci-context-codegen-experiments/audit/laya-selection-2026-09-30/invocations/10-absolute-no_context/plan.search-plan.json",
+    "--activity",
+    "AbsWrapInt64",
+    "/Users/alice/meta-go/research/metaprogramming/gooo-ci-context-codegen-experiments/audit/laya-selection-2026-09-30/invocations/10-absolute-no_context/fixture.gooo.fixture"
+  ],
+  "binary_sha256": "f9f33b86c2114c1adeba01319fddb7d48f666e739aef768bbb5a580adfb7cda9",
+  "choice_event_sequences": [
+    19
+  ],
+  "event_sequences": [
+    19,
+    20
+  ],
+  "exit_code": 0,
+  "fixture_sha256": "28335004b1a83bbf2e0ddebf60665ff33bad4c0891affad9f5ae63bda7749463",
+  "harness_completed_unix_ns": 1790748036045899000,
+  "harness_completed_utc": "2026-09-30T06:00:36.046231+00:00",
+  "harness_watchdog_seconds": 90,
+  "intent_id": "absolute",
+  "invocation_id": "10-absolute-no_context",
+  "plan_sha256": "3bea9de26651028652d2f1c67bb7b5bf8966664f28d49fab620e5aa46d22cf5f",
+  "process_completed_unix_ns": 1790748036041667000,
+  "resource_file": "resource.json",
+  "schema": "gooo/ci-context-selection-invocation/v1",
+  "sequence": 10,
+  "started_unix_ns": 1790748035792872000,
+  "started_utc": "2026-09-30T06:00:35.792870+00:00",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "5ed09fef24c343246f106f3426c110a6fb0f12d14abaacb5ebc7efa62743c0cb",
+  "treatment": "no_context"
+}

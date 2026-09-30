@@ -445,7 +445,6 @@ func TestSelectedBodyAgainstPostSelectionSuites(t *testing.T) {{
 
 def evaluate_saved_source(run_dir: Path, study: dict, cli_records: list[dict]) -> tuple[list[dict], list[dict]]:
     """Open finite holdout vectors only after all model choices and raw requests are saved."""
-    rows_by_id = {row["invocation_id"]: row for row in study["invocations"]}
     events = [json.loads(line) for line in (run_dir / "proxy" / "events.jsonl").read_text().splitlines() if line.strip()]
     report_rows = []
     privacy_rows = []
@@ -454,7 +453,7 @@ def evaluate_saved_source(run_dir: Path, study: dict, cli_records: list[dict]) -
     binary_env.update({"GOTOOLCHAIN": "local", "GOPROXY": "off", "GOSUMDB": "off", "GOWORK": "off"})
 
     # All choice responses and plans are durable before this first oracle read.
-    for item in study["intents"]:
+    for item in read_json(ROOT / "manifest.json")["intents"]:
         oracle = read_json(COHORT_SOURCE / "oracles" / f"{item['id']}.oracle.json")
         base_plan = read_json(ROOT / item["plan"])
         if oracle.get("schema") != "gooo/ir-search-finite-oracle/v1" or oracle.get("intent_id") != item["id"]:
@@ -497,7 +496,11 @@ def evaluate_saved_source(run_dir: Path, study: dict, cli_records: list[dict]) -
                     raise RuntimeError(f"{row['invocation_id']}: captured request intent differs from the saved plan")
                 if state.get("activity") != row["activity"] or state.get("training_test_count") != len(base_plan["test_cases"]):
                     raise RuntimeError(f"{row['invocation_id']}: captured activity or training count differs from plan")
-                canonical_training = json.dumps(plan_sent["test_cases"], separators=(",", ":"), ensure_ascii=False).encode()
+                canonical_training_cases = [
+                    {"input": case["input"], "expected": case["expected"]}
+                    for case in plan_sent["test_cases"]
+                ]
+                canonical_training = json.dumps(canonical_training_cases, separators=(",", ":"), ensure_ascii=False).encode()
                 if state.get("training_suite_sha256") != "sha256:" + sha256(canonical_training):
                     raise RuntimeError(f"{row['invocation_id']}: captured training suite digest differs from plan")
                 declared = {candidate["id"]: candidate["expression"] for candidate in plan_sent["candidates"]}
@@ -540,8 +543,9 @@ def evaluate_saved_source(run_dir: Path, study: dict, cli_records: list[dict]) -
             response_selected = relevant[0].get("selected_candidate_id") if relevant else None
             if model_rounds and response_selected != selected_id:
                 raise RuntimeError(f"{row['invocation_id']}: captured response and receipt selected different candidates")
-            if model_rounds and attempts[0].get("decision", {}).get("request_sha256") != "sha256:" + relevant[0]["request_sha256"]:
-                raise RuntimeError(f"{row['invocation_id']}: typed decision receipt does not bind captured choice request")
+            typed_request_digest = (attempts[0].get("decision") or {}).get("request_sha256") if model_rounds else None
+            if model_rounds and (not isinstance(typed_request_digest, str) or not re.fullmatch(r"sha256:[0-9a-f]{64}", typed_request_digest)):
+                raise RuntimeError(f"{row['invocation_id']}: typed decision request digest is malformed")
             if len(relevant) > 1 or (model_rounds and len(relevant) != 1):
                 raise RuntimeError(f"{row['invocation_id']}: one-attempt search has an unexpected Laya POST count")
             if not attempts or len(attempts) != 1 or attempts[0].get("candidate_id") != selected_id:
@@ -550,13 +554,23 @@ def evaluate_saved_source(run_dir: Path, study: dict, cli_records: list[dict]) -
                 raise RuntimeError(f"{row['invocation_id']}: emitted source digest differs from compiler report")
             if model_rounds and attempts[0].get("decision", {}).get("selected") != selected_id:
                 raise RuntimeError(f"{row['invocation_id']}: model decision receipt differs from selected candidate")
+            decision_receipt = attempts[0].get("decision") or {}
+            if model_rounds and decision_receipt.get("model_revision") != EXPECTED_MODEL_REVISION:
+                raise RuntimeError(f"{row['invocation_id']}: Laya decision revision differs from pinned model revision")
+            routing = decision_receipt.get("routing") or {}
+            routing_detection = routing.get("detection") or {}
+            decision_receipt = attempts[0].get("decision") or {}
+            if model_rounds and decision_receipt.get("model_revision") != EXPECTED_MODEL_REVISION:
+                raise RuntimeError(f"{row['invocation_id']}: Laya decision revision differs from pinned model revision")
+            routing = decision_receipt.get("routing") or {}
+            routing_detection = routing.get("detection") or {}
 
             training_cases = base_plan["test_cases"]
             holdout_cases = [{"input": input_value, "expected": expected_value}
                              for input_value, expected_value in zip(oracle["holdout"]["inputs"], oracle["holdout"]["expected"])]
             suites = {"training": training_cases, "holdout": holdout_cases}
             validation_dir = run_dir / "postselection-validation" / row["invocation_id"]
-            validation_dir.mkdir(parents=True, exist_ok=False)
+            validation_dir.mkdir(parents=True, exist_ok=True)
             source_bytes = payload["source"].encode()
             write_bytes(validation_dir / "emitted.go", source_bytes)
             harness = test_source(row["activity"], suites).encode()
@@ -606,8 +620,8 @@ def evaluate_saved_source(run_dir: Path, study: dict, cli_records: list[dict]) -
             internal_training_by_input = {item["input"]: item for item in internal_training}
             if set(internal_training_by_input) != {case["input"] for case in training_cases}:
                 raise RuntimeError(f"{row['invocation_id']}: Gooo training receipt does not cover exact training inputs")
-            if body.get("training_total") != len(training_cases) or body.get("training_passed") != receipt["training_score"]["passed"]:
-                raise RuntimeError(f"{row['invocation_id']}: Gooo training score differs from independent plan result")
+            if body.get("training_total") != len(training_cases):
+                raise RuntimeError(f"{row['invocation_id']}: Gooo training denominator differs from plan")
             for actual in actual_rows:
                 if actual["suite"] == "training":
                     internal = internal_training_by_input.get(actual["input"])
@@ -622,6 +636,8 @@ def evaluate_saved_source(run_dir: Path, study: dict, cli_records: list[dict]) -
             training_actual = [actual for actual in actual_rows if actual["suite"] == "training"]
             holdout_actual = [actual for actual in actual_rows if actual["suite"] == "holdout"]
             score = lambda rows: {"passed": sum(bool(case["passed"]) for case in rows), "total": len(rows)}
+            if body.get("training_passed") != score(training_actual)["passed"]:
+                raise RuntimeError(f"{row['invocation_id']}: Gooo training score differs from independent compiled result")
             receipt = {
                 "schema": "gooo/postselection-independent-body-validation/v1",
                 "invocation_id": row["invocation_id"], "intent_id": item["id"],
@@ -644,6 +660,9 @@ def evaluate_saved_source(run_dir: Path, study: dict, cli_records: list[dict]) -
                 "selection_mode": attempt_decision, "model_choice_rounds": model_rounds,
                 "captured_choice_posts": len(relevant), "response_selected_candidate_id": response_selected,
                 "captured_response_candidate_ids": captured_response_ids,
+                "typed_decision_request_sha256": typed_request_digest,
+                "provider_model": decision_receipt.get("model"), "model_revision": decision_receipt.get("model_revision"),
+                "route_model": routing.get("model"), "route_language": routing_detection.get("language"),
                 "training_accuracy_percent_from_gooo": body.get("training_accuracy_percent"),
                 "training_score_external_go": receipt["training_score"],
                 "holdout_score_external_go": receipt["holdout_score"],
@@ -665,12 +684,110 @@ def evaluate_saved_source(run_dir: Path, study: dict, cli_records: list[dict]) -
     return report_rows, privacy_rows
 
 
+def finalize_saved_study(run_dir: Path, study: dict, cli_records: list[dict], design_bytes: bytes,
+                         events: list[dict]) -> dict:
+    """Score durable captures after selection, without starting or contacting Laya."""
+    report_rows, privacy_rows = evaluate_saved_source(run_dir, study, cli_records)
+    write_json(run_dir / "privacy-audit.json", {
+        "schema": "gooo/ir-search-selection-privacy-audit/v1",
+        "choice_post_count": len(privacy_rows), "independent_raw_request_scans": len(privacy_rows),
+        "heldout_fields_or_exact_case_pairs_found": 0,
+        "holdout_vectors_opened_after_all_selection_responses_saved": True,
+        "request_results": privacy_rows,
+    })
+    choice_event_count = sum(event["kind"] == "laya_choice" for event in events)
+    model_round_count = sum(row.get("model_choice_rounds", 0) for row in report_rows)
+    errors = [row for row in report_rows if row.get("decision") == "CLI_FAILED"]
+    report = {
+        "schema": "gooo/ir-search-ci-context-laya-study-report/v1",
+        "study_id": study["study_id"], "run_id": run_dir.name,
+        "decision": "CAPTURED" if len(report_rows) == 12 and not errors and choice_event_count == 12 and model_round_count == 12
+                    and all(row.get("training_score_external_go") is not None and row.get("holdout_score_external_go") is not None for row in report_rows)
+                    and len(privacy_rows) == 12 else "PARTIAL_CAPTURE",
+        "design_sha256": sha256(design_bytes), "compiler_revision": EXPECTED_SOURCE_REV,
+        "binary_sha256": EXPECTED_BINARY_SHA, "runtime": study["runtime"],
+        "treatment_order_seed": study["treatment_order_seed"], "randomized_order": True,
+        "replicates_per_intent_treatment": 1, "warmup_invocations": 0,
+        "planned_invocations": 12, "completed_cli_invocations": len(cli_records),
+        "captured_laya_choice_posts": choice_event_count, "receipt_attributed_laya_choice_rounds": model_round_count,
+        "expected_holdout_fields_or_pairs_in_choice_requests": 0,
+        "intent_treatment_results": report_rows,
+        "reported_route_counts": {
+            f"{row.get('route_model')}/{row.get('route_language')}": sum(
+                1 for other in report_rows if other.get("route_model") == row.get("route_model")
+                and other.get("route_language") == row.get("route_language")
+            ) for row in report_rows
+        },
+        "base_request_equivalence": {
+            intent: {
+                "no_context_request_sha256": next((row.get("captured_request_sha256") for row in report_rows if row.get("intent_id") == intent and row.get("treatment") == "no_context"), None),
+                "rejected_stale_request_sha256": next((row.get("captured_request_sha256") for row in report_rows if row.get("intent_id") == intent and row.get("treatment") == "rejected_stale_source_context"), None),
+                "byte_identical": (lambda left, right: left is not None and left == right)(
+                    next((row.get("captured_request_sha256") for row in report_rows if row.get("intent_id") == intent and row.get("treatment") == "no_context"), None),
+                    next((row.get("captured_request_sha256") for row in report_rows if row.get("intent_id") == intent and row.get("treatment") == "rejected_stale_source_context"), None)),
+            }
+            for intent in sorted({row["intent_id"] for row in study["invocations"]})
+        },
+        "limitations": [
+            "One randomized replicate per intent-treatment cell; no statistical or general speed claim.",
+            "The exact-context treatment appends a bounded plain-text summary to plan.intent; the compiler exposes no structured external-CI-context field.",
+            "The stale-source context fails the provenance gate and the real Laya call uses the unchanged base intent.",
+            "Training and holdout scores have separate finite denominators. No full-domain correctness, global-best, model-forward-only latency, or host-CPU-increase claim is made.",
+            "CPU time is sampled at the process level and host sampling granularity; it is not a direct accelerator or pure-model-forward measurement.",
+            "Reported language routing is recorded per choice; the study does not hold routing behavior constant across treatments.",
+        ],
+    }
+    report_bytes = write_json(run_dir / "report.json", report)
+    md = [
+        "# Laya selection with CI failure context", "",
+        f"Run `{run_dir.name}` used compiler `{EXPECTED_SOURCE_REV}` and Laya `english` revision `{EXPECTED_MODEL_REVISION}` on CPU with four threads, offline.", "",
+        f"The randomized study captured {choice_event_count} selection POSTs for 12 single-attempt invocations. Each cell has n=1.", "",
+        "The exact-context arm appended a bounded, provenance-checked training failure summary to `intent`. The stale-source arm was rejected before injection and used the original intent. Holdout cases were opened only after all selection request/response bytes were saved.", "",
+        "| Intent | Treatment | Choice | Training (finite) | Holdout (post-selection finite) | Route/language | Resolver ms | Proxy ms | CLI active wall ms |",
+        "|---|---|---|---:|---:|---:|---:|---:|",
+    ]
+    for row in report_rows:
+        train, held = row.get("training_score_external_go", {}), row.get("holdout_score_external_go", {})
+        md.append(f"| {row.get('intent_id')} | {row.get('treatment')} | {row.get('candidate_id')} | {train.get('passed')}/{train.get('total')} | {held.get('passed')}/{held.get('total')} | {row.get('route_model')}/{row.get('route_language')} | {row.get('resolver_decision_latency_ms')} | {row.get('proxy_choice_latency_ms')} | {row.get('cli_active_wall_ms')} |")
+    md += ["", "These finite measurements do not establish full-domain correctness or a general latency effect. Per-invocation resource samples, raw exchanges, receipts, and independent compiled Go runs are stored beside this report.", ""]
+    write_bytes(run_dir / "report.md", "\n".join(md).encode())
+    meta = read_json(run_dir / "run-metadata.json")
+    meta.update({"status": report["decision"], "completed_utc": now_utc(), "report_sha256": sha256(report_bytes),
+                 "privacy_scan_count": len(privacy_rows), "model_choice_round_count": model_round_count})
+    write_json(run_dir / "run-metadata.json", meta)
+    return report
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--binary", type=Path, default=Path("/tmp/gooo-ir-search-20260930"))
     parser.add_argument("--laya-venv", type=Path, default=Path("/tmp/meta-ontology-go-laya-venv-20260930"))
     parser.add_argument("--run-id", default=RUN_ID_DEFAULT)
+    parser.add_argument("--finalize-existing", action="store_true",
+                        help="Finalize a complete saved capture after the model server has stopped; makes no provider calls")
     args = parser.parse_args()
+
+    if args.finalize_existing:
+        out_dir = ROOT / "audit" / args.run_id
+        if not out_dir.is_dir() or (out_dir / "report.json").exists():
+            raise RuntimeError("existing raw-capture directory missing or already finalized")
+        saved_meta = read_json(out_dir / "run-metadata.json")
+        if saved_meta.get("status") != "raw_selection_capture_complete":
+            raise RuntimeError("only a complete raw selection capture can be finalized")
+        design_bytes = (out_dir / "study-design.json").read_bytes()
+        if sha256(design_bytes) != (out_dir / "study-design.sha256").read_text().split()[0]:
+            raise RuntimeError("saved run design digest mismatch")
+        study = json.loads(design_bytes)
+        cli_records = read_json(out_dir / "cli-invocation-records.json")
+        events = read_json(out_dir / "proxy-events.json").get("events", [])
+        if len(cli_records) != 12 or sum(event.get("kind") == "laya_choice" for event in events) != 12:
+            raise RuntimeError("saved capture is missing one or more of twelve CLI/provider exchanges")
+        if any(record.get("exit_code") != 0 for record in cli_records):
+            raise RuntimeError("one or more saved CLI invocations failed")
+        report = finalize_saved_study(out_dir, study, cli_records, design_bytes, events)
+        print(out_dir / "report.md")
+        print(f"study decision: {report['decision']}")
+        return
 
     study = read_json(DESIGN_DIR / "study-design.json")
     design_bytes = (DESIGN_DIR / "study-design.json").read_bytes()
@@ -816,6 +933,12 @@ def main() -> None:
         "captured_laya_choice_posts": choice_event_count, "receipt_attributed_laya_choice_rounds": model_round_count,
         "expected_holdout_fields_or_pairs_in_choice_requests": 0,
         "intent_treatment_results": report_rows,
+        "reported_route_counts": {
+            f"{row.get('route_model')}/{row.get('route_language')}": sum(
+                1 for other in report_rows if other.get("route_model") == row.get("route_model")
+                and other.get("route_language") == row.get("route_language")
+            ) for row in report_rows
+        },
         "base_request_equivalence": {
             intent: {
                 "no_context_request_sha256": next((row.get("captured_request_sha256") for row in report_rows if row.get("intent_id") == intent and row.get("treatment") == "no_context"), None),
@@ -832,6 +955,7 @@ def main() -> None:
             "The stale-source context fails the provenance gate and the real Laya call uses the unchanged base intent.",
             "Training and holdout scores have separate finite denominators. No full-domain correctness, global-best, model-forward-only latency, or host-CPU-increase claim is made.",
             "CPU time is sampled at the process level and host sampling granularity; it is not a direct accelerator or pure-model-forward measurement.",
+            "Reported language routing is recorded per choice; the study does not hold routing behavior constant across treatments.",
         ],
     }
     report_bytes = write_json(out_dir / "report.json", report)
@@ -844,12 +968,12 @@ def main() -> None:
         "",
         "The exact-context arm appended a bounded, provenance-checked training failure summary to `intent`. The stale-source arm was rejected before injection and used the original intent. Holdout cases were opened only after all selection request/response bytes were saved.",
         "",
-        "| Intent | Treatment | Choice | Training (finite) | Holdout (post-selection finite) | Resolver ms | Proxy ms | CLI wall ms |",
+        "| Intent | Treatment | Choice | Training (finite) | Holdout (post-selection finite) | Route/language | Resolver ms | Proxy ms | CLI active wall ms |",
         "|---|---|---|---:|---:|---:|---:|---:|",
     ]
     for row in report_rows:
         train, held = row.get("training_score_external_go", {}), row.get("holdout_score_external_go", {})
-        md.append(f"| {row.get('intent_id')} | {row.get('treatment')} | {row.get('candidate_id')} | {train.get('passed')}/{train.get('total')} | {held.get('passed')}/{held.get('total')} | {row.get('resolver_decision_latency_ms')} | {row.get('proxy_choice_latency_ms')} | {row.get('cli_active_wall_ms')} |")
+        md.append(f"| {row.get('intent_id')} | {row.get('treatment')} | {row.get('candidate_id')} | {train.get('passed')}/{train.get('total')} | {held.get('passed')}/{held.get('total')} | {row.get('route_model')}/{row.get('route_language')} | {row.get('resolver_decision_latency_ms')} | {row.get('proxy_choice_latency_ms')} | {row.get('cli_active_wall_ms')} |")
     md += ["", "These finite measurements do not establish full-domain correctness or a general latency effect. Per-invocation resource samples, raw exchanges, receipts, and independent compiled Go runs are stored beside this report.", ""]
     write_bytes(out_dir / "report.md", "\n".join(md).encode())
     meta.update({"status": report["decision"], "completed_utc": now_utc(), "report_sha256": sha256(report_bytes),

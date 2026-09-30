@@ -1,0 +1,30 @@
+{
+  "initial_finalization_attempts": [
+    {
+      "attempt": 1,
+      "outcome": "failed_before_opening_independent_oracle",
+      "reason": "runner expected a top-level intents field absent from the frozen invocation design"
+    },
+    {
+      "attempt": 2,
+      "outcome": "failed_before_go_validation",
+      "reason": "training suite hash check serialized sorted plan keys rather than Go struct field order input, expected"
+    },
+    {
+      "attempt": 3,
+      "outcome": "one_offline_go_validation_completed_then_bookkeeping_failed",
+      "reason": "runner compared training score against a receipt variable created later; first attempt raw Go stdout/stderr preserved under postselection-validation/03-clamp-exact_matching_failed_ci_context/recovery-pass-01/"
+    }
+  ],
+  "recovery": {
+    "independent_go_validations": 12,
+    "method": "resume from fsynced request/response/CLI captures; stop/start no provider service; rerun only independent compiled Go validations",
+    "report_status": "CAPTURED"
+  },
+  "schema": "gooo/selection-postselection-finalization-audit/v1",
+  "selection_capture": {
+    "laya_choice_posts": 12,
+    "model_calls_repeated_during_recovery": false,
+    "status": "complete_before_postselection"
+  }
+}

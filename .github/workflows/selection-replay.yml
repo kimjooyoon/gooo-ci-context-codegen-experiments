@@ -1,0 +1,101 @@
+name: Saved Laya selection replay
+
+on:
+  push:
+    paths:
+      - '.github/workflows/selection-replay.yml'
+      - '.github/workflows/ci-context-probes.yml'
+      - 'scripts/validate_selection_run.py'
+      - 'scripts/analyze_case_discrimination.py'
+      - 'scripts/test_analyze_case_discrimination.py'
+      - 'scripts/selection_support.py'
+      - 'scripts/prepare_selection_design.py'
+      - 'scripts/run_known_bad_probes.py'
+      - 'scripts/test_selection_support.py'
+      - 'selection-design/**'
+      - 'audit/ci-run-36673382253/**'
+      - 'audit/laya-selection-2026-09-30/**'
+      - 'fixtures/**'
+      - 'plans/**'
+      - 'manifest.json'
+  pull_request:
+    paths:
+      - '.github/workflows/selection-replay.yml'
+      - '.github/workflows/ci-context-probes.yml'
+      - 'scripts/validate_selection_run.py'
+      - 'scripts/analyze_case_discrimination.py'
+      - 'scripts/test_analyze_case_discrimination.py'
+      - 'scripts/selection_support.py'
+      - 'scripts/prepare_selection_design.py'
+      - 'scripts/run_known_bad_probes.py'
+      - 'scripts/test_selection_support.py'
+      - 'selection-design/**'
+      - 'audit/ci-run-36673382253/**'
+      - 'audit/laya-selection-2026-09-30/**'
+      - 'fixtures/**'
+      - 'plans/**'
+      - 'manifest.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  saved-selection-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      GOOO_LAYA_URL: ''
+      GOOO_LAYA_API_KEY: ''
+      HF_HUB_OFFLINE: '1'
+      TRANSFORMERS_OFFLINE: '1'
+      HF_HUB_DISABLE_TELEMETRY: '1'
+      GOTOOLCHAIN: local
+      GOPROXY: off
+      GOSUMDB: off
+      GOWORK: off
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.27.0'
+          cache: false
+
+      - name: Independently replay saved Go and verify evidence bindings
+        run: |
+          python3 scripts/validate_selection_run.py \
+            --run-dir audit/laya-selection-2026-09-30 \
+            --output "$RUNNER_TEMP/selection-replay-validation" \
+            --require-go-version go1.27.0
+
+      - name: Run case-discrimination regressions
+        run: python3 -m unittest discover -s scripts -p 'test_analyze_case_discrimination.py' -v
+
+      - name: Check finite case-discrimination analysis
+        run: |
+          python3 scripts/analyze_case_discrimination.py \
+            --check \
+            --run-dir audit/laya-selection-2026-09-30
+
+      - name: Add replay results to the job summary
+        if: always()
+        run: |
+          report="$RUNNER_TEMP/selection-replay-validation/validation-report.md"
+          if [ -f "$report" ]; then
+            cat "$report" >> "$GITHUB_STEP_SUMMARY"
+          else
+            printf '%s\n' 'The saved-run validator did not produce a replay report.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+          case_report='audit/laya-selection-2026-09-30/case-discrimination.md'
+          if [ -f "$case_report" ]; then
+            cat "$case_report" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: selection-replay-${{ github.sha }}
+          path: ${{ runner.temp }}/selection-replay-validation
+          if-no-files-found: warn

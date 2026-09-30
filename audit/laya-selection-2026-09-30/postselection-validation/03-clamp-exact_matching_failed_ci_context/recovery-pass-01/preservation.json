@@ -1,0 +1,7 @@
+{
+  "note": "First postselection Go output preserved before retrying finalization after a receipt-ordering bug.",
+  "files": {
+    "go-test.stdout.raw": "c9c46ede1287e4b336d25186918a700f9a8a6632f1492bd27d24573864c282ff",
+    "go-test.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

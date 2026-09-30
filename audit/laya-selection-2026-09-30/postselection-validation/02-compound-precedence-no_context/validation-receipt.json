@@ -1,0 +1,28 @@
+{
+  "all_finite_cases_observed": true,
+  "candidate_expression": "0",
+  "candidate_id": "zero",
+  "go_test_exit_code": 1,
+  "go_test_expected_exit_code": 1,
+  "go_test_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "go_test_stdout_sha256": "6d7556c11ae5ab1ae011f2aec4f2474c36f1058040e90f10c45a08cdeb538141",
+  "holdout_score": {
+    "passed": 3,
+    "total": 4
+  },
+  "intent_id": "compound-precedence",
+  "invocation_id": "02-compound-precedence-no_context",
+  "oracle_sha256": "5b3597a5e890bb39ea7d14272a6bbacf6d346857f79deb83660eeec2cd6b90a6",
+  "schema": "gooo/postselection-independent-body-validation/v1",
+  "scope": "independent finite int64 input observations after candidate selection; no full-domain proof",
+  "source_digest_reported": "sha256:8465f6375a1fd9300a7fa3b971491969565618484bee813afafd214f4749319c",
+  "source_sha256": "8465f6375a1fd9300a7fa3b971491969565618484bee813afafd214f4749319c",
+  "timing_unix_ns": {
+    "go_test_finished": 1790748401103339000,
+    "go_test_started": 1790748400593397000
+  },
+  "training_score": {
+    "passed": 0,
+    "total": 4
+  }
+}

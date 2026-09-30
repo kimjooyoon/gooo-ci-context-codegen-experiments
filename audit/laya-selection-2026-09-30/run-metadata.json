@@ -1,0 +1,43 @@
+{
+  "capture_proxy_url": "http://127.0.0.1:55138/v1/systemone",
+  "choice_post_count": 12,
+  "completed_invocations": 12,
+  "completed_utc": "2026-09-30T06:06:42.109812+00:00",
+  "device": "cpu",
+  "elapsed_ms_including_health_and_sampler": 10861.548999999999,
+  "expected_model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+  "health_after": {
+    "device": "cpu",
+    "loaded": [
+      "english",
+      "multilingual"
+    ],
+    "revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  },
+  "health_before": {
+    "device": "cpu",
+    "loaded": [
+      "english"
+    ],
+    "revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  },
+  "host_logical_cpu_count": 10,
+  "invocation_count_planned": 12,
+  "laya_port": 55129,
+  "laya_venv": "/private/tmp/meta-ontology-go-laya-venv-20260930",
+  "laya_version": "0.3.21",
+  "model_choice_round_count": 12,
+  "planned_invocations": 12,
+  "preexecution_sha256": "e3022fdc9d2d04183f0fd0b5ba4bac2bab46949c682b8c82f8382c921be02579",
+  "privacy_scan_count": 12,
+  "provider_policy": "offline loopback-only; GOOO_LAYA_API_KEY unset; no model download",
+  "randomized_order": true,
+  "report_sha256": "682411228bf3cbffee011c7c41a08e5ff0bf366ff52a1c2d07715498ea38c576",
+  "run_id": "laya-selection-2026-09-30",
+  "schema": "gooo/ir-search-ci-context-laya-run/v1",
+  "started_utc": "2026-09-30T06:00:25.692639+00:00",
+  "status": "CAPTURED",
+  "threads": 4,
+  "treatment_order_seed": 20260930,
+  "warmup_invocations": 0
+}

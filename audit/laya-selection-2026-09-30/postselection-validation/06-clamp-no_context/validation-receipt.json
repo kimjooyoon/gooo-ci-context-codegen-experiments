@@ -1,0 +1,28 @@
+{
+  "all_finite_cases_observed": true,
+  "candidate_expression": "0",
+  "candidate_id": "zero",
+  "go_test_exit_code": 0,
+  "go_test_expected_exit_code": 0,
+  "go_test_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "go_test_stdout_sha256": "1cd944fc9928f302b6f79efb639d3b53670319adba907c627f20b8f551474a92",
+  "holdout_score": {
+    "passed": 4,
+    "total": 4
+  },
+  "intent_id": "clamp",
+  "invocation_id": "06-clamp-no_context",
+  "oracle_sha256": "b96c17efde2ab42606ebd6ab95b456fed6698fabbbdee3241bf1f0584ad0843f",
+  "schema": "gooo/postselection-independent-body-validation/v1",
+  "scope": "independent finite int64 input observations after candidate selection; no full-domain proof",
+  "source_digest_reported": "sha256:56de401a1ca592ad3112a63c114b5b016096f55afa2531434e89cf9089e54867",
+  "source_sha256": "56de401a1ca592ad3112a63c114b5b016096f55afa2531434e89cf9089e54867",
+  "timing_unix_ns": {
+    "go_test_finished": 1790748397525548000,
+    "go_test_started": 1790748397019497000
+  },
+  "training_score": {
+    "passed": 3,
+    "total": 3
+  }
+}

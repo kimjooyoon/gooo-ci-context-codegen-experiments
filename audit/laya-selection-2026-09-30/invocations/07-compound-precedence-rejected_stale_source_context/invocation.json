@@ -1,0 +1,38 @@
+{
+  "activity": "CompoundPrecedence",
+  "argv": [
+    "/private/tmp/gooo-ir-search-20260930",
+    "body-codegen",
+    "--json",
+    "--fill-search",
+    "/Users/alice/meta-go/research/metaprogramming/gooo-ci-context-codegen-experiments/audit/laya-selection-2026-09-30/invocations/07-compound-precedence-rejected_stale_source_context/plan.search-plan.json",
+    "--activity",
+    "CompoundPrecedence",
+    "/Users/alice/meta-go/research/metaprogramming/gooo-ci-context-codegen-experiments/audit/laya-selection-2026-09-30/invocations/07-compound-precedence-rejected_stale_source_context/fixture.gooo.fixture"
+  ],
+  "binary_sha256": "f9f33b86c2114c1adeba01319fddb7d48f666e739aef768bbb5a580adfb7cda9",
+  "choice_event_sequences": [
+    13
+  ],
+  "event_sequences": [
+    13,
+    14
+  ],
+  "exit_code": 0,
+  "fixture_sha256": "2578de3c0ee33d3e68c2dc8b7c3165316d322873cb50a4caf76ccb260e853eb3",
+  "harness_completed_unix_ns": 1790748035207959000,
+  "harness_completed_utc": "2026-09-30T06:00:35.208275+00:00",
+  "harness_watchdog_seconds": 90,
+  "intent_id": "compound-precedence",
+  "invocation_id": "07-compound-precedence-rejected_stale_source_context",
+  "plan_sha256": "028eb7cef545ecf46aa2bbbc1e7c5be6acb79d2bd7e04e4a65adf5b5824beee0",
+  "process_completed_unix_ns": 1790748035201241000,
+  "resource_file": "resource.json",
+  "schema": "gooo/ci-context-selection-invocation/v1",
+  "sequence": 7,
+  "started_unix_ns": 1790748034938493000,
+  "started_utc": "2026-09-30T06:00:34.938491+00:00",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "84ac019bf4e741cfdaa5f26a2e8853008a31d3578d8e458f72f26cad10e473c2",
+  "treatment": "rejected_stale_source_context"
+}

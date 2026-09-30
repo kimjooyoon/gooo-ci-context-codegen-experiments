@@ -1,0 +1,100 @@
+{
+  "binary": {
+    "sha256": "f9f33b86c2114c1adeba01319fddb7d48f666e739aef768bbb5a580adfb7cda9",
+    "source_revision": "29d44bc778d85aee03b9af500bd83dc98f368189",
+    "vcs_modified": "false"
+  },
+  "expected_model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+  "holdout_vectors_loaded": false,
+  "invocation_plan_hashes": [
+    {
+      "fixture_sha256": "266a5fa9e097eb3566ba820b7d83561fd4545c771cd5d0aadefd3aa481a2d622",
+      "invocation_id": "01-piecewise-rejected_stale_source_context",
+      "plan_sha256": "50ae9d7d4d6c50a0c11df5515216260c550b74603f4137b7ba21269993190163",
+      "treatment": "rejected_stale_source_context"
+    },
+    {
+      "fixture_sha256": "2578de3c0ee33d3e68c2dc8b7c3165316d322873cb50a4caf76ccb260e853eb3",
+      "invocation_id": "02-compound-precedence-no_context",
+      "plan_sha256": "028eb7cef545ecf46aa2bbbc1e7c5be6acb79d2bd7e04e4a65adf5b5824beee0",
+      "treatment": "no_context"
+    },
+    {
+      "fixture_sha256": "4a5870cea7474783c472c2c3c0b8c75641e3a09fc867f3038f94f893fcd80be1",
+      "invocation_id": "03-clamp-exact_matching_failed_ci_context",
+      "plan_sha256": "57121e47844c1f8a284e3ba82a896b8fd1a8f335be9ffa20eaf36ee81ccf90c3",
+      "treatment": "exact_matching_failed_ci_context"
+    },
+    {
+      "fixture_sha256": "4a5870cea7474783c472c2c3c0b8c75641e3a09fc867f3038f94f893fcd80be1",
+      "invocation_id": "04-clamp-rejected_stale_source_context",
+      "plan_sha256": "bd0e2d54d3fa96dc656c8df3aeffd723f2ca6a29599ff5b42f0ede9ea1fca4e1",
+      "treatment": "rejected_stale_source_context"
+    },
+    {
+      "fixture_sha256": "28335004b1a83bbf2e0ddebf60665ff33bad4c0891affad9f5ae63bda7749463",
+      "invocation_id": "05-absolute-rejected_stale_source_context",
+      "plan_sha256": "3bea9de26651028652d2f1c67bb7b5bf8966664f28d49fab620e5aa46d22cf5f",
+      "treatment": "rejected_stale_source_context"
+    },
+    {
+      "fixture_sha256": "4a5870cea7474783c472c2c3c0b8c75641e3a09fc867f3038f94f893fcd80be1",
+      "invocation_id": "06-clamp-no_context",
+      "plan_sha256": "bd0e2d54d3fa96dc656c8df3aeffd723f2ca6a29599ff5b42f0ede9ea1fca4e1",
+      "treatment": "no_context"
+    },
+    {
+      "fixture_sha256": "2578de3c0ee33d3e68c2dc8b7c3165316d322873cb50a4caf76ccb260e853eb3",
+      "invocation_id": "07-compound-precedence-rejected_stale_source_context",
+      "plan_sha256": "028eb7cef545ecf46aa2bbbc1e7c5be6acb79d2bd7e04e4a65adf5b5824beee0",
+      "treatment": "rejected_stale_source_context"
+    },
+    {
+      "fixture_sha256": "2578de3c0ee33d3e68c2dc8b7c3165316d322873cb50a4caf76ccb260e853eb3",
+      "invocation_id": "08-compound-precedence-exact_matching_failed_ci_context",
+      "plan_sha256": "3958939ec83354a1758e41da7c516607e60ee784478f146438fc31a44624370f",
+      "treatment": "exact_matching_failed_ci_context"
+    },
+    {
+      "fixture_sha256": "28335004b1a83bbf2e0ddebf60665ff33bad4c0891affad9f5ae63bda7749463",
+      "invocation_id": "09-absolute-exact_matching_failed_ci_context",
+      "plan_sha256": "404e6258ff960e87c81e7feb7874fd72a04bd86a4ca6ed9c4c7279b5656021e0",
+      "treatment": "exact_matching_failed_ci_context"
+    },
+    {
+      "fixture_sha256": "28335004b1a83bbf2e0ddebf60665ff33bad4c0891affad9f5ae63bda7749463",
+      "invocation_id": "10-absolute-no_context",
+      "plan_sha256": "3bea9de26651028652d2f1c67bb7b5bf8966664f28d49fab620e5aa46d22cf5f",
+      "treatment": "no_context"
+    },
+    {
+      "fixture_sha256": "266a5fa9e097eb3566ba820b7d83561fd4545c771cd5d0aadefd3aa481a2d622",
+      "invocation_id": "11-piecewise-no_context",
+      "plan_sha256": "50ae9d7d4d6c50a0c11df5515216260c550b74603f4137b7ba21269993190163",
+      "treatment": "no_context"
+    },
+    {
+      "fixture_sha256": "266a5fa9e097eb3566ba820b7d83561fd4545c771cd5d0aadefd3aa481a2d622",
+      "invocation_id": "12-piecewise-exact_matching_failed_ci_context",
+      "plan_sha256": "cf201c83d95d478a5f38e6c0a4bfbe35b04e3d87ff5d547676dd52ed3c1f1111",
+      "treatment": "exact_matching_failed_ci_context"
+    }
+  ],
+  "laya_version": "0.3.21",
+  "offline_flags": {
+    "HF_HUB_DISABLE_TELEMETRY": "1",
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1"
+  },
+  "runtime": {
+    "device": "cpu",
+    "model": "english",
+    "model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+    "package_version": "0.3.21",
+    "threads": 4
+  },
+  "schema": "gooo/ir-search-ci-context-preexecution/v1",
+  "status": "plans_frozen_before_laya_start",
+  "study_design_sha256": "f49ecfdb7eb6518f7089c470577384b82fb211d2537803e0986684469f37d288",
+  "study_id": "ir-search-ci-context-laya-2026-09-30"
+}

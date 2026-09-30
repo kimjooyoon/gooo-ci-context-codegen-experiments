@@ -22,6 +22,14 @@ The frozen run design contains four intents × three treatments, shuffled once u
 
 The saved study will include copied independent finite-oracle files only in its postselection validation folder, after all selection responses have been persisted. The manifest pins their byte digests without exposing holdout vectors to the model. The initial CI artifact remains training-only.
 
+## Captured result
+
+Run `laya-selection-2026-09-30` completed all 12 planned Laya choices, with one call per intent-treatment cell. Its raw POST bodies passed recursive holdout-privacy scans; each rejected-stale control sent bytes identical to its no-context counterpart. The report records separate finite training and postselection holdout counts for every choice.
+
+Pooling the four intents gives these descriptive totals: no-context 6/13 training and 14/16 holdout; exact-context 3/13 and 13/16; rejected-stale 6/13 and 14/16. A separate [candidate-discrimination analysis](audit/laya-selection-2026-09-30/case-discrimination.md) shows how many holdout cases distinguish the three declared candidates; it does not change the emitted-body finite scores above. Each denominator is a repeated set of finite examples, with one selection per cell, so these are not statistical estimates.
+
+The four exact-context requests all reported `multilingual/it` routing, while the eight unchanged-intent requests reported `english/en`. Routing was not held constant, so choice differences may reflect the route as well as the context. The exact-context arm did not improve the pooled finite training or holdout counts in this run. The 12 observations are descriptive (n=1 per cell); they do not establish a causal treatment effect, broad correctness, or a general speed result. See [`report.md`](audit/laya-selection-2026-09-30/report.md) and its raw request/response and compiled Go artifacts.
+
 The non-model CI cost audit in `audit/compiler-ci-cost-2026-09-30/` is run-metadata evidence, not context supplied to a selection request.
 
 ## Reproduction

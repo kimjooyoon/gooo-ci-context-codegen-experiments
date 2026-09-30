@@ -71,13 +71,18 @@
     }
   ],
   "selection_design": {
-    "status": "frozen_not_executed",
+    "status": "captured_single_replicate",
     "invocation_count": 12,
     "replicates_per_intent_treatment": 1,
     "attempts_per_invocation": 1,
     "order_seed": 20260930,
     "warmups": 0,
-    "holdout_policy": "Open independent finite holdout vectors only after all selection requests and responses are saved."
+    "run_id": "laya-selection-2026-09-30",
+    "design_sha256": "f49ecfdb7eb6518f7089c470577384b82fb211d2537803e0986684469f37d288",
+    "report_sha256": "682411228bf3cbffee011c7c41a08e5ff0bf366ff52a1c2d07715498ea38c576",
+    "captured_choice_posts": 12,
+    "receipt_attributed_laya_choices": 12,
+    "holdout_policy": "Open independent finite holdout vectors only after all selection requests and responses are saved. No held-out inputs or expected outputs appeared in the twelve raw requests."
   },
   "scope_limits": [
     "One deterministic candidate and one bounded attempt per intent.",

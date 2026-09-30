@@ -1,0 +1,34 @@
+{
+  "candidates": [
+    {
+      "expression": "input",
+      "id": "identity"
+    },
+    {
+      "expression": "0",
+      "id": "zero"
+    },
+    {
+      "expression": "7",
+      "id": "seven"
+    }
+  ],
+  "hole_id": "negative_value",
+  "intent": "For a signed int64 input, return seven when negative and otherwise preserve the input.\n\n[Bounded verified CI training failure context] {\"activity_id\":\"bodycodegen://activity/negative-to-seven\",\"candidate_expression\":\"input\",\"candidate_id\":\"identity\",\"compiler_revision\":\"29d44bc778d85aee03b9af500bd83dc98f368189\",\"fixture_sha256\":\"266a5fa9e097eb3566ba820b7d83561fd4545c771cd5d0aadefd3aa481a2d622\",\"generated_source_sha256\":\"2f11f7666e17bbb4bd002ba22253388459afe4164739398246c2110820c26285\",\"plan_sha256\":\"81931f13b925a2c22ef8c5b036e0b6a7e6f8b2b596cf94c70be8ba30c7efeb52\",\"source\":\"verified_external_go_test_training_only\",\"training_mismatch_count\":3,\"training_mismatches\":[{\"actual\":-3,\"expected\":7,\"input\":-3},{\"actual\":-2,\"expected\":7,\"input\":-2},{\"actual\":-1,\"expected\":7,\"input\":-1}],\"training_suite_sha256\":\"07d8ea76a698e5e0dfa05ae0ab3b4e870ae29347a3a77fea131e704475dd8ae9\"}",
+  "max_attempts": 1,
+  "schema": "gooo/body-codegen-ir-search-plan/v1",
+  "test_cases": [
+    {
+      "expected": 7,
+      "input": -3
+    },
+    {
+      "expected": 7,
+      "input": -2
+    },
+    {
+      "expected": 7,
+      "input": -1
+    }
+  ]
+}

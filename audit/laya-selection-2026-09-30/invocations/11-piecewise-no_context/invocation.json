@@ -1,0 +1,38 @@
+{
+  "activity": "NegativeToSeven",
+  "argv": [
+    "/private/tmp/gooo-ir-search-20260930",
+    "body-codegen",
+    "--json",
+    "--fill-search",
+    "/Users/alice/meta-go/research/metaprogramming/gooo-ci-context-codegen-experiments/audit/laya-selection-2026-09-30/invocations/11-piecewise-no_context/plan.search-plan.json",
+    "--activity",
+    "NegativeToSeven",
+    "/Users/alice/meta-go/research/metaprogramming/gooo-ci-context-codegen-experiments/audit/laya-selection-2026-09-30/invocations/11-piecewise-no_context/fixture.gooo.fixture"
+  ],
+  "binary_sha256": "f9f33b86c2114c1adeba01319fddb7d48f666e739aef768bbb5a580adfb7cda9",
+  "choice_event_sequences": [
+    21
+  ],
+  "event_sequences": [
+    21,
+    22
+  ],
+  "exit_code": 0,
+  "fixture_sha256": "266a5fa9e097eb3566ba820b7d83561fd4545c771cd5d0aadefd3aa481a2d622",
+  "harness_completed_unix_ns": 1790748036290797000,
+  "harness_completed_utc": "2026-09-30T06:00:36.291135+00:00",
+  "harness_watchdog_seconds": 90,
+  "intent_id": "piecewise",
+  "invocation_id": "11-piecewise-no_context",
+  "plan_sha256": "50ae9d7d4d6c50a0c11df5515216260c550b74603f4137b7ba21269993190163",
+  "process_completed_unix_ns": 1790748036286557000,
+  "resource_file": "resource.json",
+  "schema": "gooo/ci-context-selection-invocation/v1",
+  "sequence": 11,
+  "started_unix_ns": 1790748036046970000,
+  "started_utc": "2026-09-30T06:00:36.046968+00:00",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "d29601f7fe5db947fe9e5cd9b2e80d2c3a711a3a87d89f1d4ae85bcd05ee3c80",
+  "treatment": "no_context"
+}

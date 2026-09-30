@@ -1,0 +1,714 @@
+{
+  "cells": [
+    {
+      "candidate_id": "negate",
+      "intent_id": "clamp",
+      "scores": {
+        "holdout": {
+          "all_cases": {
+            "passed": 3,
+            "total": 4
+          },
+          "candidate_discriminating_cases": {
+            "passed": 0,
+            "total": 1
+          },
+          "candidate_invariant_cases": {
+            "passed": 3,
+            "total": 3
+          }
+        },
+        "training": {
+          "all_cases": {
+            "passed": 0,
+            "total": 3
+          },
+          "candidate_discriminating_cases": {
+            "passed": 0,
+            "total": 3
+          },
+          "candidate_invariant_cases": {
+            "passed": 0,
+            "total": 0
+          }
+        }
+      },
+      "treatment": "exact_matching_failed_ci_context"
+    },
+    {
+      "candidate_id": "zero",
+      "intent_id": "clamp",
+      "scores": {
+        "holdout": {
+          "all_cases": {
+            "passed": 4,
+            "total": 4
+          },
+          "candidate_discriminating_cases": {
+            "passed": 1,
+            "total": 1
+          },
+          "candidate_invariant_cases": {
+            "passed": 3,
+            "total": 3
+          }
+        },
+        "training": {
+          "all_cases": {
+            "passed": 3,
+            "total": 3
+          },
+          "candidate_discriminating_cases": {
+            "passed": 3,
+            "total": 3
+          },
+          "candidate_invariant_cases": {
+            "passed": 0,
+            "total": 0
+          }
+        }
+      },
+      "treatment": "rejected_stale_source_context"
+    },
+    {
+      "candidate_id": "zero",
+      "intent_id": "clamp",
+      "scores": {
+        "holdout": {
+          "all_cases": {
+            "passed": 4,
+            "total": 4
+          },
+          "candidate_discriminating_cases": {
+            "passed": 1,
+            "total": 1
+          },
+          "candidate_invariant_cases": {
+            "passed": 3,
+            "total": 3
+          }
+        },
+        "training": {
+          "all_cases": {
+            "passed": 3,
+            "total": 3
+          },
+          "candidate_discriminating_cases": {
+            "passed": 3,
+            "total": 3
+          },
+          "candidate_invariant_cases": {
+            "passed": 0,
+            "total": 0
+          }
+        }
+      },
+      "treatment": "no_context"
+    },
+    {
+      "candidate_id": "zero",
+      "intent_id": "absolute",
+      "scores": {
+        "holdout": {
+          "all_cases": {
+            "passed": 3,
+            "total": 4
+          },
+          "candidate_discriminating_cases": {
+            "passed": 0,
+            "total": 1
+          },
+          "candidate_invariant_cases": {
+            "passed": 3,
+            "total": 3
+          }
+        },
+        "training": {
+          "all_cases": {
+            "passed": 0,
+            "total": 3
+          },
+          "candidate_discriminating_cases": {
+            "passed": 0,
+            "total": 3
+          },
+          "candidate_invariant_cases": {
+            "passed": 0,
+            "total": 0
+          }
+        }
+      },
+      "treatment": "rejected_stale_source_context"
+    },
+    {
+      "candidate_id": "negate",
+      "intent_id": "absolute",
+      "scores": {
+        "holdout": {
+          "all_cases": {
+            "passed": 4,
+            "total": 4
+          },
+          "candidate_discriminating_cases": {
+            "passed": 1,
+            "total": 1
+          },
+          "candidate_invariant_cases": {
+            "passed": 3,
+            "total": 3
+          }
+        },
+        "training": {
+          "all_cases": {
+            "passed": 3,
+            "total": 3
+          },
+          "candidate_discriminating_cases": {
+            "passed": 3,
+            "total": 3
+          },
+          "candidate_invariant_cases": {
+            "passed": 0,
+            "total": 0
+          }
+        }
+      },
+      "treatment": "exact_matching_failed_ci_context"
+    },
+    {
+      "candidate_id": "zero",
+      "intent_id": "absolute",
+      "scores": {
+        "holdout": {
+          "all_cases": {
+            "passed": 3,
+            "total": 4
+          },
+          "candidate_discriminating_cases": {
+            "passed": 0,
+            "total": 1
+          },
+          "candidate_invariant_cases": {
+            "passed": 3,
+            "total": 3
+          }
+        },
+        "training": {
+          "all_cases": {
+            "passed": 0,
+            "total": 3
+          },
+          "candidate_discriminating_cases": {
+            "passed": 0,
+            "total": 3
+          },
+          "candidate_invariant_cases": {
+            "passed": 0,
+            "total": 0
+          }
+        }
+      },
+      "treatment": "no_context"
+    },
+    {
+      "candidate_id": "seven",
+      "intent_id": "piecewise",
+      "scores": {
+        "holdout": {
+          "all_cases": {
+            "passed": 4,
+            "total": 4
+          },
+          "candidate_discriminating_cases": {
+            "passed": 1,
+            "total": 1
+          },
+          "candidate_invariant_cases": {
+            "passed": 3,
+            "total": 3
+          }
+        },
+        "training": {
+          "all_cases": {
+            "passed": 3,
+            "total": 3
+          },
+          "candidate_discriminating_cases": {
+            "passed": 3,
+            "total": 3
+          },
+          "candidate_invariant_cases": {
+            "passed": 0,
+            "total": 0
+          }
+        }
+      },
+      "treatment": "rejected_stale_source_context"
+    },
+    {
+      "candidate_id": "seven",
+      "intent_id": "piecewise",
+      "scores": {
+        "holdout": {
+          "all_cases": {
+            "passed": 4,
+            "total": 4
+          },
+          "candidate_discriminating_cases": {
+            "passed": 1,
+            "total": 1
+          },
+          "candidate_invariant_cases": {
+            "passed": 3,
+            "total": 3
+          }
+        },
+        "training": {
+          "all_cases": {
+            "passed": 3,
+            "total": 3
+          },
+          "candidate_discriminating_cases": {
+            "passed": 3,
+            "total": 3
+          },
+          "candidate_invariant_cases": {
+            "passed": 0,
+            "total": 0
+          }
+        }
+      },
+      "treatment": "no_context"
+    },
+    {
+      "candidate_id": "identity",
+      "intent_id": "piecewise",
+      "scores": {
+        "holdout": {
+          "all_cases": {
+            "passed": 3,
+            "total": 4
+          },
+          "candidate_discriminating_cases": {
+            "passed": 0,
+            "total": 1
+          },
+          "candidate_invariant_cases": {
+            "passed": 3,
+            "total": 3
+          }
+        },
+        "training": {
+          "all_cases": {
+            "passed": 0,
+            "total": 3
+          },
+          "candidate_discriminating_cases": {
+            "passed": 0,
+            "total": 3
+          },
+          "candidate_invariant_cases": {
+            "passed": 0,
+            "total": 0
+          }
+        }
+      },
+      "treatment": "exact_matching_failed_ci_context"
+    },
+    {
+      "candidate_id": "zero",
+      "intent_id": "compound-precedence",
+      "scores": {
+        "holdout": {
+          "all_cases": {
+            "passed": 3,
+            "total": 4
+          },
+          "candidate_discriminating_cases": {
+            "passed": 0,
+            "total": 1
+          },
+          "candidate_invariant_cases": {
+            "passed": 3,
+            "total": 3
+          }
+        },
+        "training": {
+          "all_cases": {
+            "passed": 0,
+            "total": 4
+          },
+          "candidate_discriminating_cases": {
+            "passed": 0,
+            "total": 4
+          },
+          "candidate_invariant_cases": {
+            "passed": 0,
+            "total": 0
+          }
+        }
+      },
+      "treatment": "no_context"
+    },
+    {
+      "candidate_id": "zero",
+      "intent_id": "compound-precedence",
+      "scores": {
+        "holdout": {
+          "all_cases": {
+            "passed": 3,
+            "total": 4
+          },
+          "candidate_discriminating_cases": {
+            "passed": 0,
+            "total": 1
+          },
+          "candidate_invariant_cases": {
+            "passed": 3,
+            "total": 3
+          }
+        },
+        "training": {
+          "all_cases": {
+            "passed": 0,
+            "total": 4
+          },
+          "candidate_discriminating_cases": {
+            "passed": 0,
+            "total": 4
+          },
+          "candidate_invariant_cases": {
+            "passed": 0,
+            "total": 0
+          }
+        }
+      },
+      "treatment": "rejected_stale_source_context"
+    },
+    {
+      "candidate_id": "identity",
+      "intent_id": "compound-precedence",
+      "scores": {
+        "holdout": {
+          "all_cases": {
+            "passed": 3,
+            "total": 4
+          },
+          "candidate_discriminating_cases": {
+            "passed": 0,
+            "total": 1
+          },
+          "candidate_invariant_cases": {
+            "passed": 3,
+            "total": 3
+          }
+        },
+        "training": {
+          "all_cases": {
+            "passed": 0,
+            "total": 4
+          },
+          "candidate_discriminating_cases": {
+            "passed": 0,
+            "total": 4
+          },
+          "candidate_invariant_cases": {
+            "passed": 0,
+            "total": 0
+          }
+        }
+      },
+      "treatment": "exact_matching_failed_ci_context"
+    }
+  ],
+  "counterfactual_source": "Pinned finite-oracle candidate_outputs; unselected candidates are not attributed to new runtime execution.",
+  "definition": "A case discriminates these declared candidates iff their frozen oracle outputs differ at that case index.",
+  "limits": [
+    "Relative only to the three declared candidates for each intent.",
+    "An invariant case may execute the filled branch; invariance is not a branch coverage claim.",
+    "No new vectors, model calls, full-domain proof, or population intent accuracy.",
+    "One invocation per intent-treatment cell; routing differs between treatments."
+  ],
+  "run_id": "laya-selection-2026-09-30",
+  "schema": "gooo/finite-candidate-discrimination/v1",
+  "source_report_sha256": "682411228bf3cbffee011c7c41a08e5ff0bf366ff52a1c2d07715498ea38c576",
+  "suite_adequacy": {
+    "absolute": {
+      "oracle_sha256": "be989f945bb16bc969790e3878f02c4879caa917499b2deeb3711624506adbdf",
+      "suites": {
+        "holdout": {
+          "candidate_discriminating_indexes": [
+            0
+          ],
+          "candidate_invariant_indexes": [
+            1,
+            2,
+            3
+          ],
+          "candidate_signature_groups": [
+            [
+              "identity",
+              "negate"
+            ],
+            [
+              "zero"
+            ]
+          ],
+          "total": 4
+        },
+        "training": {
+          "candidate_discriminating_indexes": [
+            0,
+            1,
+            2
+          ],
+          "candidate_invariant_indexes": [],
+          "candidate_signature_groups": [
+            [
+              "identity"
+            ],
+            [
+              "negate"
+            ],
+            [
+              "zero"
+            ]
+          ],
+          "total": 3
+        }
+      }
+    },
+    "clamp": {
+      "oracle_sha256": "b96c17efde2ab42606ebd6ab95b456fed6698fabbbdee3241bf1f0584ad0843f",
+      "suites": {
+        "holdout": {
+          "candidate_discriminating_indexes": [
+            3
+          ],
+          "candidate_invariant_indexes": [
+            0,
+            1,
+            2
+          ],
+          "candidate_signature_groups": [
+            [
+              "identity",
+              "negate"
+            ],
+            [
+              "zero"
+            ]
+          ],
+          "total": 4
+        },
+        "training": {
+          "candidate_discriminating_indexes": [
+            0,
+            1,
+            2
+          ],
+          "candidate_invariant_indexes": [],
+          "candidate_signature_groups": [
+            [
+              "identity"
+            ],
+            [
+              "negate"
+            ],
+            [
+              "zero"
+            ]
+          ],
+          "total": 3
+        }
+      }
+    },
+    "compound-precedence": {
+      "oracle_sha256": "5b3597a5e890bb39ea7d14272a6bbacf6d346857f79deb83660eeec2cd6b90a6",
+      "suites": {
+        "holdout": {
+          "candidate_discriminating_indexes": [
+            3
+          ],
+          "candidate_invariant_indexes": [
+            0,
+            1,
+            2
+          ],
+          "candidate_signature_groups": [
+            [
+              "hundred"
+            ],
+            [
+              "identity"
+            ],
+            [
+              "zero"
+            ]
+          ],
+          "total": 4
+        },
+        "training": {
+          "candidate_discriminating_indexes": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "candidate_invariant_indexes": [],
+          "candidate_signature_groups": [
+            [
+              "hundred"
+            ],
+            [
+              "identity"
+            ],
+            [
+              "zero"
+            ]
+          ],
+          "total": 4
+        }
+      }
+    },
+    "piecewise": {
+      "oracle_sha256": "3b8c9d76ea66492aa50fb9badb65d69173fa6f746c4dccfc0100b567b55bed48",
+      "suites": {
+        "holdout": {
+          "candidate_discriminating_indexes": [
+            0
+          ],
+          "candidate_invariant_indexes": [
+            1,
+            2,
+            3
+          ],
+          "candidate_signature_groups": [
+            [
+              "identity"
+            ],
+            [
+              "seven"
+            ],
+            [
+              "zero"
+            ]
+          ],
+          "total": 4
+        },
+        "training": {
+          "candidate_discriminating_indexes": [
+            0,
+            1,
+            2
+          ],
+          "candidate_invariant_indexes": [],
+          "candidate_signature_groups": [
+            [
+              "identity"
+            ],
+            [
+              "seven"
+            ],
+            [
+              "zero"
+            ]
+          ],
+          "total": 3
+        }
+      }
+    }
+  },
+  "treatment_aggregate": {
+    "exact_matching_failed_ci_context": {
+      "holdout": {
+        "all_cases": {
+          "passed": 13,
+          "total": 16
+        },
+        "candidate_discriminating_cases": {
+          "passed": 1,
+          "total": 4
+        },
+        "candidate_invariant_cases": {
+          "passed": 12,
+          "total": 12
+        }
+      },
+      "training": {
+        "all_cases": {
+          "passed": 3,
+          "total": 13
+        },
+        "candidate_discriminating_cases": {
+          "passed": 3,
+          "total": 13
+        },
+        "candidate_invariant_cases": {
+          "passed": 0,
+          "total": 0
+        }
+      }
+    },
+    "no_context": {
+      "holdout": {
+        "all_cases": {
+          "passed": 14,
+          "total": 16
+        },
+        "candidate_discriminating_cases": {
+          "passed": 2,
+          "total": 4
+        },
+        "candidate_invariant_cases": {
+          "passed": 12,
+          "total": 12
+        }
+      },
+      "training": {
+        "all_cases": {
+          "passed": 6,
+          "total": 13
+        },
+        "candidate_discriminating_cases": {
+          "passed": 6,
+          "total": 13
+        },
+        "candidate_invariant_cases": {
+          "passed": 0,
+          "total": 0
+        }
+      }
+    },
+    "rejected_stale_source_context": {
+      "holdout": {
+        "all_cases": {
+          "passed": 14,
+          "total": 16
+        },
+        "candidate_discriminating_cases": {
+          "passed": 2,
+          "total": 4
+        },
+        "candidate_invariant_cases": {
+          "passed": 12,
+          "total": 12
+        }
+      },
+      "training": {
+        "all_cases": {
+          "passed": 6,
+          "total": 13
+        },
+        "candidate_discriminating_cases": {
+          "passed": 6,
+          "total": 13
+        },
+        "candidate_invariant_cases": {
+          "passed": 0,
+          "total": 0
+        }
+      }
+    }
+  }
+}

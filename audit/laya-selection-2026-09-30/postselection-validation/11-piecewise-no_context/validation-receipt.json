@@ -1,0 +1,28 @@
+{
+  "all_finite_cases_observed": true,
+  "candidate_expression": "7",
+  "candidate_id": "seven",
+  "go_test_exit_code": 0,
+  "go_test_expected_exit_code": 0,
+  "go_test_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "go_test_stdout_sha256": "ff26d66caa682bdeee4119e19e4a9fec3b1f84f77d791525a1bfa53d6c0022ed",
+  "holdout_score": {
+    "passed": 4,
+    "total": 4
+  },
+  "intent_id": "piecewise",
+  "invocation_id": "11-piecewise-no_context",
+  "oracle_sha256": "3b8c9d76ea66492aa50fb9badb65d69173fa6f746c4dccfc0100b567b55bed48",
+  "schema": "gooo/postselection-independent-body-validation/v1",
+  "scope": "independent finite int64 input observations after candidate selection; no full-domain proof",
+  "source_digest_reported": "sha256:82e59ce28d08585b0828443d5137e846094aefa9251a656084fadf7790022148",
+  "source_sha256": "82e59ce28d08585b0828443d5137e846094aefa9251a656084fadf7790022148",
+  "timing_unix_ns": {
+    "go_test_finished": 1790748400087296000,
+    "go_test_started": 1790748399555352000
+  },
+  "training_score": {
+    "passed": 3,
+    "total": 3
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "choice_post_count": 12,
+  "heldout_fields_or_exact_case_pairs_found": 0,
+  "holdout_vectors_opened_after_all_selection_responses_saved": true,
+  "independent_raw_request_scans": 12,
+  "request_results": [
+    {
+      "heldout_fields_or_pairs_found": 0,
+      "invocation_id": "03-clamp-exact_matching_failed_ci_context",
+      "scanned_nodes": 55,
+      "sequence": 5
+    },
+    {
+      "heldout_fields_or_pairs_found": 0,
+      "invocation_id": "04-clamp-rejected_stale_source_context",
+      "scanned_nodes": 31,
+      "sequence": 7
+    },
+    {
+      "heldout_fields_or_pairs_found": 0,
+      "invocation_id": "06-clamp-no_context",
+      "scanned_nodes": 31,
+      "sequence": 11
+    },
+    {
+      "heldout_fields_or_pairs_found": 0,
+      "invocation_id": "05-absolute-rejected_stale_source_context",
+      "scanned_nodes": 31,
+      "sequence": 9
+    },
+    {
+      "heldout_fields_or_pairs_found": 0,
+      "invocation_id": "09-absolute-exact_matching_failed_ci_context",
+      "scanned_nodes": 55,
+      "sequence": 17
+    },
+    {
+      "heldout_fields_or_pairs_found": 0,
+      "invocation_id": "10-absolute-no_context",
+      "scanned_nodes": 31,
+      "sequence": 19
+    },
+    {
+      "heldout_fields_or_pairs_found": 0,
+      "invocation_id": "01-piecewise-rejected_stale_source_context",
+      "scanned_nodes": 31,
+      "sequence": 1
+    },
+    {
+      "heldout_fields_or_pairs_found": 0,
+      "invocation_id": "11-piecewise-no_context",
+      "scanned_nodes": 31,
+      "sequence": 21
+    },
+    {
+      "heldout_fields_or_pairs_found": 0,
+      "invocation_id": "12-piecewise-exact_matching_failed_ci_context",
+      "scanned_nodes": 55,
+      "sequence": 23
+    },
+    {
+      "heldout_fields_or_pairs_found": 0,
+      "invocation_id": "02-compound-precedence-no_context",
+      "scanned_nodes": 31,
+      "sequence": 3
+    },
+    {
+      "heldout_fields_or_pairs_found": 0,
+      "invocation_id": "07-compound-precedence-rejected_stale_source_context",
+      "scanned_nodes": 31,
+      "sequence": 13
+    },
+    {
+      "heldout_fields_or_pairs_found": 0,
+      "invocation_id": "08-compound-precedence-exact_matching_failed_ci_context",
+      "scanned_nodes": 59,
+      "sequence": 15
+    }
+  ],
+  "schema": "gooo/ir-search-selection-privacy-audit/v1"
+}

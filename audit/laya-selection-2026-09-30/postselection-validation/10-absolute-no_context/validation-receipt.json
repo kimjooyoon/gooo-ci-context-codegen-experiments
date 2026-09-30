@@ -1,0 +1,28 @@
+{
+  "all_finite_cases_observed": true,
+  "candidate_expression": "0",
+  "candidate_id": "zero",
+  "go_test_exit_code": 1,
+  "go_test_expected_exit_code": 1,
+  "go_test_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "go_test_stdout_sha256": "ce1d32023c422a412e8670a0a49e848576810fd89c7ebe11aea8f68aabde78ea",
+  "holdout_score": {
+    "passed": 3,
+    "total": 4
+  },
+  "intent_id": "absolute",
+  "invocation_id": "10-absolute-no_context",
+  "oracle_sha256": "be989f945bb16bc969790e3878f02c4879caa917499b2deeb3711624506adbdf",
+  "schema": "gooo/postselection-independent-body-validation/v1",
+  "scope": "independent finite int64 input observations after candidate selection; no full-domain proof",
+  "source_digest_reported": "sha256:9c44006b5e79a4920238dae2c124595b063c51f1148725d92768716c813a318e",
+  "source_sha256": "9c44006b5e79a4920238dae2c124595b063c51f1148725d92768716c813a318e",
+  "timing_unix_ns": {
+    "go_test_finished": 1790748399051865000,
+    "go_test_started": 1790748398544798000
+  },
+  "training_score": {
+    "passed": 0,
+    "total": 3
+  }
+}

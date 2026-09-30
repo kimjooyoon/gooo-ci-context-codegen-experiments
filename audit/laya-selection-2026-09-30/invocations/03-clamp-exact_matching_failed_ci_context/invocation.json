@@ -1,0 +1,38 @@
+{
+  "activity": "ClampNegativeToZero",
+  "argv": [
+    "/private/tmp/gooo-ir-search-20260930",
+    "body-codegen",
+    "--json",
+    "--fill-search",
+    "/Users/alice/meta-go/research/metaprogramming/gooo-ci-context-codegen-experiments/audit/laya-selection-2026-09-30/invocations/03-clamp-exact_matching_failed_ci_context/plan.search-plan.json",
+    "--activity",
+    "ClampNegativeToZero",
+    "/Users/alice/meta-go/research/metaprogramming/gooo-ci-context-codegen-experiments/audit/laya-selection-2026-09-30/invocations/03-clamp-exact_matching_failed_ci_context/fixture.gooo.fixture"
+  ],
+  "binary_sha256": "f9f33b86c2114c1adeba01319fddb7d48f666e739aef768bbb5a580adfb7cda9",
+  "choice_event_sequences": [
+    5
+  ],
+  "event_sequences": [
+    5,
+    6
+  ],
+  "exit_code": 0,
+  "fixture_sha256": "4a5870cea7474783c472c2c3c0b8c75641e3a09fc867f3038f94f893fcd80be1",
+  "harness_completed_unix_ns": 1790748034184673000,
+  "harness_completed_utc": "2026-09-30T06:00:34.184985+00:00",
+  "harness_watchdog_seconds": 90,
+  "intent_id": "clamp",
+  "invocation_id": "03-clamp-exact_matching_failed_ci_context",
+  "plan_sha256": "57121e47844c1f8a284e3ba82a896b8fd1a8f335be9ffa20eaf36ee81ccf90c3",
+  "process_completed_unix_ns": 1790748034180498000,
+  "resource_file": "resource.json",
+  "schema": "gooo/ci-context-selection-invocation/v1",
+  "sequence": 3,
+  "started_unix_ns": 1790748031454033000,
+  "started_utc": "2026-09-30T06:00:31.454031+00:00",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "ddc70c53b219c0593b75f98277b2877140ef1418d799f2129afbc00732d84047",
+  "treatment": "exact_matching_failed_ci_context"
+}

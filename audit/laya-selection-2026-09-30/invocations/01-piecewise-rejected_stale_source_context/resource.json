@@ -1,0 +1,22 @@
+{
+  "cli_active_wall_ms": 402.19749999999976,
+  "cli_process": {
+    "cpu_seconds_delta_coarse": 0.0,
+    "measurement_note": "ps cumulative CPU is second-granularity on this host; sampled RSS/pcpu are observations, not continuous peaks",
+    "pcpu_percent_max_sampled": 1.6,
+    "rss_peak_kb_sampled": 14960,
+    "sample_count": 3
+  },
+  "harness_sampling_window_ms": 406.57441599999976,
+  "owned_laya_server_process": {
+    "cpu_seconds_delta_coarse": 0.6700000000000004,
+    "measurement_note": "ps cumulative CPU is second-granularity on this host; sampled RSS/pcpu are observations, not continuous peaks",
+    "pcpu_percent_max_sampled": 141.7,
+    "rss_peak_kb_sampled": 1768864,
+    "sample_count": 4
+  },
+  "process_completion_kind": "communicate_returned",
+  "raw_samples": "resource-samples.jsonl",
+  "sampling_interval_ms": 120,
+  "schema": "gooo/ci-context-selection-resource/v1"
+}

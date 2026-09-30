@@ -1,0 +1,612 @@
+{
+  "base_request_equivalence": {
+    "absolute": {
+      "byte_identical": true,
+      "no_context_request_sha256": "1fbfa27beca20c76d8e62be93aa3c33cbcafd4cd6aec97c187976c41b67b714d",
+      "rejected_stale_request_sha256": "1fbfa27beca20c76d8e62be93aa3c33cbcafd4cd6aec97c187976c41b67b714d"
+    },
+    "clamp": {
+      "byte_identical": true,
+      "no_context_request_sha256": "5a999f1d1877f4d77c8f430fd755937aa12db544dbcda2a56647847c3cfe17be",
+      "rejected_stale_request_sha256": "5a999f1d1877f4d77c8f430fd755937aa12db544dbcda2a56647847c3cfe17be"
+    },
+    "compound-precedence": {
+      "byte_identical": true,
+      "no_context_request_sha256": "1a94a10c01ba17539fee02e07edd91f7f3fdf307484d392164a59d47e53d779c",
+      "rejected_stale_request_sha256": "1a94a10c01ba17539fee02e07edd91f7f3fdf307484d392164a59d47e53d779c"
+    },
+    "piecewise": {
+      "byte_identical": true,
+      "no_context_request_sha256": "538b3a21ab931d2612b4040a01c1598f4b23565c225d843ddc3c2a5edc8db74e",
+      "rejected_stale_request_sha256": "538b3a21ab931d2612b4040a01c1598f4b23565c225d843ddc3c2a5edc8db74e"
+    }
+  },
+  "binary_sha256": "f9f33b86c2114c1adeba01319fddb7d48f666e739aef768bbb5a580adfb7cda9",
+  "captured_laya_choice_posts": 12,
+  "compiler_revision": "29d44bc778d85aee03b9af500bd83dc98f368189",
+  "completed_cli_invocations": 12,
+  "decision": "CAPTURED",
+  "design_sha256": "f49ecfdb7eb6518f7089c470577384b82fb211d2537803e0986684469f37d288",
+  "expected_holdout_fields_or_pairs_in_choice_requests": 0,
+  "intent_treatment_results": [
+    {
+      "candidate_expression": "-input",
+      "candidate_id": "negate",
+      "captured_choice_posts": 1,
+      "captured_request_sha256": "a4d40f9d005341e13a3fd7f5bdc86526328c8a4b50a21842fe2ec700ecfdf594",
+      "captured_response_candidate_ids": [
+        "negate"
+      ],
+      "cli_active_wall_ms": 2726.4534169999993,
+      "context_gate": "accepted_exact_source_bound_ci_context",
+      "context_was_injected": true,
+      "first_choice_request_after_cli_start_ms": 5.495,
+      "go_validation_receipt": "postselection-validation/03-clamp-exact_matching_failed_ci_context/validation-receipt.json",
+      "harness_sampling_window_ms": 2730.7975000000006,
+      "holdout_score_external_go": {
+        "passed": 3,
+        "total": 4
+      },
+      "intent_id": "clamp",
+      "model_choice_rounds": 1,
+      "model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+      "owned_server_resource_samples": {
+        "cpu_seconds_delta_coarse": 2.45,
+        "measurement_note": "ps cumulative CPU is second-granularity on this host; sampled RSS/pcpu are observations, not continuous peaks",
+        "pcpu_percent_max_sampled": 181.9,
+        "rss_peak_kb_sampled": 4004672,
+        "sample_count": 22
+      },
+      "privacy_scanned_post_count": 1,
+      "provider_model": "laya-rl-agent",
+      "proxy_choice_latency_ms": 2717.794167,
+      "request_intent_sha256": "d07cc17ec40120f613b3c07dd6b0748485e4f1c77080712b37f2e8075ea76fcf",
+      "resolver_decision_latency_ms": 2720.351458,
+      "response_selected_candidate_id": "negate",
+      "route_language": "it",
+      "route_model": "multilingual",
+      "selection_mode": "laya",
+      "sequence": 3,
+      "training_accuracy_percent_from_gooo": 0,
+      "training_score_external_go": {
+        "passed": 0,
+        "total": 3
+      },
+      "treatment": "exact_matching_failed_ci_context",
+      "typed_decision_request_sha256": "sha256:9129b51364c503ddde888d058efcf81000bb1f4f76f2bb7e25ad28537dd4e2b9"
+    },
+    {
+      "candidate_expression": "0",
+      "candidate_id": "zero",
+      "captured_choice_posts": 1,
+      "captured_request_sha256": "5a999f1d1877f4d77c8f430fd755937aa12db544dbcda2a56647847c3cfe17be",
+      "captured_response_candidate_ids": [
+        "zero"
+      ],
+      "cli_active_wall_ms": 246.0679170000013,
+      "context_gate": "stale_or_mismatched_generated_source_sha256",
+      "context_was_injected": false,
+      "first_choice_request_after_cli_start_ms": 5.533,
+      "go_validation_receipt": "postselection-validation/04-clamp-rejected_stale_source_context/validation-receipt.json",
+      "harness_sampling_window_ms": 250.4382920000001,
+      "holdout_score_external_go": {
+        "passed": 4,
+        "total": 4
+      },
+      "intent_id": "clamp",
+      "model_choice_rounds": 1,
+      "model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+      "owned_server_resource_samples": {
+        "cpu_seconds_delta_coarse": 0.5099999999999998,
+        "measurement_note": "ps cumulative CPU is second-granularity on this host; sampled RSS/pcpu are observations, not continuous peaks",
+        "pcpu_percent_max_sampled": 193.9,
+        "rss_peak_kb_sampled": 3461584,
+        "sample_count": 3
+      },
+      "privacy_scanned_post_count": 1,
+      "provider_model": "laya-rl-agent",
+      "proxy_choice_latency_ms": 237.7123749999992,
+      "request_intent_sha256": "83908b61caf0b902d93959f5a613dfa3643ecc34cf3374f04ab02d811bb9891f",
+      "resolver_decision_latency_ms": 239.946125,
+      "response_selected_candidate_id": "zero",
+      "route_language": "en",
+      "route_model": "english",
+      "selection_mode": "laya",
+      "sequence": 4,
+      "training_accuracy_percent_from_gooo": 100,
+      "training_score_external_go": {
+        "passed": 3,
+        "total": 3
+      },
+      "treatment": "rejected_stale_source_context",
+      "typed_decision_request_sha256": "sha256:3ac93dfaa0b9c64602bf0e10da303d9c188e1b5215e131d7e47943766c3354a4"
+    },
+    {
+      "candidate_expression": "0",
+      "candidate_id": "zero",
+      "captured_choice_posts": 1,
+      "captured_request_sha256": "5a999f1d1877f4d77c8f430fd755937aa12db544dbcda2a56647847c3cfe17be",
+      "captured_response_candidate_ids": [
+        "zero"
+      ],
+      "cli_active_wall_ms": 241.66100000000057,
+      "context_gate": "no_context",
+      "context_was_injected": false,
+      "first_choice_request_after_cli_start_ms": 5.401,
+      "go_validation_receipt": "postselection-validation/06-clamp-no_context/validation-receipt.json",
+      "harness_sampling_window_ms": 246.0114579999999,
+      "holdout_score_external_go": {
+        "passed": 4,
+        "total": 4
+      },
+      "intent_id": "clamp",
+      "model_choice_rounds": 1,
+      "model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+      "owned_server_resource_samples": {
+        "cpu_seconds_delta_coarse": 0.5,
+        "measurement_note": "ps cumulative CPU is second-granularity on this host; sampled RSS/pcpu are observations, not continuous peaks",
+        "pcpu_percent_max_sampled": 206.3,
+        "rss_peak_kb_sampled": 3471216,
+        "sample_count": 3
+      },
+      "privacy_scanned_post_count": 1,
+      "provider_model": "laya-rl-agent",
+      "proxy_choice_latency_ms": 233.4009580000007,
+      "request_intent_sha256": "83908b61caf0b902d93959f5a613dfa3643ecc34cf3374f04ab02d811bb9891f",
+      "resolver_decision_latency_ms": 235.752291,
+      "response_selected_candidate_id": "zero",
+      "route_language": "en",
+      "route_model": "english",
+      "selection_mode": "laya",
+      "sequence": 6,
+      "training_accuracy_percent_from_gooo": 100,
+      "training_score_external_go": {
+        "passed": 3,
+        "total": 3
+      },
+      "treatment": "no_context",
+      "typed_decision_request_sha256": "sha256:3ac93dfaa0b9c64602bf0e10da303d9c188e1b5215e131d7e47943766c3354a4"
+    },
+    {
+      "candidate_expression": "0",
+      "candidate_id": "zero",
+      "captured_choice_posts": 1,
+      "captured_request_sha256": "1fbfa27beca20c76d8e62be93aa3c33cbcafd4cd6aec97c187976c41b67b714d",
+      "captured_response_candidate_ids": [
+        "zero"
+      ],
+      "cli_active_wall_ms": 249.6579170000004,
+      "context_gate": "stale_or_mismatched_generated_source_sha256",
+      "context_was_injected": false,
+      "first_choice_request_after_cli_start_ms": 5.507,
+      "go_validation_receipt": "postselection-validation/05-absolute-rejected_stale_source_context/validation-receipt.json",
+      "harness_sampling_window_ms": 254.02654200000006,
+      "holdout_score_external_go": {
+        "passed": 3,
+        "total": 4
+      },
+      "intent_id": "absolute",
+      "model_choice_rounds": 1,
+      "model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+      "owned_server_resource_samples": {
+        "cpu_seconds_delta_coarse": 0.5300000000000002,
+        "measurement_note": "ps cumulative CPU is second-granularity on this host; sampled RSS/pcpu are observations, not continuous peaks",
+        "pcpu_percent_max_sampled": 203.1,
+        "rss_peak_kb_sampled": 3471120,
+        "sample_count": 3
+      },
+      "privacy_scanned_post_count": 1,
+      "provider_model": "laya-rl-agent",
+      "proxy_choice_latency_ms": 241.16599999999977,
+      "request_intent_sha256": "0056de03f8e358103be16256f7f297eb2f15684ab43315fde3ee2bcb81e93a81",
+      "resolver_decision_latency_ms": 243.548,
+      "response_selected_candidate_id": "zero",
+      "route_language": "en",
+      "route_model": "english",
+      "selection_mode": "laya",
+      "sequence": 5,
+      "training_accuracy_percent_from_gooo": 0,
+      "training_score_external_go": {
+        "passed": 0,
+        "total": 3
+      },
+      "treatment": "rejected_stale_source_context",
+      "typed_decision_request_sha256": "sha256:66f28504c654632ce06cfca2855f1bbe4d812d636ffcd3a49211b6f972e2f4a7"
+    },
+    {
+      "candidate_expression": "-input",
+      "candidate_id": "negate",
+      "captured_choice_posts": 1,
+      "captured_request_sha256": "3d9de6a1a6800614fba5204befb8cb4e2f2f35e047a336a46e01bc0b77ac33b6",
+      "captured_response_candidate_ids": [
+        "negate"
+      ],
+      "cli_active_wall_ms": 274.8494170000004,
+      "context_gate": "accepted_exact_source_bound_ci_context",
+      "context_was_injected": true,
+      "first_choice_request_after_cli_start_ms": 5.39,
+      "go_validation_receipt": "postselection-validation/09-absolute-exact_matching_failed_ci_context/validation-receipt.json",
+      "harness_sampling_window_ms": 279.2364169999999,
+      "holdout_score_external_go": {
+        "passed": 4,
+        "total": 4
+      },
+      "intent_id": "absolute",
+      "model_choice_rounds": 1,
+      "model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+      "owned_server_resource_samples": {
+        "cpu_seconds_delta_coarse": 0.6999999999999993,
+        "measurement_note": "ps cumulative CPU is second-granularity on this host; sampled RSS/pcpu are observations, not continuous peaks",
+        "pcpu_percent_max_sampled": 251.7,
+        "rss_peak_kb_sampled": 3531024,
+        "sample_count": 4
+      },
+      "privacy_scanned_post_count": 1,
+      "provider_model": "laya-rl-agent",
+      "proxy_choice_latency_ms": 266.2822079999998,
+      "request_intent_sha256": "f785efafe25a8c390f4a2790a5cd5bb869471b690d1fbcd2f92bc4ea1081fa10",
+      "resolver_decision_latency_ms": 268.561291,
+      "response_selected_candidate_id": "negate",
+      "route_language": "it",
+      "route_model": "multilingual",
+      "selection_mode": "laya",
+      "sequence": 9,
+      "training_accuracy_percent_from_gooo": 100,
+      "training_score_external_go": {
+        "passed": 3,
+        "total": 3
+      },
+      "treatment": "exact_matching_failed_ci_context",
+      "typed_decision_request_sha256": "sha256:a3286c3ed0c31dc74b04d0dc7e045ac065c650aae97cb3d476242f2d4ae965a5"
+    },
+    {
+      "candidate_expression": "0",
+      "candidate_id": "zero",
+      "captured_choice_posts": 1,
+      "captured_request_sha256": "1fbfa27beca20c76d8e62be93aa3c33cbcafd4cd6aec97c187976c41b67b714d",
+      "captured_response_candidate_ids": [
+        "zero"
+      ],
+      "cli_active_wall_ms": 248.7937080000009,
+      "context_gate": "no_context",
+      "context_was_injected": false,
+      "first_choice_request_after_cli_start_ms": 5.528,
+      "go_validation_receipt": "postselection-validation/10-absolute-no_context/validation-receipt.json",
+      "harness_sampling_window_ms": 253.20883300000042,
+      "holdout_score_external_go": {
+        "passed": 3,
+        "total": 4
+      },
+      "intent_id": "absolute",
+      "model_choice_rounds": 1,
+      "model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+      "owned_server_resource_samples": {
+        "cpu_seconds_delta_coarse": 0.5299999999999994,
+        "measurement_note": "ps cumulative CPU is second-granularity on this host; sampled RSS/pcpu are observations, not continuous peaks",
+        "pcpu_percent_max_sampled": 251.7,
+        "rss_peak_kb_sampled": 3527792,
+        "sample_count": 3
+      },
+      "privacy_scanned_post_count": 1,
+      "provider_model": "laya-rl-agent",
+      "proxy_choice_latency_ms": 240.41583400000022,
+      "request_intent_sha256": "0056de03f8e358103be16256f7f297eb2f15684ab43315fde3ee2bcb81e93a81",
+      "resolver_decision_latency_ms": 242.843125,
+      "response_selected_candidate_id": "zero",
+      "route_language": "en",
+      "route_model": "english",
+      "selection_mode": "laya",
+      "sequence": 10,
+      "training_accuracy_percent_from_gooo": 0,
+      "training_score_external_go": {
+        "passed": 0,
+        "total": 3
+      },
+      "treatment": "no_context",
+      "typed_decision_request_sha256": "sha256:66f28504c654632ce06cfca2855f1bbe4d812d636ffcd3a49211b6f972e2f4a7"
+    },
+    {
+      "candidate_expression": "7",
+      "candidate_id": "seven",
+      "captured_choice_posts": 1,
+      "captured_request_sha256": "538b3a21ab931d2612b4040a01c1598f4b23565c225d843ddc3c2a5edc8db74e",
+      "captured_response_candidate_ids": [
+        "seven"
+      ],
+      "cli_active_wall_ms": 402.19749999999976,
+      "context_gate": "stale_or_mismatched_generated_source_sha256",
+      "context_was_injected": false,
+      "first_choice_request_after_cli_start_ms": 11.411,
+      "go_validation_receipt": "postselection-validation/01-piecewise-rejected_stale_source_context/validation-receipt.json",
+      "harness_sampling_window_ms": 406.57441599999976,
+      "holdout_score_external_go": {
+        "passed": 4,
+        "total": 4
+      },
+      "intent_id": "piecewise",
+      "model_choice_rounds": 1,
+      "model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+      "owned_server_resource_samples": {
+        "cpu_seconds_delta_coarse": 0.6700000000000004,
+        "measurement_note": "ps cumulative CPU is second-granularity on this host; sampled RSS/pcpu are observations, not continuous peaks",
+        "pcpu_percent_max_sampled": 141.7,
+        "rss_peak_kb_sampled": 1768864,
+        "sample_count": 4
+      },
+      "privacy_scanned_post_count": 1,
+      "provider_model": "laya-rl-agent",
+      "proxy_choice_latency_ms": 387.808916,
+      "request_intent_sha256": "c13ad495f71be53d94ecaa03208bc083ed822109ea752d3e41e0ff29ce0b10f6",
+      "resolver_decision_latency_ms": 390.514875,
+      "response_selected_candidate_id": "seven",
+      "route_language": "en",
+      "route_model": "english",
+      "selection_mode": "laya",
+      "sequence": 1,
+      "training_accuracy_percent_from_gooo": 100,
+      "training_score_external_go": {
+        "passed": 3,
+        "total": 3
+      },
+      "treatment": "rejected_stale_source_context",
+      "typed_decision_request_sha256": "sha256:f6a6caa3b54ed07dcd205463a75c514dd0e1e6b51b1446b7ce1157f3b14c9c6e"
+    },
+    {
+      "candidate_expression": "7",
+      "candidate_id": "seven",
+      "captured_choice_posts": 1,
+      "captured_request_sha256": "538b3a21ab931d2612b4040a01c1598f4b23565c225d843ddc3c2a5edc8db74e",
+      "captured_response_candidate_ids": [
+        "seven"
+      ],
+      "cli_active_wall_ms": 239.58562500000014,
+      "context_gate": "no_context",
+      "context_was_injected": false,
+      "first_choice_request_after_cli_start_ms": 5.574,
+      "go_validation_receipt": "postselection-validation/11-piecewise-no_context/validation-receipt.json",
+      "harness_sampling_window_ms": 244.02666699999997,
+      "holdout_score_external_go": {
+        "passed": 4,
+        "total": 4
+      },
+      "intent_id": "piecewise",
+      "model_choice_rounds": 1,
+      "model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+      "owned_server_resource_samples": {
+        "cpu_seconds_delta_coarse": 0.4900000000000002,
+        "measurement_note": "ps cumulative CPU is second-granularity on this host; sampled RSS/pcpu are observations, not continuous peaks",
+        "pcpu_percent_max_sampled": 228.1,
+        "rss_peak_kb_sampled": 3527792,
+        "sample_count": 3
+      },
+      "privacy_scanned_post_count": 1,
+      "provider_model": "laya-rl-agent",
+      "proxy_choice_latency_ms": 230.74516700000027,
+      "request_intent_sha256": "c13ad495f71be53d94ecaa03208bc083ed822109ea752d3e41e0ff29ce0b10f6",
+      "resolver_decision_latency_ms": 233.273583,
+      "response_selected_candidate_id": "seven",
+      "route_language": "en",
+      "route_model": "english",
+      "selection_mode": "laya",
+      "sequence": 11,
+      "training_accuracy_percent_from_gooo": 100,
+      "training_score_external_go": {
+        "passed": 3,
+        "total": 3
+      },
+      "treatment": "no_context",
+      "typed_decision_request_sha256": "sha256:f6a6caa3b54ed07dcd205463a75c514dd0e1e6b51b1446b7ce1157f3b14c9c6e"
+    },
+    {
+      "candidate_expression": "input",
+      "candidate_id": "identity",
+      "captured_choice_posts": 1,
+      "captured_request_sha256": "cf1e108ae2f716040d106b6b7088acd57a54446453d072e559859d055d505fc3",
+      "captured_response_candidate_ids": [
+        "identity"
+      ],
+      "cli_active_wall_ms": 256.62950000000075,
+      "context_gate": "accepted_exact_source_bound_ci_context",
+      "context_was_injected": true,
+      "first_choice_request_after_cli_start_ms": 6.087,
+      "go_validation_receipt": "postselection-validation/12-piecewise-exact_matching_failed_ci_context/validation-receipt.json",
+      "harness_sampling_window_ms": 261.0536660000005,
+      "holdout_score_external_go": {
+        "passed": 3,
+        "total": 4
+      },
+      "intent_id": "piecewise",
+      "model_choice_rounds": 1,
+      "model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+      "owned_server_resource_samples": {
+        "cpu_seconds_delta_coarse": 0.6600000000000001,
+        "measurement_note": "ps cumulative CPU is second-granularity on this host; sampled RSS/pcpu are observations, not continuous peaks",
+        "pcpu_percent_max_sampled": 242.3,
+        "rss_peak_kb_sampled": 3527792,
+        "sample_count": 3
+      },
+      "privacy_scanned_post_count": 1,
+      "provider_model": "laya-rl-agent",
+      "proxy_choice_latency_ms": 247.74029199999958,
+      "request_intent_sha256": "c121f95d9687ed07462aedbf4d96df2b99abe02f7e2ec3163afadb3308fc8d20",
+      "resolver_decision_latency_ms": 250.133625,
+      "response_selected_candidate_id": "identity",
+      "route_language": "it",
+      "route_model": "multilingual",
+      "selection_mode": "laya",
+      "sequence": 12,
+      "training_accuracy_percent_from_gooo": 0,
+      "training_score_external_go": {
+        "passed": 0,
+        "total": 3
+      },
+      "treatment": "exact_matching_failed_ci_context",
+      "typed_decision_request_sha256": "sha256:544ced9be0dbc91dea440b573669e7a37a2f47bde7ae35c4e2f2b178459fa50b"
+    },
+    {
+      "candidate_expression": "0",
+      "candidate_id": "zero",
+      "captured_choice_posts": 1,
+      "captured_request_sha256": "1a94a10c01ba17539fee02e07edd91f7f3fdf307484d392164a59d47e53d779c",
+      "captured_response_candidate_ids": [
+        "zero"
+      ],
+      "cli_active_wall_ms": 266.9363750000002,
+      "context_gate": "no_context",
+      "context_was_injected": false,
+      "first_choice_request_after_cli_start_ms": 5.48,
+      "go_validation_receipt": "postselection-validation/02-compound-precedence-no_context/validation-receipt.json",
+      "harness_sampling_window_ms": 270.92758299999974,
+      "holdout_score_external_go": {
+        "passed": 3,
+        "total": 4
+      },
+      "intent_id": "compound-precedence",
+      "model_choice_rounds": 1,
+      "model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+      "owned_server_resource_samples": {
+        "cpu_seconds_delta_coarse": 0.5699999999999998,
+        "measurement_note": "ps cumulative CPU is second-granularity on this host; sampled RSS/pcpu are observations, not continuous peaks",
+        "pcpu_percent_max_sampled": 181.4,
+        "rss_peak_kb_sampled": 1798048,
+        "sample_count": 4
+      },
+      "privacy_scanned_post_count": 1,
+      "provider_model": "laya-rl-agent",
+      "proxy_choice_latency_ms": 257.04499999999973,
+      "request_intent_sha256": "8d2bd347fb4684d47ce9c77887dcfb259baddecde216f8bcd3e04fb021f4d677",
+      "resolver_decision_latency_ms": 260.617292,
+      "response_selected_candidate_id": "zero",
+      "route_language": "en",
+      "route_model": "english",
+      "selection_mode": "laya",
+      "sequence": 2,
+      "training_accuracy_percent_from_gooo": 0,
+      "training_score_external_go": {
+        "passed": 0,
+        "total": 4
+      },
+      "treatment": "no_context",
+      "typed_decision_request_sha256": "sha256:31d07e67af68bbe1dc9e013176f708ee5b383f11848e5b516315b0b23c072e81"
+    },
+    {
+      "candidate_expression": "0",
+      "candidate_id": "zero",
+      "captured_choice_posts": 1,
+      "captured_request_sha256": "1a94a10c01ba17539fee02e07edd91f7f3fdf307484d392164a59d47e53d779c",
+      "captured_response_candidate_ids": [
+        "zero"
+      ],
+      "cli_active_wall_ms": 262.74729100000013,
+      "context_gate": "stale_or_mismatched_generated_source_sha256",
+      "context_was_injected": false,
+      "first_choice_request_after_cli_start_ms": 5.474,
+      "go_validation_receipt": "postselection-validation/07-compound-precedence-rejected_stale_source_context/validation-receipt.json",
+      "harness_sampling_window_ms": 269.65020799999985,
+      "holdout_score_external_go": {
+        "passed": 3,
+        "total": 4
+      },
+      "intent_id": "compound-precedence",
+      "model_choice_rounds": 1,
+      "model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+      "owned_server_resource_samples": {
+        "cpu_seconds_delta_coarse": 0.5599999999999996,
+        "measurement_note": "ps cumulative CPU is second-granularity on this host; sampled RSS/pcpu are observations, not continuous peaks",
+        "pcpu_percent_max_sampled": 208.7,
+        "rss_peak_kb_sampled": 3479392,
+        "sample_count": 4
+      },
+      "privacy_scanned_post_count": 1,
+      "provider_model": "laya-rl-agent",
+      "proxy_choice_latency_ms": 254.26024999999976,
+      "request_intent_sha256": "8d2bd347fb4684d47ce9c77887dcfb259baddecde216f8bcd3e04fb021f4d677",
+      "resolver_decision_latency_ms": 256.643083,
+      "response_selected_candidate_id": "zero",
+      "route_language": "en",
+      "route_model": "english",
+      "selection_mode": "laya",
+      "sequence": 7,
+      "training_accuracy_percent_from_gooo": 0,
+      "training_score_external_go": {
+        "passed": 0,
+        "total": 4
+      },
+      "treatment": "rejected_stale_source_context",
+      "typed_decision_request_sha256": "sha256:31d07e67af68bbe1dc9e013176f708ee5b383f11848e5b516315b0b23c072e81"
+    },
+    {
+      "candidate_expression": "input",
+      "candidate_id": "identity",
+      "captured_choice_posts": 1,
+      "captured_request_sha256": "75cd153fec2af706133b5417218c9d3d160d4dcfb873449d248c80b7ab68346d",
+      "captured_response_candidate_ids": [
+        "identity"
+      ],
+      "cli_active_wall_ms": 298.8370410000005,
+      "context_gate": "accepted_exact_source_bound_ci_context",
+      "context_was_injected": true,
+      "first_choice_request_after_cli_start_ms": 5.25,
+      "go_validation_receipt": "postselection-validation/08-compound-precedence-exact_matching_failed_ci_context/validation-receipt.json",
+      "harness_sampling_window_ms": 303.15087500000004,
+      "holdout_score_external_go": {
+        "passed": 3,
+        "total": 4
+      },
+      "intent_id": "compound-precedence",
+      "model_choice_rounds": 1,
+      "model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+      "owned_server_resource_samples": {
+        "cpu_seconds_delta_coarse": 0.7900000000000009,
+        "measurement_note": "ps cumulative CPU is second-granularity on this host; sampled RSS/pcpu are observations, not continuous peaks",
+        "pcpu_percent_max_sampled": 236.6,
+        "rss_peak_kb_sampled": 3531024,
+        "sample_count": 4
+      },
+      "privacy_scanned_post_count": 1,
+      "provider_model": "laya-rl-agent",
+      "proxy_choice_latency_ms": 290.66129200000114,
+      "request_intent_sha256": "4b025abf07545640263a00c5b51b4d7a383fc145d58ee9322beeef318aea2916",
+      "resolver_decision_latency_ms": 292.954375,
+      "response_selected_candidate_id": "identity",
+      "route_language": "it",
+      "route_model": "multilingual",
+      "selection_mode": "laya",
+      "sequence": 8,
+      "training_accuracy_percent_from_gooo": 0,
+      "training_score_external_go": {
+        "passed": 0,
+        "total": 4
+      },
+      "treatment": "exact_matching_failed_ci_context",
+      "typed_decision_request_sha256": "sha256:a749a31a8b3f1cfa29921df066575e5e9ed99a6543460a22ccf68a4cf49b45b9"
+    }
+  ],
+  "limitations": [
+    "One randomized replicate per intent-treatment cell; no statistical or general speed claim.",
+    "The exact-context treatment appends a bounded plain-text summary to plan.intent; the compiler exposes no structured external-CI-context field.",
+    "The stale-source context fails the provenance gate and the real Laya call uses the unchanged base intent.",
+    "Training and holdout scores have separate finite denominators. No full-domain correctness, global-best, model-forward-only latency, or host-CPU-increase claim is made.",
+    "CPU time is sampled at the process level and host sampling granularity; it is not a direct accelerator or pure-model-forward measurement."
+  ],
+  "planned_invocations": 12,
+  "randomized_order": true,
+  "receipt_attributed_laya_choice_rounds": 12,
+  "replicates_per_intent_treatment": 1,
+  "reported_route_counts": {
+    "english/en": 8,
+    "multilingual/it": 4
+  },
+  "run_id": "laya-selection-2026-09-30",
+  "runtime": {
+    "device": "cpu",
+    "model": "english",
+    "model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+    "package_version": "0.3.21",
+    "threads": 4
+  },
+  "schema": "gooo/ir-search-ci-context-laya-study-report/v1",
+  "study_id": "ir-search-ci-context-laya-2026-09-30",
+  "treatment_order_seed": 20260930,
+  "warmup_invocations": 0
+}
