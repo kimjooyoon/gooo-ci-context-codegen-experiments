@@ -1101,7 +1101,7 @@ def compile_and_score(run_dir: Path, row: dict, source: bytes, activity: str, or
     probe_bytes = make_probe_source(activity, suites).encode()
     write_bytes(validation / "probe_test.go", probe_bytes)
     write_bytes(validation / "independent-oracle.json", oracle_bytes)
-    write_bytes(validation / "go.mod", b"module pinned-context-probe\n\ngo 1.27.0\n")
+    write_bytes(validation / "go.mod", b"module pinned-context-probe\n\ngo 1.27.1\n")
     started_ns = time.time_ns()
     test = subprocess.run(["go", "test", "-count=1", "-v", "./..."], cwd=validation,
                           env=env, capture_output=True, check=False, timeout=120)

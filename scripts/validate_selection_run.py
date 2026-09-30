@@ -768,7 +768,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run-dir", type=Path, default=DEFAULT_RUN)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
-    parser.add_argument("--require-go-version", help="require an exact Go version token, e.g. go1.27.0")
+    parser.add_argument("--require-go-version", help="require an exact Go version token, e.g. go1.27.1")
     args = parser.parse_args()
     result = validate(args.run_dir, args.output, args.require_go_version)
     print(args.output.resolve() / "validation-report.json")

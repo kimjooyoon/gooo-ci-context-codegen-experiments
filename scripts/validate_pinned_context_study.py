@@ -29,7 +29,7 @@ DEFAULT_OUTPUT = Path(os.environ.get("RUNNER_TEMP", tempfile.gettempdir())) / "p
 # pins together so they can be replaced as one unit if the frozen source changes.
 EXPECTED_SOURCE_REVISION = "bb5c1ec2f81cbfb17ac6fb2f7a9e1d7b67168e7f"
 EXPECTED_BINARY_SHA256 = "47b9f3bd1b365d18771ba36b0a2b472b139fdb6a08b404697e188478dce38c6e"
-EXPECTED_GO_VERSION = "go1.27.0"
+EXPECTED_GO_VERSION = "go1.27.1"
 EXPECTED_LAYA_VERSION = "0.3.21"
 EXPECTED_MODEL_REVISION = "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
 MODELS = ("english", "multilingual")
@@ -488,7 +488,7 @@ def typed_request_hashes(go_bin: str, output_dir: Path, env: dict[str, str], req
                          helper_name: str = "typed-request-hasher") -> dict[str, str]:
     helper_dir = output_dir / helper_name
     helper_dir.mkdir(parents=True, exist_ok=False)
-    (helper_dir / "go.mod").write_text("module pinned-context-request-hasher\n\ngo 1.27.0\n", encoding="utf-8")
+    (helper_dir / "go.mod").write_text("module pinned-context-request-hasher\n\ngo 1.27.1\n", encoding="utf-8")
     (helper_dir / "main.go").write_text(r'''package main
 import (
     "crypto/sha256"
@@ -570,7 +570,7 @@ def independent_go_replay(go_bin: str, output_dir: Path, invocation_id: str, sou
     work.mkdir(parents=True, exist_ok=False)
     (work / "emitted.go").write_bytes(source)
     (work / "probe_test.go").write_text(probe_source(activity, suites), encoding="utf-8")
-    (work / "go.mod").write_text("module pinned-context-source-replay\n\ngo 1.27.0\n", encoding="utf-8")
+    (work / "go.mod").write_text("module pinned-context-source-replay\n\ngo 1.27.1\n", encoding="utf-8")
     proc = subprocess.run([go_bin, "test", "-count=1", "-v", "./..."], cwd=work, env=env,
                           capture_output=True, timeout=120, check=False)
     stdout = proc.stdout.decode("utf-8", errors="replace")
