@@ -1,0 +1,12 @@
+{
+  "schema": "gooo/ci-replay-publication/v1",
+  "repository": "kimjooyoon/gooo-ci-context-codegen-experiments",
+  "commit": "eadfa146b5dc6f9160bf63356917ebafd9a16b8f",
+  "workflow_run_id": 36689154046,
+  "workflow_url": "https://github.com/kimjooyoon/gooo-ci-context-codegen-experiments/actions/runs/36689154046",
+  "conclusion": "success",
+  "independent_report_decision": "PASS",
+  "additional_model_calls": 0,
+  "report_sha256": "61720cd28fc794a1106cc3e33fed1b224015cccb173c83ffd8502f24677ba8db",
+  "validator_sha256": "4e6fc96cf328c35c380da44d6997d100d96b187ca7cfbee0dd6d1edb6fbbe8da"
+}

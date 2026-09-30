@@ -127,6 +127,12 @@ These percentages measure those cases, not a percentage of whole-language intent
 | Multilingual | Compact | 30/39 | 45/48 | 9/12 | 86.52 ms |
 | Multilingual | Compact + failure feedback | 9/39 | 42/48 | 6/12 | 108.86 ms |
 
+The [latency and choice breakdown](audit/pinned-compact-context-2026-09-30/analysis/latency-and-choice-breakdown.md)
+includes provider POST times, every repeated choice, warmups, process samples,
+and next experiment designs. The [public offline replay CI](https://github.com/kimjooyoon/gooo-ci-context-codegen-experiments/actions/runs/36689154046)
+passed on the published capture commit; its separate Linux replay report and
+receipt are retained in `audit/pinned-compact-context-2026-09-30/ci-replay/`.
+
 Compact packaging improved the multilingual finite scores in this capture;
 adding failure feedback reduced its training score. English scores were unchanged.
 Three repeats of four known intents do not establish a general speed or causal
