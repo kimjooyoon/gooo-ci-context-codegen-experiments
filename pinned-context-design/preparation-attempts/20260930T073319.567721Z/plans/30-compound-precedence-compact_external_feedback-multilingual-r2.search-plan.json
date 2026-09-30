@@ -1,0 +1,71 @@
+{
+  "candidates": [
+    {
+      "expression": "input",
+      "id": "identity"
+    },
+    {
+      "expression": "0",
+      "id": "zero"
+    },
+    {
+      "expression": "100",
+      "id": "hundred"
+    }
+  ],
+  "external_training_feedback": {
+    "candidate_id": "identity",
+    "observations": [
+      {
+        "actual": -1,
+        "expected": 100,
+        "input": -1,
+        "passed": false
+      },
+      {
+        "actual": 10,
+        "expected": 100,
+        "input": 10,
+        "passed": false
+      },
+      {
+        "actual": 11,
+        "expected": 100,
+        "input": 11,
+        "passed": false
+      },
+      {
+        "actual": 13,
+        "expected": 100,
+        "input": 13,
+        "passed": false
+      }
+    ],
+    "source_digest": "sha256:2578de3c0ee33d3e68c2dc8b7c3165316d322873cb50a4caf76ccb260e853eb3",
+    "training_suite_sha256": "sha256:d3971048a08c0bf47b044f9e8f32ef1c966e896162e9131d3ba3138b6ea7cb6f"
+  },
+  "hole_id": "branch_value",
+  "intent": "Use Go precedence: input < 0 OR (input >= 10 AND input != 12). Return one hundred when that condition holds; otherwise preserve input.",
+  "max_attempts": 1,
+  "prompt_profile": "compact",
+  "provider_model": "multilingual",
+  "schema": "gooo/body-codegen-ir-search-plan/v1",
+  "test_cases": [
+    {
+      "expected": 100,
+      "input": -1
+    },
+    {
+      "expected": 100,
+      "input": 10
+    },
+    {
+      "expected": 100,
+      "input": 11
+    },
+    {
+      "expected": 100,
+      "input": 13
+    }
+  ]
+}

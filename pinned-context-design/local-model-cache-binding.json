@@ -1,0 +1,110 @@
+{
+  "cached_snapshot_files": [
+    {
+      "bytes": 2083,
+      "is_symlink": true,
+      "path": "encoder/config.json",
+      "sha256": "bf3ab80598fdccf414855a2ce80f22859e4492d06ca8a62ddd1cfb63972f8979"
+    },
+    {
+      "bytes": 842609210,
+      "is_symlink": true,
+      "path": "model.safetensors",
+      "sha256": "891102d372688fc2a094dac56a384bc537b87c63f21f9f3dac0be2b7cbc8d86c"
+    },
+    {
+      "bytes": 1938,
+      "is_symlink": true,
+      "path": "multilingual/encoder/config.json",
+      "sha256": "83f6916d13ef0f556ac461f28308dc2bffa7ebeadee8ec9e2db5812020ea5bb4"
+    },
+    {
+      "bytes": 643835514,
+      "is_symlink": true,
+      "path": "multilingual/model.safetensors",
+      "sha256": "9d628fd971b700382ac6f65920a86f149777b2e748e0c955fb3b19695aa8f204"
+    },
+    {
+      "bytes": 472,
+      "is_symlink": true,
+      "path": "multilingual/rl_agent_config.json",
+      "sha256": "25061739243b617ad88d1219ba6f8a9c86c5881ca28df024fa2d9b3b2fcc30c6"
+    },
+    {
+      "bytes": 34363188,
+      "is_symlink": true,
+      "path": "multilingual/tokenizer/tokenizer.json",
+      "sha256": "609d8f4c067cd3950f88594c5a802616cea245823836ef5848ee4fc40aab5b6f"
+    },
+    {
+      "bytes": 524,
+      "is_symlink": true,
+      "path": "multilingual/tokenizer/tokenizer_config.json",
+      "sha256": "6c6b2d8e3c84ce0e671c129cd6b374b235d6f9863042a5836358d00a89bbb5a1"
+    },
+    {
+      "bytes": 745,
+      "is_symlink": true,
+      "path": "rl_agent_config.json",
+      "sha256": "ae287b56bbcf5f8c4f4541ae9dfd00c914c4c48b940b8398c3058af37ba92bbd"
+    },
+    {
+      "bytes": 3583228,
+      "is_symlink": true,
+      "path": "tokenizer/tokenizer.json",
+      "sha256": "6c8aaa9a542084f2457eab775d4eeb51f92a70c0fd9de28d5edb0ddec3c08d30"
+    },
+    {
+      "bytes": 308,
+      "is_symlink": true,
+      "path": "tokenizer/tokenizer_config.json",
+      "sha256": "50044de60daaa73df97d262e15a40d4faf0160e7d742df64b377877a1320dd12"
+    },
+    {
+      "bytes": 2084,
+      "is_symlink": true,
+      "path": "typed-decisions/encoder/config.json",
+      "sha256": "5268d24ad3b77c8151de5dcb0762ba4391619aad9ab0bda33e36fb083cfeae6d"
+    },
+    {
+      "bytes": 842609220,
+      "is_symlink": true,
+      "path": "typed-decisions/model.safetensors",
+      "sha256": "4fa56de72383a9d3efa9cfa78955733c81b9fc8067a587ca4beb82c78107a24e"
+    },
+    {
+      "bytes": 847,
+      "is_symlink": true,
+      "path": "typed-decisions/rl_agent_config.json",
+      "sha256": "ebf0cd524d92342a6be5e48e9fca3d7c2babfb5a56ccd79d2171ef5d8c7f7be8"
+    },
+    {
+      "bytes": 3583228,
+      "is_symlink": true,
+      "path": "typed-decisions/tokenizer/tokenizer.json",
+      "sha256": "6c8aaa9a542084f2457eab775d4eeb51f92a70c0fd9de28d5edb0ddec3c08d30"
+    },
+    {
+      "bytes": 337,
+      "is_symlink": true,
+      "path": "typed-decisions/tokenizer/tokenizer_config.json",
+      "sha256": "08d4cf3ac4dca381759441b85b91a6d40e688471dcd33d15d6649eb0a9a854d1"
+    }
+  ],
+  "cached_snapshot_total_bytes": 2370592926,
+  "claim_scope": "Local cache content binding only; does not establish remote model authenticity.",
+  "laya_runtime_source_files": [
+    {
+      "bytes": 27665,
+      "path": "/private/tmp/meta-ontology-go-laya-venv-20260930/lib/python3.11/site-packages/laya/common.py",
+      "sha256": "9358176290b519b3e1df0077e6b55ce6a57e191abaf8401f3f7c35cb62596868"
+    }
+  ],
+  "laya_version": "0.3.21",
+  "model_repository": "convaiinnovations/laya",
+  "model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+  "schema": "gooo/pinned-context-local-model-cache-binding/v1",
+  "snapshot_path": "/Users/alice/.cache/huggingface/hub/models--convaiinnovations--laya/snapshots/55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+  "tokenizers_version": "0.23.2",
+  "transformers_version": "5.17.0"
+}

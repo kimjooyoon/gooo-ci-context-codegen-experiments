@@ -1,0 +1,410 @@
+[
+  {
+    "head_option_stats": {
+      "options": 3,
+      "options_distinct": 3,
+      "tokens_per_option": null
+    },
+    "model_max_len": 512,
+    "provider_model": "english",
+    "question_count": 1,
+    "question_head_max_len": 192,
+    "request_sha256": "45d1fa3c5212e5ed7d9d73c3aea95355061b7a168bdd1c8cc97b506cd0764abf",
+    "state_token_room": 440,
+    "state_tokens_before_model_truncation": 316,
+    "state_truncated": false,
+    "token_count_exact_sequence": 388,
+    "tokenizer_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  },
+  {
+    "head_option_stats": {
+      "options": 3,
+      "options_distinct": 3,
+      "tokens_per_option": null
+    },
+    "model_max_len": 1024,
+    "provider_model": "multilingual",
+    "question_count": 1,
+    "question_head_max_len": 256,
+    "request_sha256": "8cc16b20a2750088ec322c19b02612141b5260d573d92e99aff501a4f72dbfee",
+    "state_token_room": 951,
+    "state_tokens_before_model_truncation": 281,
+    "state_truncated": false,
+    "token_count_exact_sequence": 354,
+    "tokenizer_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  },
+  {
+    "head_option_stats": {
+      "options": 3,
+      "options_distinct": 3,
+      "tokens_per_option": null
+    },
+    "model_max_len": 512,
+    "provider_model": "english",
+    "question_count": 1,
+    "question_head_max_len": 192,
+    "request_sha256": "009ea1728b40e73e718ff8af3af9bfabc72f296c75dbf9cf5d93203e9269bcdb",
+    "state_token_room": 440,
+    "state_tokens_before_model_truncation": 222,
+    "state_truncated": false,
+    "token_count_exact_sequence": 294,
+    "tokenizer_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  },
+  {
+    "head_option_stats": {
+      "options": 3,
+      "options_distinct": 3,
+      "tokens_per_option": null
+    },
+    "model_max_len": 1024,
+    "provider_model": "multilingual",
+    "question_count": 1,
+    "question_head_max_len": 256,
+    "request_sha256": "675a550fab86e6f796318a48d99cddf92937cab927959110d10961dd21d9547b",
+    "state_token_room": 951,
+    "state_tokens_before_model_truncation": 193,
+    "state_truncated": false,
+    "token_count_exact_sequence": 266,
+    "tokenizer_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  },
+  {
+    "head_option_stats": {
+      "options": 3,
+      "options_distinct": 3,
+      "tokens_per_option": null
+    },
+    "model_max_len": 512,
+    "provider_model": "english",
+    "question_count": 1,
+    "question_head_max_len": 192,
+    "request_sha256": "7629e35c0db4e168a52dc0f3d235a1b089816ab871fb3d7cbb70536f490d8842",
+    "state_token_room": 443,
+    "state_tokens_before_model_truncation": 274,
+    "state_truncated": false,
+    "token_count_exact_sequence": 343,
+    "tokenizer_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  },
+  {
+    "head_option_stats": {
+      "options": 3,
+      "options_distinct": 3,
+      "tokens_per_option": null
+    },
+    "model_max_len": 1024,
+    "provider_model": "multilingual",
+    "question_count": 1,
+    "question_head_max_len": 256,
+    "request_sha256": "59dc37b29a0fbec13e0dfa529ae3663527938895c48d8f2a306ccb452d98c574",
+    "state_token_room": 954,
+    "state_tokens_before_model_truncation": 270,
+    "state_truncated": false,
+    "token_count_exact_sequence": 340,
+    "tokenizer_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  },
+  {
+    "head_option_stats": {
+      "options": 3,
+      "options_distinct": 3,
+      "tokens_per_option": null
+    },
+    "model_max_len": 512,
+    "provider_model": "english",
+    "question_count": 1,
+    "question_head_max_len": 192,
+    "request_sha256": "98aba24939c473934cca945e4921d4e2b6c81232458ad9c5ccfca75f4970a31d",
+    "state_token_room": 440,
+    "state_tokens_before_model_truncation": 303,
+    "state_truncated": false,
+    "token_count_exact_sequence": 375,
+    "tokenizer_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  },
+  {
+    "head_option_stats": {
+      "options": 3,
+      "options_distinct": 3,
+      "tokens_per_option": null
+    },
+    "model_max_len": 1024,
+    "provider_model": "multilingual",
+    "question_count": 1,
+    "question_head_max_len": 256,
+    "request_sha256": "2f33ae4cd839d4d74998507cd0c84206e3e5c17f44d1b8891b56f3c276a32ac9",
+    "state_token_room": 951,
+    "state_tokens_before_model_truncation": 263,
+    "state_truncated": false,
+    "token_count_exact_sequence": 336,
+    "tokenizer_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  },
+  {
+    "head_option_stats": {
+      "options": 3,
+      "options_distinct": 3,
+      "tokens_per_option": null
+    },
+    "model_max_len": 512,
+    "provider_model": "english",
+    "question_count": 1,
+    "question_head_max_len": 192,
+    "request_sha256": "7a2095d628fe3776719e82957f26179f0f4d198411b68863768634e11498b745",
+    "state_token_room": 440,
+    "state_tokens_before_model_truncation": 209,
+    "state_truncated": false,
+    "token_count_exact_sequence": 281,
+    "tokenizer_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  },
+  {
+    "head_option_stats": {
+      "options": 3,
+      "options_distinct": 3,
+      "tokens_per_option": null
+    },
+    "model_max_len": 1024,
+    "provider_model": "multilingual",
+    "question_count": 1,
+    "question_head_max_len": 256,
+    "request_sha256": "9a24729d2bd815dfb90d56818bc534f2568fefc830b2446d286a435e171a9172",
+    "state_token_room": 951,
+    "state_tokens_before_model_truncation": 175,
+    "state_truncated": false,
+    "token_count_exact_sequence": 248,
+    "tokenizer_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  },
+  {
+    "head_option_stats": {
+      "options": 3,
+      "options_distinct": 3,
+      "tokens_per_option": null
+    },
+    "model_max_len": 512,
+    "provider_model": "english",
+    "question_count": 1,
+    "question_head_max_len": 192,
+    "request_sha256": "650ec4b9abd01bebd287d432abdbd5e54f3a0aaceadc45820504487c72766dd6",
+    "state_token_room": 443,
+    "state_tokens_before_model_truncation": 262,
+    "state_truncated": false,
+    "token_count_exact_sequence": 331,
+    "tokenizer_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  },
+  {
+    "head_option_stats": {
+      "options": 3,
+      "options_distinct": 3,
+      "tokens_per_option": null
+    },
+    "model_max_len": 1024,
+    "provider_model": "multilingual",
+    "question_count": 1,
+    "question_head_max_len": 256,
+    "request_sha256": "9cab66a80bd50f3cf6700b7a1db7bbdda93aa7e19c718be668783a0aff4b4b76",
+    "state_token_room": 954,
+    "state_tokens_before_model_truncation": 249,
+    "state_truncated": false,
+    "token_count_exact_sequence": 319,
+    "tokenizer_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  },
+  {
+    "head_option_stats": {
+      "options": 3,
+      "options_distinct": 3,
+      "tokens_per_option": null
+    },
+    "model_max_len": 512,
+    "provider_model": "english",
+    "question_count": 1,
+    "question_head_max_len": 192,
+    "request_sha256": "64c03220c3e25d90f3bf2292509af8d51dbd13d3e1520b51155a585c9b6b053e",
+    "state_token_room": 442,
+    "state_tokens_before_model_truncation": 345,
+    "state_truncated": false,
+    "token_count_exact_sequence": 415,
+    "tokenizer_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  },
+  {
+    "head_option_stats": {
+      "options": 3,
+      "options_distinct": 3,
+      "tokens_per_option": null
+    },
+    "model_max_len": 1024,
+    "provider_model": "multilingual",
+    "question_count": 1,
+    "question_head_max_len": 256,
+    "request_sha256": "ddd21e19ef8e3f036041f8c0c3893d1e611562e6613c5193b79665a9b41aeb35",
+    "state_token_room": 949,
+    "state_tokens_before_model_truncation": 341,
+    "state_truncated": false,
+    "token_count_exact_sequence": 416,
+    "tokenizer_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  },
+  {
+    "head_option_stats": {
+      "options": 3,
+      "options_distinct": 3,
+      "tokens_per_option": null
+    },
+    "model_max_len": 512,
+    "provider_model": "english",
+    "question_count": 1,
+    "question_head_max_len": 192,
+    "request_sha256": "cb9c197f0c4e63e013dcd91c15f87012d743921bd2b08735cd134718179981c9",
+    "state_token_room": 442,
+    "state_tokens_before_model_truncation": 240,
+    "state_truncated": false,
+    "token_count_exact_sequence": 310,
+    "tokenizer_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  },
+  {
+    "head_option_stats": {
+      "options": 3,
+      "options_distinct": 3,
+      "tokens_per_option": null
+    },
+    "model_max_len": 1024,
+    "provider_model": "multilingual",
+    "question_count": 1,
+    "question_head_max_len": 256,
+    "request_sha256": "49898846cc814ffdc3aa63feff13df89ae3797b9d227110ede8aee45f5a9eaeb",
+    "state_token_room": 949,
+    "state_tokens_before_model_truncation": 228,
+    "state_truncated": false,
+    "token_count_exact_sequence": 303,
+    "tokenizer_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  },
+  {
+    "head_option_stats": {
+      "options": 3,
+      "options_distinct": 3,
+      "tokens_per_option": null
+    },
+    "model_max_len": 512,
+    "provider_model": "english",
+    "question_count": 1,
+    "question_head_max_len": 192,
+    "request_sha256": "23074bba97be8e1d1a8e6c028a9201d37cac6cee64b8f3cd9488ae2039e33a94",
+    "state_token_room": 445,
+    "state_tokens_before_model_truncation": 294,
+    "state_truncated": false,
+    "token_count_exact_sequence": 361,
+    "tokenizer_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  },
+  {
+    "head_option_stats": {
+      "options": 3,
+      "options_distinct": 3,
+      "tokens_per_option": null
+    },
+    "model_max_len": 1024,
+    "provider_model": "multilingual",
+    "question_count": 1,
+    "question_head_max_len": 256,
+    "request_sha256": "bace10a360f0975787b60978aea55f17cffc388b1a8360e4822c9ca055337211",
+    "state_token_room": 952,
+    "state_tokens_before_model_truncation": 302,
+    "state_truncated": false,
+    "token_count_exact_sequence": 374,
+    "tokenizer_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  },
+  {
+    "head_option_stats": {
+      "options": 3,
+      "options_distinct": 3,
+      "tokens_per_option": null
+    },
+    "model_max_len": 512,
+    "provider_model": "english",
+    "question_count": 1,
+    "question_head_max_len": 192,
+    "request_sha256": "4bd20ef068e95670e6d5e380fa553081884362c73b33df7b9a7820874c38d439",
+    "state_token_room": 442,
+    "state_tokens_before_model_truncation": 296,
+    "state_truncated": false,
+    "token_count_exact_sequence": 366,
+    "tokenizer_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  },
+  {
+    "head_option_stats": {
+      "options": 3,
+      "options_distinct": 3,
+      "tokens_per_option": null
+    },
+    "model_max_len": 1024,
+    "provider_model": "multilingual",
+    "question_count": 1,
+    "question_head_max_len": 256,
+    "request_sha256": "a33bdb9625d8cdb32ab064a48912de136ba352605ec269125a56679734a579de",
+    "state_token_room": 951,
+    "state_tokens_before_model_truncation": 259,
+    "state_truncated": false,
+    "token_count_exact_sequence": 332,
+    "tokenizer_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  },
+  {
+    "head_option_stats": {
+      "options": 3,
+      "options_distinct": 3,
+      "tokens_per_option": null
+    },
+    "model_max_len": 512,
+    "provider_model": "english",
+    "question_count": 1,
+    "question_head_max_len": 192,
+    "request_sha256": "3774b3f66cc1fd8a79c61371c23293c8c36391657c1e5bf79fc9c16400347d0e",
+    "state_token_room": 442,
+    "state_tokens_before_model_truncation": 202,
+    "state_truncated": false,
+    "token_count_exact_sequence": 272,
+    "tokenizer_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  },
+  {
+    "head_option_stats": {
+      "options": 3,
+      "options_distinct": 3,
+      "tokens_per_option": null
+    },
+    "model_max_len": 1024,
+    "provider_model": "multilingual",
+    "question_count": 1,
+    "question_head_max_len": 256,
+    "request_sha256": "8afda801ccc1b818249dc8f10de61be43e312c9937553518b0a9c4c292e16a25",
+    "state_token_room": 951,
+    "state_tokens_before_model_truncation": 171,
+    "state_truncated": false,
+    "token_count_exact_sequence": 244,
+    "tokenizer_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  },
+  {
+    "head_option_stats": {
+      "options": 3,
+      "options_distinct": 3,
+      "tokens_per_option": null
+    },
+    "model_max_len": 512,
+    "provider_model": "english",
+    "question_count": 1,
+    "question_head_max_len": 192,
+    "request_sha256": "a07fc2b7c58fecea8926c1f12277885fce20bbc3cda63c07026b343c11c993e0",
+    "state_token_room": 445,
+    "state_tokens_before_model_truncation": 254,
+    "state_truncated": false,
+    "token_count_exact_sequence": 321,
+    "tokenizer_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  },
+  {
+    "head_option_stats": {
+      "options": 3,
+      "options_distinct": 3,
+      "tokens_per_option": null
+    },
+    "model_max_len": 1024,
+    "provider_model": "multilingual",
+    "question_count": 1,
+    "question_head_max_len": 256,
+    "request_sha256": "3f55d442eccfee21fd5cf4bffc2db399ebf9d484f60b86f36340212789273c9e",
+    "state_token_room": 954,
+    "state_tokens_before_model_truncation": 241,
+    "state_truncated": false,
+    "token_count_exact_sequence": 311,
+    "tokenizer_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  }
+]

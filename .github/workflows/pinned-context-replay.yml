@@ -1,0 +1,94 @@
+name: Frozen pinned-context offline replay
+
+on:
+  push:
+    paths:
+      - '.github/workflows/pinned-context-replay.yml'
+      - 'scripts/validate_pinned_context_study.py'
+      - 'scripts/prepare_pinned_context_study.py'
+      - 'scripts/run_pinned_context_study.py'
+      - 'scripts/test_pinned_capture_proxy.py'
+      - 'scripts/selection_support.py'
+      - 'pinned-context-design/**'
+      - 'audit/pinned-compact-context-2026-09-30/**'
+      - 'audit/ci-run-36673382253/**'
+      - 'fixtures/**'
+      - 'plans/**'
+      - 'manifest.json'
+  pull_request:
+    paths:
+      - '.github/workflows/pinned-context-replay.yml'
+      - 'scripts/validate_pinned_context_study.py'
+      - 'scripts/prepare_pinned_context_study.py'
+      - 'scripts/run_pinned_context_study.py'
+      - 'scripts/test_pinned_capture_proxy.py'
+      - 'scripts/selection_support.py'
+      - 'pinned-context-design/**'
+      - 'audit/pinned-compact-context-2026-09-30/**'
+      - 'audit/ci-run-36673382253/**'
+      - 'fixtures/**'
+      - 'plans/**'
+      - 'manifest.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pinned-context-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      GOOO_LAYA_URL: ''
+      GOOO_LAYA_API_KEY: ''
+      GOOO_PROVIDER_MODEL: ''
+      HF_HUB_OFFLINE: '1'
+      TRANSFORMERS_OFFLINE: '1'
+      HF_DATASETS_OFFLINE: '1'
+      HF_HUB_DISABLE_TELEMETRY: '1'
+      GOTOOLCHAIN: local
+      GOPROXY: off
+      GOSUMDB: off
+      GOWORK: off
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.27.0'
+          cache: false
+
+      - name: Run model-free capture proxy regressions
+        run: python3 -m unittest discover -s scripts -p 'test_pinned_capture_proxy.py' -v
+
+      - name: Validate frozen design or independently replay captured study
+        run: |
+          if [ -f audit/pinned-compact-context-2026-09-30/report.json ]; then
+            python3 scripts/validate_pinned_context_study.py \
+              --run-dir audit/pinned-compact-context-2026-09-30 \
+              --output "$RUNNER_TEMP/pinned-context-independent-replay" \
+              --require-go-version go1.27.0
+          else
+            python3 scripts/validate_pinned_context_study.py \
+              --design-only \
+              --run-dir pinned-context-design \
+              --output "$RUNNER_TEMP/pinned-context-independent-replay"
+          fi
+
+      - name: Add replay report to the job summary
+        if: always()
+        run: |
+          report="$RUNNER_TEMP/pinned-context-independent-replay/independent-replay-report.md"
+          if [ -f "$report" ]; then
+            cat "$report" >> "$GITHUB_STEP_SUMMARY"
+          else
+            printf '%s\n' 'The independent replay did not produce a report.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pinned-context-independent-replay-${{ github.sha }}
+          path: ${{ runner.temp }}/pinned-context-independent-replay
+          if-no-files-found: warn

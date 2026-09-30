@@ -14,7 +14,7 @@ For each intent, a later model-selection phase may compare three treatments:
 2. **Exact matching failed-CI context:** append a compact, explicitly labeled failure summary to `intent`, only after matching the captured fixture, activity, compiler revision, plan, and source digests. Keep the appended text at most 900 Unicode code points and the full `intent` at most the compiler's 2,000-code-point limit. Include only training failures and hashes; never append any other case set.
 3. **Rejected stale-source context:** present a context record whose source digest differs, reject it before injection, and make the choice request with the unchanged base intent. This is a rejection control, not a different model input.
 
-The current `IRBodySearchPlan` exposes no structured external-context field, and its decoder rejects unknown fields. Therefore the matching-context treatment appends a bounded summary to the natural-language `intent`, not a typed compiler input or authenticated proof. The wrapper validates compiler, fixture, activity, plan, training suite, candidate, and emitted-source bindings before building that plan. It rejects a stale source binding before injection.
+The compiler revision used by this historical phase (`29d44bc`) exposes no structured external-context field, and its decoder rejects unknown fields. Therefore its matching-context treatment appends a bounded summary to the natural-language `intent`, not a typed compiler input or authenticated proof. The wrapper validates compiler, fixture, activity, plan, training suite, candidate, and emitted-source bindings before building that plan. It rejects a stale source binding before injection.
 
 The frozen run design contains four intents × three treatments, shuffled once using the recorded seed, one invocation per cell, no warmup, and one allowed attempt per invocation. All Laya requests contain training cases only. The runner saves raw requests and responses before opening independent holdout vectors; holdout scoring happens only on the final emitted bodies after selection. A recorded provider request is not treated as a model-selected choice unless Gooo's receipt attributes the decision to Laya.
 
@@ -69,8 +69,45 @@ The installed HTTP endpoint supports explicit `model: "english"` or
 upstream request bytes through an audited adapter, pin each model, and keep a
 compact failure-summary arm separate from the original full-context arm.
 Provenance hashes remain in the local evidence record when omitted from a compact
-model prompt. First calls and warm repeats need separate measurements. These
-follow-up treatments are planned, not counted as measured model calls.
+model prompt. First calls and warm repeats need separate measurements. The
+historical routing diagnosis made no further inference calls.
+
+## Native model pins and compact feedback study
+
+The follow-up uses Gooo source `bb5c1ec2f81cbfb17ac6fb2f7a9e1d7b67168e7f`
+([compiler PR](https://github.com/kimjooyoon/meta-ontology-go/pull/1099)).
+`provider_model` binds an explicit route to the typed request and receipt;
+`prompt_profile: "compact"` changes packaging independently of feedback;
+`external_training_feedback` accepts source- and training-suite-bound advisory
+observations. The compact model input carries failed training triples and counts,
+while provenance hashes stay in local receipts. Gooo still evaluates and
+typechecks the selected expression after the choice.
+
+The planned comparison has four existing intents, three arms (legacy input,
+compact input, compact input with actual earlier CI failures), two explicitly
+pinned models, and three repeats: **72 measured calls plus two separate warmups**.
+These are 24 distinct intent/arm/model cells, not 72 independent functional
+intents. Both compact arms share the same question instructions. All plans and
+order are frozen before inference. A separate 24-template local mock preflight
+checks the exact outgoing protocol and cached tokenizer budgets; those calls
+are not model inference. The known finite oracle is reused only for
+postselection scoring and does not establish fresh unseen generalization.
+
+The [final design](pinned-context-design/study-design.json) is frozen at SHA-256
+`00da5cae3ee097870a66320ae18cf3fcd510652a369eb8eef31b5e6b4c5fb896`.
+All 24 exact wire templates passed the cached-tokenizer preflight without state
+truncation: 272–415 tokens for English (512-token budget), and 244–416 for
+multilingual (1,024-token budget). Source-bound design validation passed with
+zero model inference calls. Model outcomes, timings, and memory use are counted
+only after raw captures and independent compiled-Go validation are saved.
+Failed invocations remain visible, and request digests, model routes, and actual
+receipts are checked separately.
+
+A [superseded model-free preparation](pinned-context-design/superseded-preparation-v1/)
+records a retention failure: its original frozen design JSON was not preserved.
+Its digest, raw mock exchanges, and 74 plan files remain available; the plans are
+byte-identical to the final design. That preparation made zero inference calls
+and is excluded from measured results.
 
 ## Reproduction
 

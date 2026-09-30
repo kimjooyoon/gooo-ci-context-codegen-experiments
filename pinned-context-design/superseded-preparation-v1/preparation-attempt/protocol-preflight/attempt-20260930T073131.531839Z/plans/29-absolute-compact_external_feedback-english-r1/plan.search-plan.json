@@ -1,0 +1,61 @@
+{
+  "candidates": [
+    {
+      "expression": "input",
+      "id": "identity"
+    },
+    {
+      "expression": "0",
+      "id": "zero"
+    },
+    {
+      "expression": "-input",
+      "id": "negate"
+    }
+  ],
+  "external_training_feedback": {
+    "candidate_id": "identity",
+    "observations": [
+      {
+        "actual": -3,
+        "expected": 3,
+        "input": -3,
+        "passed": false
+      },
+      {
+        "actual": -2,
+        "expected": 2,
+        "input": -2,
+        "passed": false
+      },
+      {
+        "actual": -1,
+        "expected": 1,
+        "input": -1,
+        "passed": false
+      }
+    ],
+    "source_digest": "sha256:28335004b1a83bbf2e0ddebf60665ff33bad4c0891affad9f5ae63bda7749463",
+    "training_suite_sha256": "sha256:82b60c95b85fb77b500a2dc79716131a6e20b8d3261e24f1710b9614890426a6"
+  },
+  "hole_id": "magnitude",
+  "intent": "For signed int64, negate negative values and preserve nonnegative values; arithmetic wraps in two's-complement int64, so MinInt64 remains MinInt64.",
+  "max_attempts": 1,
+  "prompt_profile": "compact",
+  "provider_model": "english",
+  "schema": "gooo/body-codegen-ir-search-plan/v1",
+  "test_cases": [
+    {
+      "expected": 3,
+      "input": -3
+    },
+    {
+      "expected": 2,
+      "input": -2
+    },
+    {
+      "expected": 1,
+      "input": -1
+    }
+  ]
+}

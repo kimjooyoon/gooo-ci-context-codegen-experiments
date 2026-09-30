@@ -1,0 +1,4 @@
+package bodycodegen
+namespace bodycodegen
+entity Integer id "bodycodegen://entity/integer"
+activity CompoundPrecedence(Integer) -> Integer computes "let output = input; if input < 0 || input >= 10 && input != 12 { output = __GOOO_BODY_HOLE_branch_value__ } else { output = input }; return output"

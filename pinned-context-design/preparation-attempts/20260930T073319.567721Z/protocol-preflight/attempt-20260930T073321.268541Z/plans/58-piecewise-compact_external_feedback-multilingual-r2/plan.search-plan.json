@@ -1,0 +1,61 @@
+{
+  "candidates": [
+    {
+      "expression": "input",
+      "id": "identity"
+    },
+    {
+      "expression": "0",
+      "id": "zero"
+    },
+    {
+      "expression": "7",
+      "id": "seven"
+    }
+  ],
+  "external_training_feedback": {
+    "candidate_id": "identity",
+    "observations": [
+      {
+        "actual": -3,
+        "expected": 7,
+        "input": -3,
+        "passed": false
+      },
+      {
+        "actual": -2,
+        "expected": 7,
+        "input": -2,
+        "passed": false
+      },
+      {
+        "actual": -1,
+        "expected": 7,
+        "input": -1,
+        "passed": false
+      }
+    ],
+    "source_digest": "sha256:266a5fa9e097eb3566ba820b7d83561fd4545c771cd5d0aadefd3aa481a2d622",
+    "training_suite_sha256": "sha256:aecdce3f251fd8057137619efdbd18f0fa5132a57e3a66ae6d62952878044f8c"
+  },
+  "hole_id": "negative_value",
+  "intent": "For a signed int64 input, return seven when negative and otherwise preserve the input.",
+  "max_attempts": 1,
+  "prompt_profile": "compact",
+  "provider_model": "multilingual",
+  "schema": "gooo/body-codegen-ir-search-plan/v1",
+  "test_cases": [
+    {
+      "expected": 7,
+      "input": -3
+    },
+    {
+      "expected": 7,
+      "input": -2
+    },
+    {
+      "expected": 7,
+      "input": -1
+    }
+  ]
+}
