@@ -1,0 +1,460 @@
+{
+  "report": "Read-only CI bottleneck audit",
+  "repository": "kimjooyoon/meta-ontology-go",
+  "observed_at_utc": "2026-09-30T05:42:12Z",
+  "runs_date": "2026-09-30",
+  "runs": [
+    {
+      "label": "PR1095 source feature",
+      "id": 36667822960,
+      "event": "pull_request",
+      "attempt": 1,
+      "start": "04:12:58Z",
+      "end": "04:28:26Z",
+      "wall_s": 928,
+      "race": [
+        "04:14:29Z",
+        "04:22:54Z",
+        505
+      ],
+      "semantic": [
+        "04:14:54Z",
+        "04:19:42Z",
+        288
+      ],
+      "policy": [
+        "04:22:57Z",
+        "04:26:21Z",
+        204
+      ],
+      "evidence": [
+        "04:26:24Z",
+        "04:27:07Z",
+        43
+      ],
+      "proof": [
+        "04:27:10Z",
+        "04:27:48Z",
+        38
+      ],
+      "failure": [
+        "04:27:50Z",
+        "04:28:26Z",
+        36
+      ],
+      "feedback_step_s": 87
+    },
+    {
+      "label": "dev f53e661 push",
+      "id": 36669210680,
+      "event": "push",
+      "attempt": 1,
+      "start": "04:31:15Z",
+      "end": "04:44:30Z",
+      "wall_s": 795,
+      "race": [
+        "04:31:26Z",
+        "04:39:25Z",
+        479
+      ],
+      "semantic": [
+        "04:32:45Z",
+        "04:37:38Z",
+        293
+      ],
+      "policy": [
+        "04:39:28Z",
+        "04:42:14Z",
+        166
+      ],
+      "evidence": [
+        "04:42:17Z",
+        "04:43:02Z",
+        45
+      ],
+      "proof": [
+        "04:43:05Z",
+        "04:43:44Z",
+        39
+      ],
+      "failure": [
+        "04:43:48Z",
+        "04:44:29Z",
+        41
+      ],
+      "feedback_step_s": 66
+    },
+    {
+      "label": "PR1096 promotion dispatch",
+      "id": 36670266098,
+      "event": "workflow_dispatch",
+      "attempt": 1,
+      "start": "04:45:19Z",
+      "end": "04:56:36Z",
+      "wall_s": 677,
+      "race": [
+        "04:45:23Z",
+        "04:51:39Z",
+        376
+      ],
+      "semantic": [
+        "04:45:23Z",
+        "04:51:29Z",
+        366
+      ],
+      "policy": [
+        "04:51:42Z",
+        "04:54:08Z",
+        146
+      ],
+      "evidence": [
+        "04:54:13Z",
+        "04:55:07Z",
+        54
+      ],
+      "proof": [
+        "04:55:10Z",
+        "04:55:58Z",
+        48
+      ],
+      "failure": [
+        "04:56:01Z",
+        "04:56:35Z",
+        34
+      ],
+      "feedback_step_s": 51
+    },
+    {
+      "label": "PR1096 native PR CI successful attempt",
+      "id": 36670267673,
+      "event": "pull_request",
+      "attempt": 2,
+      "start": "04:56:47Z",
+      "end": "05:09:59Z",
+      "wall_s": 792,
+      "race": [
+        "04:56:51Z",
+        "05:05:01Z",
+        490
+      ],
+      "semantic": [
+        "04:56:52Z",
+        "05:02:52Z",
+        360
+      ],
+      "policy": [
+        "05:05:04Z",
+        "05:07:44Z",
+        160
+      ],
+      "evidence": [
+        "05:07:47Z",
+        "05:08:36Z",
+        49
+      ],
+      "proof": [
+        "05:08:39Z",
+        "05:09:18Z",
+        39
+      ],
+      "failure": [
+        "05:09:21Z",
+        "05:09:59Z",
+        38
+      ],
+      "feedback_step_s": 61
+    },
+    {
+      "label": "PR1097 telemetry feature",
+      "id": 36671487306,
+      "event": "pull_request",
+      "attempt": 1,
+      "start": "05:01:16Z",
+      "end": "05:15:24Z",
+      "wall_s": 848,
+      "race": [
+        "05:02:34Z",
+        "05:10:09Z",
+        455
+      ],
+      "semantic": [
+        "05:02:48Z",
+        "05:08:28Z",
+        340
+      ],
+      "policy": [
+        "05:10:12Z",
+        "05:13:10Z",
+        178
+      ],
+      "evidence": [
+        "05:13:13Z",
+        "05:13:57Z",
+        44
+      ],
+      "proof": [
+        "05:13:59Z",
+        "05:14:45Z",
+        46
+      ],
+      "failure": [
+        "05:14:48Z",
+        "05:15:23Z",
+        35
+      ],
+      "feedback_step_s": 66
+    },
+    {
+      "label": "dev09 push",
+      "id": 36672639946,
+      "event": "push",
+      "attempt": 1,
+      "start": "05:16:17Z",
+      "end": "05:31:28Z",
+      "wall_s": 911,
+      "race": [
+        "05:17:20Z",
+        "05:25:20Z",
+        480
+      ],
+      "semantic": [
+        "05:17:32Z",
+        "05:24:04Z",
+        392
+      ],
+      "policy": [
+        "05:25:23Z",
+        "05:29:01Z",
+        218
+      ],
+      "evidence": [
+        "05:29:05Z",
+        "05:29:55Z",
+        50
+      ],
+      "proof": [
+        "05:29:58Z",
+        "05:30:48Z",
+        50
+      ],
+      "failure": [
+        "05:30:51Z",
+        "05:31:27Z",
+        36
+      ],
+      "feedback_step_s": 88,
+      "in_progress_snapshot": {
+        "at": "05:30:27Z",
+        "proof_bundle_started": "05:29:58Z",
+        "setup_go_started": "05:30:04Z",
+        "subsequent_steps_incomplete": true
+      }
+    }
+  ],
+  "promotion_wait": {
+    "run_id": 36670267673,
+    "attempt1": {
+      "result": "action_required",
+      "completed": "04:45:20Z",
+      "job_count": 0
+    },
+    "attempt2_started": "04:56:47Z",
+    "measured_wait_s": 687,
+    "approval_timestamp_known": false,
+    "dispatch_run_id": 36670266098,
+    "dispatch_span": "04:45:19\u201304:56:36Z",
+    "dispatch_to_native_completion_wall_s": 1480,
+    "note": "Approval wait overlapped most of dispatch; do not add interval durations as wall time."
+  },
+  "protection": {
+    "branch": "main",
+    "strict": true,
+    "required_contexts": [
+      "CI policy",
+      "Semantic conformance",
+      "gofmt",
+      "go vet",
+      "go test",
+      "go test -race"
+    ],
+    "required_reviews": 0,
+    "Guardian_in_required_contexts": false,
+    "Guardian_in_these_run_trees": false
+  },
+  "repeated_tree": {
+    "all_six_runs_have_same_job_name_set": true,
+    "job_count": 12,
+    "names": [
+      "go test -race",
+      "Semantic conformance",
+      "go test",
+      "gofmt",
+      "go vet",
+      "Language package execution",
+      "Feedback predecessor",
+      "COHERENCE boundary probe",
+      "CI policy",
+      "CI evidence",
+      "CI proof bundle",
+      "CI failure summary"
+    ],
+    "stable_step_counts": {
+      "CI policy": 33,
+      "CI evidence": 15,
+      "CI proof bundle": 18,
+      "CI failure summary": 12,
+      "gofmt": 13,
+      "Feedback predecessor": 13
+    },
+    "coherence_probe": "8 steps when run; skipped on dev f53, promotion dispatch, dev09."
+  },
+  "summary_metrics": {
+    "race_job_s": {
+      "samples": [
+        505,
+        479,
+        376,
+        490,
+        455,
+        480
+      ],
+      "median": 479.5
+    },
+    "semantic_job_s": {
+      "samples": [
+        288,
+        293,
+        366,
+        360,
+        340,
+        392
+      ],
+      "median": 350
+    },
+    "policy_job_s": {
+      "samples": [
+        204,
+        166,
+        146,
+        160,
+        178,
+        218
+      ],
+      "median": 172
+    },
+    "policy_feedback_step_s": [
+      87,
+      66,
+      51,
+      61,
+      66,
+      88
+    ],
+    "evidence_proof_failure_tail_s": {
+      "from_evidence_start_to_failure_end": [
+        122,
+        133,
+        143,
+        132,
+        130,
+        143
+      ],
+      "range": [
+        122,
+        143
+      ]
+    },
+    "race_end_to_run_end_s": {
+      "samples": [
+        332,
+        305,
+        297,
+        298,
+        315,
+        368
+      ],
+      "median": 310
+    },
+    "note": "Parallel job durations overlap and are not summed as workflow wall time."
+  },
+  "active_snapshot": {
+    "run_id": 36672639946,
+    "at": "2026-09-30T05:30:27Z",
+    "status_at_snapshot": "in_progress",
+    "incomplete_window": "Proof bundle began 05:29:58Z; setup-go began 05:30:04Z; later steps were incomplete.",
+    "later_result": "Proof bundle 05:30:48Z, failure summary 05:31:27Z, run success 05:31:28Z."
+  },
+  "recommendations_only": [
+    "On a disposable branch, compare cold and exact-SHA-keyed Go build-cache timing for the unchanged full race and semantic checks.",
+    "Profile CI policy receipt/feedback and evaluate exact-commit workspace/artifact reuse while retaining lineage checks and fresh receipts.",
+    "Measure checkout/materialization in evidence and proof-bundle jobs; test reducing duplicate preparation while retaining fresh evidence, reconstruction, and provenance.",
+    "Record the bot approval event timestamp and evaluate a narrowly scoped trusted-workflow approval route; keep native PR CI and all six contexts."
+  ],
+  "limitations": [
+    "No exact approval timestamp was present; 11m27s is action_required completion to retry start, not an attributed approval processing time.",
+    "Timestamps do not establish causes for runtime variation or resource contention.",
+    "No unrelated app/workflow is blamed for these run durations."
+  ],
+  "links": {
+    "36667822960": "https://github.com/kimjooyoon/meta-ontology-go/actions/runs/36667822960",
+    "36669210680": "https://github.com/kimjooyoon/meta-ontology-go/actions/runs/36669210680",
+    "36670266098": "https://github.com/kimjooyoon/meta-ontology-go/actions/runs/36670266098",
+    "36670267673": "https://github.com/kimjooyoon/meta-ontology-go/actions/runs/36670267673",
+    "36671487306": "https://github.com/kimjooyoon/meta-ontology-go/actions/runs/36671487306",
+    "36672639946": "https://github.com/kimjooyoon/meta-ontology-go/actions/runs/36672639946"
+  },
+  "cohort_observed_at_utc": "2026-09-30T05:33:11Z",
+  "branch_protection_observed_at_utc": "2026-09-30T05:42:12Z",
+  "subsequent_promotion_1098_snapshot": {
+    "scope_note": "Follow-on operational snapshot; excluded from the six completed-run timing metrics.",
+    "pr": 1098,
+    "head_sha": "3e604bbe8042b42ede61d7e9b9125dc567b9d8a9",
+    "dispatch": {
+      "run_id": 36673822112,
+      "run_number": 5387,
+      "event": "workflow_dispatch",
+      "actor": "github-actions[bot]",
+      "started_at_utc": "2026-09-30T05:31:44Z",
+      "sampled_at_utc": "2026-09-30T05:42:12Z",
+      "status_at_sample": "in_progress",
+      "elapsed_at_sample_seconds": 628,
+      "go_test_race_job": {
+        "started_at_utc": "2026-09-30T05:32:00Z",
+        "completed_at_utc": "2026-09-30T05:39:54Z"
+      },
+      "ci_policy_job_started_at_utc": "2026-09-30T05:39:57Z",
+      "ci_policy_in_progress_at_sample": true
+    },
+    "native_pr": {
+      "run_id": 36673948424,
+      "run_number": 5388,
+      "event": "pull_request",
+      "attempt_1": {
+        "conclusion": "action_required",
+        "completed_at_utc": "2026-09-30T05:33:24Z",
+        "jobs": 0
+      },
+      "attempt_2": {
+        "started_at_utc": "2026-09-30T05:35:08Z",
+        "sampled_at_utc": "2026-09-30T05:42:12Z",
+        "status_at_sample": "in_progress",
+        "elapsed_at_sample_seconds": 424,
+        "go_test_race_job": {
+          "started_at_utc": "2026-09-30T05:35:13Z",
+          "status_at_sample": "in_progress"
+        },
+        "semantic_conformance_job": {
+          "started_at_utc": "2026-09-30T05:35:14Z",
+          "completed_at_utc": "2026-09-30T05:41:38Z"
+        },
+        "go_test_job": {
+          "started_at_utc": "2026-09-30T05:35:13Z",
+          "completed_at_utc": "2026-09-30T05:37:41Z"
+        }
+      },
+      "action_required_to_retry_start_seconds": 104,
+      "approval_timestamp_known": false
+    },
+    "accounting_note": "Dispatch CI and native PR CI were simultaneously active. Approval delay is measured as action_required completion to retry start; the actual approval timestamp and both final run durations were unavailable at the sample."
+  }
+}

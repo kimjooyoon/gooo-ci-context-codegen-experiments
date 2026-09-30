@@ -1,0 +1,38 @@
+{
+  "candidates": [
+    {
+      "expression": "input",
+      "id": "identity"
+    },
+    {
+      "expression": "0",
+      "id": "zero"
+    },
+    {
+      "expression": "100",
+      "id": "hundred"
+    }
+  ],
+  "hole_id": "branch_value",
+  "intent": "Use Go precedence: input < 0 OR (input >= 10 AND input != 12). Return one hundred when that condition holds; otherwise preserve input.\n\n[Bounded verified CI training failure context] {\"activity_id\":\"bodycodegen://activity/compound-precedence\",\"candidate_expression\":\"input\",\"candidate_id\":\"identity\",\"compiler_revision\":\"29d44bc778d85aee03b9af500bd83dc98f368189\",\"fixture_sha256\":\"2578de3c0ee33d3e68c2dc8b7c3165316d322873cb50a4caf76ccb260e853eb3\",\"generated_source_sha256\":\"fa849252deb2c705d0b2abe137573d64030d8fae537317ef423e8a222f162479\",\"plan_sha256\":\"7dfa34f63a100af1b17bbbc60ad5b0391f498987223c2bc47948b9e4ddd1e65f\",\"source\":\"verified_external_go_test_training_only\",\"training_mismatch_count\":4,\"training_mismatches\":[{\"actual\":-1,\"expected\":100,\"input\":-1},{\"actual\":10,\"expected\":100,\"input\":10},{\"actual\":11,\"expected\":100,\"input\":11},{\"actual\":13,\"expected\":100,\"input\":13}],\"training_suite_sha256\":\"59f4b309a0bf063ebf6f57bc3a09f7678d63e2dea66ef0bc5e5c9b024623796a\"}",
+  "max_attempts": 1,
+  "schema": "gooo/body-codegen-ir-search-plan/v1",
+  "test_cases": [
+    {
+      "expected": 100,
+      "input": -1
+    },
+    {
+      "expected": 100,
+      "input": 10
+    },
+    {
+      "expected": 100,
+      "input": 11
+    },
+    {
+      "expected": 100,
+      "input": 13
+    }
+  ]
+}

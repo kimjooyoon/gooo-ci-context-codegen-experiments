@@ -1,4 +1,4 @@
-# Gooo CI failure context probe
+# Gooo CI failure context experiment
 
 This public experiment captures bounded, reproducible Go test failures from Gooo-emitted bodies. The current phase uses four primary IR-search intents (`clamp`, `absolute`, `piecewise`, and `compound-precedence`) and intentionally selects the first declared `identity` expression with `max_attempts: 1`. The workflow passes only when the emitted source compiles, every declared training case is observed, and the expected mismatches are independently reproduced by Go tests.
 
@@ -6,16 +6,24 @@ The compiler is rebuilt in CI from `kimjooyoon/meta-ontology-go` at `29d44bc778d
 
 The test failures are expected evidence, not a broken default check. They show finite training mismatches for four declared examples and do not claim that the selected expression is wrong over every possible input. These finite training denominators are reported separately; there is no 100% semantic or holdout claim in this cohort.
 
-## Planned later selection treatments
+## Frozen Laya selection design
 
 For each intent, a later model-selection phase may compare three treatments:
 
 1. **No context:** pass the original bounded intent and unchanged training plan.
 2. **Exact matching failed-CI context:** append a compact, explicitly labeled failure summary to `intent`, only after matching the captured fixture, activity, compiler revision, plan, and source digests. Keep the appended text at most 900 Unicode code points and the full `intent` at most the compiler's 2,000-code-point limit. Include only training failures and hashes; never append any other case set.
-3. **Rejected stale-source context:** deliberately present a context record whose source or fixture digest differs, then have the external experiment wrapper reject it before any provider request. This is a rejection control, not a model choice treatment.
+3. **Rejected stale-source context:** present a context record whose source digest differs, reject it before injection, and make the choice request with the unchanged base intent. This is a rejection control, not a different model input.
 
-The current `IRBodySearchPlan` exposes no structured external-context field, and its decoder rejects unknown fields. Therefore the matching-context treatment would be an append to the natural-language `intent`, not a typed compiler input or authenticated proof. The wrapper must validate provenance before building that plan. No later model requests have been made.
+The current `IRBodySearchPlan` exposes no structured external-context field, and its decoder rejects unknown fields. Therefore the matching-context treatment appends a bounded summary to the natural-language `intent`, not a typed compiler input or authenticated proof. The wrapper validates compiler, fixture, activity, plan, training suite, candidate, and emitted-source bindings before building that plan. It rejects a stale source binding before injection.
+
+The frozen run design contains four intents × three treatments, shuffled once using the recorded seed, one invocation per cell, no warmup, and one allowed attempt per invocation. All Laya requests contain training cases only. The runner saves raw requests and responses before opening independent holdout vectors; holdout scoring happens only on the final emitted bodies after selection. A recorded provider request is not treated as a model-selected choice unless Gooo's receipt attributes the decision to Laya.
+
+`cli_active_wall_ms` ends when the Gooo process returns. `harness_sampling_window_ms` includes later sampler shutdown; sampled CPU and RSS are process-level observations, not continuous peaks or pure-model timing. This design has n=1 per cell and supports no statistical or general latency claim. Finite scores do not prove behavior over the full int64 domain.
+
+The saved study will include copied independent finite-oracle files only in its postselection validation folder, after all selection responses have been persisted. The manifest pins their byte digests without exposing holdout vectors to the model. The initial CI artifact remains training-only.
+
+The non-model CI cost audit in `audit/compiler-ci-cost-2026-09-30/` is run-metadata evidence, not context supplied to a selection request.
 
 ## Reproduction
 
-The GitHub Actions workflow checks out the exact compiler revision, builds `cmd/gooo`, and runs the offline training-only probe. The CI artifact is named `ci-context-probe-<workflow-commit>` and contains raw evidence and receipts. A passing workflow means the expected test failures and bindings were verified; it does not mean that Gooo's internal search evaluator has become an authority for external CI.
+The GitHub Actions workflow checks out the exact compiler revision, runs offline privacy/provenance regression checks, builds `cmd/gooo`, and runs the training-only probe. The CI artifact is named `ci-context-probe-<workflow-commit>` and contains raw evidence and receipts. A passing workflow means the expected test failures and bindings were verified; it does not mean that Gooo's internal search evaluator has become an authority for external CI. A separate read-only replay workflow validates any saved Laya study without contacting a provider.

@@ -17,6 +17,7 @@
   "intents": [
     {
       "id": "clamp",
+      "independent_oracle_sha256": "b96c17efde2ab42606ebd6ab95b456fed6698fabbbdee3241bf1f0584ad0843f",
       "activity": "ClampNegativeToZero",
       "fixture": "fixtures/clamp.gooo.fixture",
       "plan": "plans/clamp.search-plan.json",
@@ -26,6 +27,7 @@
     },
     {
       "id": "absolute",
+      "independent_oracle_sha256": "be989f945bb16bc969790e3878f02c4879caa917499b2deeb3711624506adbdf",
       "activity": "AbsWrapInt64",
       "fixture": "fixtures/absolute.gooo.fixture",
       "plan": "plans/absolute.search-plan.json",
@@ -35,6 +37,7 @@
     },
     {
       "id": "piecewise",
+      "independent_oracle_sha256": "3b8c9d76ea66492aa50fb9badb65d69173fa6f746c4dccfc0100b567b55bed48",
       "activity": "NegativeToSeven",
       "fixture": "fixtures/piecewise.gooo.fixture",
       "plan": "plans/piecewise.search-plan.json",
@@ -44,6 +47,7 @@
     },
     {
       "id": "compound-precedence",
+      "independent_oracle_sha256": "5b3597a5e890bb39ea7d14272a6bbacf6d346857f79deb83660eeec2cd6b90a6",
       "activity": "CompoundPrecedence",
       "fixture": "fixtures/compound-precedence.gooo.fixture",
       "plan": "plans/compound-precedence.search-plan.json",
@@ -52,7 +56,7 @@
       "expected_identity_actuals": [-1, 10, 11, 13]
     }
   ],
-  "future_selection_treatments": [
+  "planned_selection_treatments": [
     {
       "id": "no_context",
       "definition": "Use original intent and training suite without external failure context."
@@ -63,13 +67,22 @@
     },
     {
       "id": "rejected_stale_source_context",
-      "definition": "Reject context before provider dispatch whenever compiler, fixture, activity, plan, or emitted-source provenance differs."
+      "definition": "Reject stale source context before injection, then make the selection request with the unchanged base intent."
     }
   ],
+  "selection_design": {
+    "status": "frozen_not_executed",
+    "invocation_count": 12,
+    "replicates_per_intent_treatment": 1,
+    "attempts_per_invocation": 1,
+    "order_seed": 20260930,
+    "warmups": 0,
+    "holdout_policy": "Open independent finite holdout vectors only after all selection requests and responses are saved."
+  },
   "scope_limits": [
     "One deterministic candidate and one bounded attempt per intent.",
     "Finite training behavior only; no full-domain correctness claim.",
     "This workflow validates an external Go test probe and evidence binding; internal Gooo evaluation is not treated as external CI authority.",
-    "No model-selection treatment is executed in this phase."
+    "The initial GitHub Actions workflow only verifies training-only CI failure evidence; selection results are a separately captured local offline Laya study."
   ]
 }

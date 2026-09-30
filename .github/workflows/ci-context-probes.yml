@@ -3,10 +3,10 @@ name: Gooo CI failure-context probes
 on:
   push:
     paths-ignore:
-      - 'audit/**'
+      - 'audit/ci-run-*/**'
   pull_request:
     paths-ignore:
-      - 'audit/**'
+      - 'audit/ci-run-*/**'
   workflow_dispatch:
 
 permissions:
@@ -24,6 +24,9 @@ jobs:
       PYTHONDONTWRITEBYTECODE: '1'
     steps:
       - uses: actions/checkout@v4
+
+      - name: Run offline privacy and provenance regression checks
+        run: python3 -m unittest discover -s scripts -p 'test_*.py' -v
 
       - uses: actions/setup-go@v5
         with:
