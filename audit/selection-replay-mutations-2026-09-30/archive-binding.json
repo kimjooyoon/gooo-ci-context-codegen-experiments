@@ -1,0 +1,12 @@
+{
+  "original_recorder_files_sha256": {
+    "gooo-selection-replay-mutations-20260930.json": "dbb9f7c905aba2e1ef21caafe46296231c6a94b06791ea6ef7c9bb3024b56f38",
+    "gooo-selection-replay-mutations-20260930.md": "351d7781255fda8c739705d31229101e63e766435883b133a514a64315ba37a5",
+    "gooo-selection-replay-mutations-20260930.py": "9471366a335f793157a3577c9b25c15fd196fc310d81d78c92b456326043e6d5"
+  },
+  "saved_selection_report_sha256": "682411228bf3cbffee011c7c41a08e5ff0bf366ff52a1c2d07715498ea38c576",
+  "schema": "gooo/negative-mutation-archive-binding/v1",
+  "scope": "Archived offline unchanged control and six negative evidence mutations; zero model calls. Original machine paths are retained in the recorder and rejection messages. Source bindings were recorded after the run, not as a pre-run attestation.",
+  "source_revision_observed_after_run": "5644e3071f9ec187dd3ada66b4efcf950ab78097",
+  "validator_sha256": "ec8ca021e147f5cff5e6af1cbc3821e6c3ec6e1b201a99ec2d43c9a8a6b41cd8"
+}

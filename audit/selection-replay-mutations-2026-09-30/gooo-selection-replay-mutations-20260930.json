@@ -1,0 +1,77 @@
+{
+  "control_passed": true,
+  "gooo_cli_calls": 0,
+  "model_calls": 0,
+  "negative_cases_rejected_at_expected_checks": 6,
+  "negative_cases_total": 6,
+  "network_or_model_downloads": 0,
+  "results": [
+    {
+      "error": null,
+      "expected": "PASS",
+      "independent_go_replays": 12,
+      "label": "unchanged-control",
+      "model_calls": 0,
+      "stage": "unchanged control",
+      "status": "PASS",
+      "typed_request_hashes_recomputed_with_go_json": 12
+    },
+    {
+      "error": "typed Laya request SHA-256 receipts differ from independent Go JSON reconstruction",
+      "expected": "FAIL",
+      "expected_error_fragment": "typed Laya request SHA-256 receipts differ from independent Go JSON reconstruction",
+      "label": "typed_receipt_sha_changed",
+      "rejected_as_expected": true,
+      "stage": "recomputed typed request hash",
+      "status": "FAIL"
+    },
+    {
+      "error": "01-piecewise-rejected_stale_source_context: saved postselection Go/oracle vectors differ from raw source and pinned cases",
+      "expected": "FAIL",
+      "expected_error_fragment": "saved postselection Go/oracle vectors differ from raw source and pinned cases",
+      "label": "emitted_go_copy_changed",
+      "rejected_as_expected": true,
+      "stage": "saved postselection source binding",
+      "status": "FAIL"
+    },
+    {
+      "error": "01-piecewise-rejected_stale_source_context: report row does not match raw choice and independent finite scores",
+      "expected": "FAIL",
+      "expected_error_fragment": "report row does not match raw choice and independent finite scores",
+      "label": "finite_score_relabeled",
+      "rejected_as_expected": true,
+      "stage": "independent finite score comparison",
+      "status": "FAIL"
+    },
+    {
+      "error": "01-piecewise-rejected_stale_source_context: report row does not match raw choice and independent finite scores",
+      "expected": "FAIL",
+      "expected_error_fragment": "report row does not match raw choice and independent finite scores",
+      "label": "stale_gate_relabeled_accepted",
+      "rejected_as_expected": true,
+      "stage": "derived context-gate consistency",
+      "status": "FAIL"
+    },
+    {
+      "error": "missing saved artifact: /private/var/folders/t4/mkd0zjsn2hj2mqwsjftxcfmc0000gn/T/gooo-selection-replay-mutations-20260930-8c5bc2_c/request_artifact_missing/repo/audit/laya-selection-2026-09-30/proxy/requests/0001.request.raw",
+      "expected": "FAIL",
+      "expected_error_fragment": "missing saved artifact",
+      "label": "request_artifact_missing",
+      "rejected_as_expected": true,
+      "stage": "raw proxy artifact presence",
+      "status": "FAIL"
+    },
+    {
+      "error": "01-piecewise-rejected_stale_source_context: raw choice response/event does not name a declared candidate",
+      "expected": "FAIL",
+      "expected_error_fragment": "raw choice response/event does not name a declared candidate",
+      "label": "response_choice_mismatch",
+      "rejected_as_expected": true,
+      "stage": "provider response/choice binding",
+      "status": "FAIL"
+    }
+  ],
+  "run_id": "laya-selection-2026-09-30",
+  "schema": "gooo/selection-replay-negative-mutations/v1",
+  "temporary_copies_cleaned": true
+}

@@ -32,6 +32,46 @@ The four exact-context requests all reported `multilingual/it` routing, while th
 
 The non-model CI cost audit in `audit/compiler-ci-cost-2026-09-30/` is run-metadata evidence, not context supplied to a selection request.
 
+The original runner overwrote `run-metadata.json.completed_utc` during
+postselection finalization. That field is the finalization endpoint in this
+saved run; subtracting `started_utc` would mix capture and later processing.
+Use the recorded per-invocation process and proxy timers for the reported
+latencies. The historical bytes remain intact. Future captures record
+`capture_completed_utc` and `finalization_completed_utc` separately.
+
+## Evidence mutation checks
+
+An unchanged control passed all 12 saved-source replays. Six temporary evidence
+mutations were rejected at their expected checks: changed typed request digest,
+changed emitted source, relabeled finite score, relabeled stale-context gate,
+missing raw request, and mismatched provider choice. These are offline validator
+experiments with zero model calls. The original recorder and results are retained
+in [`audit/selection-replay-mutations-2026-09-30/`](audit/selection-replay-mutations-2026-09-30/).
+They show detection of these six mutations; they do not prove detection of every
+possible evidence forgery.
+
+`scripts/validate_replay_mutations.py` repeats the unchanged control and six
+negative treatments on temporary copies in CI. Its outputs join the saved-replay
+artifact, with validator/report digests and zero model calls.
+
+## Routing and prompt budget
+
+The [offline routing diagnosis](audit/laya-routing-diagnosis-2026-09-30/gooo-laya-routing-diagnosis-20260930.md)
+found that the installed detector counts the `CI` acronym as Italian `ci`.
+Changing only that marker in memory switched three of four exact-context states
+to English; no inference was run for that ablation. The actual multilingual
+requests fit their default token budget. Encoding the same full context for the
+English default would truncate all four states, so pinning a model alone would
+introduce a separate input-length difference.
+
+The installed HTTP endpoint supports explicit `model: "english"` or
+`model: "multilingual"` routing. A future comparison can log both compiler and
+upstream request bytes through an audited adapter, pin each model, and keep a
+compact failure-summary arm separate from the original full-context arm.
+Provenance hashes remain in the local evidence record when omitted from a compact
+model prompt. First calls and warm repeats need separate measurements. These
+follow-up treatments are planned, not counted as measured model calls.
+
 ## Reproduction
 
 The GitHub Actions workflow checks out the exact compiler revision, runs offline privacy/provenance regression checks, builds `cmd/gooo`, and runs the training-only probe. The CI artifact is named `ci-context-probe-<workflow-commit>` and contains raw evidence and receipts. A passing workflow means the expected test failures and bindings were verified; it does not mean that Gooo's internal search evaluator has become an authority for external CI. A separate read-only replay workflow validates any saved Laya study without contacting a provider.

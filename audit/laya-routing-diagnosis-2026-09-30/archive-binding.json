@@ -1,0 +1,17 @@
+{
+  "diagnosis_files_sha256": {
+    "gooo-laya-routing-diagnosis-20260930.json": "009a8bb69cf4e1ca7018aed37f4dce0717b31a001ecdd3446748f5ca2b51214c",
+    "gooo-laya-routing-diagnosis-20260930.md": "4c1acc2db1e04291bd66e3e6e221b8b2c55575b5ac0374e3ae9a6cb84f58f959"
+  },
+  "historical_runner_sha256": "8f475d4c498524cf73449b97b634bcabf9e76a295a38d59c0382c6632b36e447",
+  "installed_laya_sources_sha256": {
+    "agent.py": "cd94166107d6c359bdbbeb86ebfa39e197534af1f954457ece7cb11dba363c5e",
+    "common.py": "9358176290b519b3e1df0077e6b55ce6a57e191abaf8401f3f7c35cb62596868",
+    "lang.py": "9ce50b73c36ecc962c1f02472febdbba2cbe3a4ccdee63e0fd855b9d330aff66",
+    "router.py": "9c4fac31398b78a349167c587650f495f932d7a4216713275d67cb0006ec5836",
+    "serve.py": "6e1bba24f89a47f41c05047d455d8dbcb8a88d958f08836e3b475407af8fa5ed"
+  },
+  "saved_study_revision": "5644e3071f9ec187dd3ada66b4efcf950ab78097",
+  "schema": "gooo/routing-diagnosis-archive-binding/v1",
+  "scope": "Offline deterministic language-detector ablation and cached tokenizer analysis, no new inference. Historical runner timing explanation applies to revision5644e30; later source repairs do not alter captured metadata. Original local source paths retained."
+}

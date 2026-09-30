@@ -740,11 +740,11 @@ def finalize_saved_study(run_dir: Path, study: dict, cli_records: list[dict], de
     report_bytes = write_json(run_dir / "report.json", report)
     md = [
         "# Laya selection with CI failure context", "",
-        f"Run `{run_dir.name}` used compiler `{EXPECTED_SOURCE_REV}` and Laya `english` revision `{EXPECTED_MODEL_REVISION}` on CPU with four threads, offline.", "",
+        f"Run `{run_dir.name}` used compiler `{EXPECTED_SOURCE_REV}` and Laya revision `{EXPECTED_MODEL_REVISION}` on CPU with four threads, offline.", "",
         f"The randomized study captured {choice_event_count} selection POSTs for 12 single-attempt invocations. Each cell has n=1.", "",
         "The exact-context arm appended a bounded, provenance-checked training failure summary to `intent`. The stale-source arm was rejected before injection and used the original intent. Holdout cases were opened only after all selection request/response bytes were saved.", "",
         "| Intent | Treatment | Choice | Training (finite) | Holdout (post-selection finite) | Route/language | Resolver ms | Proxy ms | CLI active wall ms |",
-        "|---|---|---|---:|---:|---:|---:|---:|",
+        "|---|---|---|---:|---:|---|---:|---:|---:|",
     ]
     for row in report_rows:
         train, held = row.get("training_score_external_go", {}), row.get("holdout_score_external_go", {})
@@ -752,7 +752,7 @@ def finalize_saved_study(run_dir: Path, study: dict, cli_records: list[dict], de
     md += ["", "These finite measurements do not establish full-domain correctness or a general latency effect. Per-invocation resource samples, raw exchanges, receipts, and independent compiled Go runs are stored beside this report.", ""]
     write_bytes(run_dir / "report.md", "\n".join(md).encode())
     meta = read_json(run_dir / "run-metadata.json")
-    meta.update({"status": report["decision"], "completed_utc": now_utc(), "report_sha256": sha256(report_bytes),
+    meta.update({"status": report["decision"], "finalization_completed_utc": now_utc(), "report_sha256": sha256(report_bytes),
                  "privacy_scan_count": len(privacy_rows), "model_choice_round_count": model_round_count})
     write_json(run_dir / "run-metadata.json", meta)
     return report
@@ -889,7 +889,9 @@ def main() -> None:
             meta["health_after_error"] = str(exc)
         write_json(out_dir / "cli-invocation-records.json", cli_records)
         write_json(out_dir / "proxy-events.json", {"events": proxy.events, "choice_post_count": sum(e["kind"] == "laya_choice" for e in proxy.events)})
-        meta.update({"status": "raw_selection_capture_complete", "completed_utc": now_utc(),
+        capture_completed_utc = now_utc()
+        meta.update({"status": "raw_selection_capture_complete", "completed_utc": capture_completed_utc,
+                     "capture_completed_utc": capture_completed_utc,
                      "elapsed_ms_including_health_and_sampler": (time.monotonic() - run_started_mono) * 1000,
                      "planned_invocations": 12, "completed_invocations": len(cli_records),
                      "choice_post_count": sum(e["kind"] == "laya_choice" for e in proxy.events)})
@@ -962,21 +964,21 @@ def main() -> None:
     md = [
         "# Laya selection with CI failure context",
         "",
-        f"Run `{args.run_id}` used compiler `{EXPECTED_SOURCE_REV}` and Laya `english` revision `{EXPECTED_MODEL_REVISION}` on CPU with four threads, offline.",
+        f"Run `{args.run_id}` used compiler `{EXPECTED_SOURCE_REV}` and Laya revision `{EXPECTED_MODEL_REVISION}` on CPU with four threads, offline.",
         "",
         f"The randomized study captured {choice_event_count} selection POSTs for 12 single-attempt invocations. Each cell has n=1.",
         "",
         "The exact-context arm appended a bounded, provenance-checked training failure summary to `intent`. The stale-source arm was rejected before injection and used the original intent. Holdout cases were opened only after all selection request/response bytes were saved.",
         "",
         "| Intent | Treatment | Choice | Training (finite) | Holdout (post-selection finite) | Route/language | Resolver ms | Proxy ms | CLI active wall ms |",
-        "|---|---|---|---:|---:|---:|---:|---:|",
+        "|---|---|---|---:|---:|---|---:|---:|---:|",
     ]
     for row in report_rows:
         train, held = row.get("training_score_external_go", {}), row.get("holdout_score_external_go", {})
         md.append(f"| {row.get('intent_id')} | {row.get('treatment')} | {row.get('candidate_id')} | {train.get('passed')}/{train.get('total')} | {held.get('passed')}/{held.get('total')} | {row.get('route_model')}/{row.get('route_language')} | {row.get('resolver_decision_latency_ms')} | {row.get('proxy_choice_latency_ms')} | {row.get('cli_active_wall_ms')} |")
     md += ["", "These finite measurements do not establish full-domain correctness or a general latency effect. Per-invocation resource samples, raw exchanges, receipts, and independent compiled Go runs are stored beside this report.", ""]
     write_bytes(out_dir / "report.md", "\n".join(md).encode())
-    meta.update({"status": report["decision"], "completed_utc": now_utc(), "report_sha256": sha256(report_bytes),
+    meta.update({"status": report["decision"], "finalization_completed_utc": now_utc(), "report_sha256": sha256(report_bytes),
                  "privacy_scan_count": len(privacy_rows), "model_choice_round_count": model_round_count})
     write_json(out_dir / "run-metadata.json", meta)
     print(out_dir / "report.md")

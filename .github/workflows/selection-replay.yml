@@ -6,6 +6,7 @@ on:
       - '.github/workflows/selection-replay.yml'
       - '.github/workflows/ci-context-probes.yml'
       - 'scripts/validate_selection_run.py'
+      - 'scripts/validate_replay_mutations.py'
       - 'scripts/analyze_case_discrimination.py'
       - 'scripts/test_analyze_case_discrimination.py'
       - 'scripts/selection_support.py'
@@ -23,6 +24,7 @@ on:
       - '.github/workflows/selection-replay.yml'
       - '.github/workflows/ci-context-probes.yml'
       - 'scripts/validate_selection_run.py'
+      - 'scripts/validate_replay_mutations.py'
       - 'scripts/analyze_case_discrimination.py'
       - 'scripts/test_analyze_case_discrimination.py'
       - 'scripts/selection_support.py'
@@ -79,6 +81,12 @@ jobs:
             --check \
             --run-dir audit/laya-selection-2026-09-30
 
+      - name: Verify replay validator rejects corrupted evidence
+        run: |
+          python3 scripts/validate_replay_mutations.py \
+            --output-dir "$RUNNER_TEMP/selection-replay-validation/mutations" \
+            --require-go-version go1.27.0
+
       - name: Add replay results to the job summary
         if: always()
         run: |
@@ -91,6 +99,10 @@ jobs:
           case_report='audit/laya-selection-2026-09-30/case-discrimination.md'
           if [ -f "$case_report" ]; then
             cat "$case_report" >> "$GITHUB_STEP_SUMMARY"
+          fi
+          mutation_report="$RUNNER_TEMP/selection-replay-validation/mutations/mutation-report.md"
+          if [ -f "$mutation_report" ]; then
+            cat "$mutation_report" >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - uses: actions/upload-artifact@v4

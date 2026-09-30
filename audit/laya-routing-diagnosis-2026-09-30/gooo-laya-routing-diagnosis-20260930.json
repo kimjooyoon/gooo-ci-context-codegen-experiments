@@ -1,0 +1,440 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-09-30T06:31:05Z",
+  "scope": "Read-only diagnosis of the saved CI-context Laya selection audit; no model inference, downloads, compiler calls, repo edits, or raw evidence edits.",
+  "audit": {
+    "path": "/Users/alice/meta-go/research/metaprogramming/gooo-ci-context-codegen-experiments/audit/laya-selection-2026-09-30",
+    "compiler_source_revision": "29d44bc778d85aee03b9af500bd83dc98f368189",
+    "compiler_binary_sha256": "f9f33b86c2114c1adeba01319fddb7d48f666e739aef768bbb5a580adfb7cda9",
+    "laya_model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+    "planned_and_completed_calls": 12,
+    "calls_with_question_body_ir_search": 12,
+    "captured_top_level_request_fields": [
+      "state",
+      "questions"
+    ],
+    "captured_model_field_count": 0,
+    "captured_lang_field_count": 0,
+    "route_counts": {
+      "english_en": 8,
+      "multilingual_it": 4
+    },
+    "route_by_arm": {
+      "no_context_or_rejected_stale": {
+        "english_en": 8,
+        "multilingual_it": 0
+      },
+      "exact_ci_failure_context": {
+        "english_en": 0,
+        "multilingual_it": 4
+      }
+    },
+    "cells_have_n": 1,
+    "stale_rejected_payloads_byte_match_no_context_by_intent": true
+  },
+  "runtime": {
+    "package": "laya",
+    "version": "0.3.21",
+    "package_path": "/tmp/meta-ontology-go-laya-venv-20260930/lib/python3.11/site-packages/laya",
+    "model_snapshot_path": "/Users/alice/.cache/huggingface/hub/models--convaiinnovations--laya/snapshots/55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+    "tokenizer_only_analysis": true,
+    "tokenizer_libraries": {
+      "transformers": "5.17.0",
+      "tokenizers": "0.23.2"
+    },
+    "tokenizers_loaded_from_local_cache_with_offline_flags": true,
+    "model_weights_loaded": false
+  },
+  "supported_controls": {
+    "systemone_http_model_override": {
+      "supported": true,
+      "request_field": "model",
+      "examples": [
+        "english",
+        "multilingual"
+      ],
+      "effect": "serve.py resolves body.model and passes model= to Router.predict; Router._route gives explicit model highest precedence.",
+      "source": [
+        "/tmp/meta-ontology-go-laya-venv-20260930/lib/python3.11/site-packages/laya/serve.py:97-113",
+        "/tmp/meta-ontology-go-laya-venv-20260930/lib/python3.11/site-packages/laya/serve.py:469-491",
+        "/tmp/meta-ontology-go-laya-venv-20260930/lib/python3.11/site-packages/laya/router.py:618-642"
+      ]
+    },
+    "systemone_http_lang_override": {
+      "supported": false,
+      "reason": "The HTTP handler reads model, max_len and head_max_len; it does not read or forward a lang field. Router.predict supports model/lang as Python arguments, and the separate laya CLI supports --model/--lang, but neither means this HTTP client can send lang.",
+      "source": [
+        "/tmp/meta-ontology-go-laya-venv-20260930/lib/python3.11/site-packages/laya/serve.py:464-491",
+        "/tmp/meta-ontology-go-laya-venv-20260930/lib/python3.11/site-packages/laya/cli.py:73-84",
+        "/tmp/meta-ontology-go-laya-venv-20260930/lib/python3.11/site-packages/laya/router.py:618-663"
+      ]
+    },
+    "systemone_http_token_budget_overrides": {
+      "supported": [
+        "max_len",
+        "head_max_len"
+      ],
+      "source": "/tmp/meta-ontology-go-laya-venv-20260930/lib/python3.11/site-packages/laya/serve.py:470-491"
+    },
+    "checkpoint_defaults": {
+      "english": {
+        "max_len": 512,
+        "head_max_len": 192,
+        "config": "/Users/alice/.cache/huggingface/hub/models--convaiinnovations--laya/snapshots/55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851/rl_agent_config.json"
+      },
+      "multilingual": {
+        "max_len": 1024,
+        "head_max_len": 256,
+        "config": "/Users/alice/.cache/huggingface/hub/models--convaiinnovations--laya/snapshots/55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851/multilingual/rl_agent_config.json"
+      }
+    }
+  },
+  "routing_diagnosis": {
+    "actual_route_input": "The saved state object has one request string containing the serialized compiler request. The CI failure context is appended inside that request's intent. Language detection analyzes state text; no explicit model/lang field was sent.",
+    "captured_exact_context_detections": {
+      "script": "latin",
+      "language": "it",
+      "is_english": false,
+      "non_latin_fraction": 0.0,
+      "diacritic_rate": 0.0,
+      "count": 4
+    },
+    "captured_no_context_or_stale_detections": {
+      "script": "latin",
+      "language": "en",
+      "is_english": true,
+      "count": 8
+    },
+    "detector_method": "Installed laya.lang is dependency-free and uses a stopword/diacritic heuristic. Its Italian stopword set includes ci; the detector lowercases words, so uppercase CI is counted as ci.",
+    "in_memory_marker_ablation": {
+      "operation": "On saved states only, replace the exact intent marker phrase 'verified CI training failure context' with 'verified build training failure context' and rerun the deterministic language detector. No HTTP or model calls.",
+      "result": "3 of 4 exact-context states change from Italian to English; absolute remains Italian.",
+      "interpretation": "CI is a strong routing trigger in three cases, but is not the only trigger. The absolute state retains the Italian stopword ed after marker replacement. This ablation diagnoses detector sensitivity; it does not measure model answer quality."
+    },
+    "source": [
+      "/tmp/meta-ontology-go-laya-venv-20260930/lib/python3.11/site-packages/laya/lang.py:1-12",
+      "/tmp/meta-ontology-go-laya-venv-20260930/lib/python3.11/site-packages/laya/lang.py:107-117",
+      "/tmp/meta-ontology-go-laya-venv-20260930/lib/python3.11/site-packages/laya/router.py:665-692"
+    ]
+  },
+  "tokenization": {
+    "method": "Loaded only already-cached tokenizers with HF_HUB_OFFLINE=1 and TRANSFORMERS_OFFLINE=1. Applied the installed Agent._to_internal and laya.common.build_sequence code path to each captured state/question. No inference or weights.",
+    "source": [
+      "/tmp/meta-ontology-go-laya-venv-20260930/lib/python3.11/site-packages/laya/agent.py:752-782",
+      "/tmp/meta-ontology-go-laya-venv-20260930/lib/python3.11/site-packages/laya/common.py:135-194"
+    ],
+    "actual_routed_call_summary": {
+      "english_no_context_or_stale_n8": {
+        "state_tokens_min_max": [
+          254,
+          294
+        ],
+        "full_sequence_tokens_min_max": [
+          321,
+          361
+        ],
+        "state_truncated_count": 0,
+        "max_len": 512
+      },
+      "multilingual_exact_context_n4": {
+        "state_tokens_min_max": [
+          733,
+          820
+        ],
+        "full_sequence_tokens_min_max": [
+          803,
+          892
+        ],
+        "state_truncated_count": 0,
+        "max_len": 1024
+      }
+    },
+    "exact_context_cross_tokenizer_check": {
+      "english": {
+        "state_tokens_min_max": [
+          670,
+          732
+        ],
+        "state_tokens_kept_min_max": [
+          443,
+          445
+        ],
+        "full_sequence_tokens": [
+          512,
+          512
+        ],
+        "truncated_count": 4,
+        "max_len": 512
+      },
+      "multilingual": {
+        "state_tokens_min_max": [
+          733,
+          820
+        ],
+        "state_tokens_kept_min_max": [
+          733,
+          820
+        ],
+        "full_sequence_tokens_min_max": [
+          803,
+          892
+        ],
+        "truncated_count": 0,
+        "max_len": 1024
+      }
+    },
+    "per_invocation": [
+      {
+        "event_seq": 1,
+        "case": "piecewise",
+        "arm": "rejected_stale_source_context",
+        "routed_model": "english",
+        "http_body_bytes": 1142,
+        "english_state_tokens": 254,
+        "english_state_kept": 254,
+        "english_full_sequence": 321,
+        "multilingual_state_tokens": 241,
+        "multilingual_state_kept": 241,
+        "multilingual_full_sequence": 311,
+        "actual_state_truncated": false
+      },
+      {
+        "event_seq": 3,
+        "case": "compound-precedence",
+        "arm": "no_context",
+        "routed_model": "english",
+        "http_body_bytes": 1261,
+        "english_state_tokens": 294,
+        "english_state_kept": 294,
+        "english_full_sequence": 361,
+        "multilingual_state_tokens": 302,
+        "multilingual_state_kept": 302,
+        "multilingual_full_sequence": 374,
+        "actual_state_truncated": false
+      },
+      {
+        "event_seq": 5,
+        "case": "clamp",
+        "arm": "exact_matching_failed_ci_context",
+        "routed_model": "multilingual",
+        "http_body_bytes": 2142,
+        "english_state_tokens": 689,
+        "english_state_kept": 443,
+        "english_full_sequence": 512,
+        "multilingual_state_tokens": 740,
+        "multilingual_state_kept": 740,
+        "multilingual_full_sequence": 810,
+        "actual_state_truncated": false
+      },
+      {
+        "event_seq": 7,
+        "case": "clamp",
+        "arm": "rejected_stale_source_context",
+        "routed_model": "english",
+        "http_body_bytes": 1166,
+        "english_state_tokens": 262,
+        "english_state_kept": 262,
+        "english_full_sequence": 331,
+        "multilingual_state_tokens": 249,
+        "multilingual_state_kept": 249,
+        "multilingual_full_sequence": 319,
+        "actual_state_truncated": false
+      },
+      {
+        "event_seq": 9,
+        "case": "absolute",
+        "arm": "rejected_stale_source_context",
+        "routed_model": "english",
+        "http_body_bytes": 1204,
+        "english_state_tokens": 274,
+        "english_state_kept": 274,
+        "english_full_sequence": 343,
+        "multilingual_state_tokens": 270,
+        "multilingual_state_kept": 270,
+        "multilingual_full_sequence": 340,
+        "actual_state_truncated": false
+      },
+      {
+        "event_seq": 11,
+        "case": "clamp",
+        "arm": "no_context",
+        "routed_model": "english",
+        "http_body_bytes": 1166,
+        "english_state_tokens": 262,
+        "english_state_kept": 262,
+        "english_full_sequence": 331,
+        "multilingual_state_tokens": 249,
+        "multilingual_state_kept": 249,
+        "multilingual_full_sequence": 319,
+        "actual_state_truncated": false
+      },
+      {
+        "event_seq": 13,
+        "case": "compound-precedence",
+        "arm": "rejected_stale_source_context",
+        "routed_model": "english",
+        "http_body_bytes": 1261,
+        "english_state_tokens": 294,
+        "english_state_kept": 294,
+        "english_full_sequence": 361,
+        "multilingual_state_tokens": 302,
+        "multilingual_state_kept": 302,
+        "multilingual_full_sequence": 374,
+        "actual_state_truncated": false
+      },
+      {
+        "event_seq": 15,
+        "case": "compound-precedence",
+        "arm": "exact_matching_failed_ci_context",
+        "routed_model": "multilingual",
+        "http_body_bytes": 2298,
+        "english_state_tokens": 732,
+        "english_state_kept": 445,
+        "english_full_sequence": 512,
+        "multilingual_state_tokens": 820,
+        "multilingual_state_kept": 820,
+        "multilingual_full_sequence": 892,
+        "actual_state_truncated": false
+      },
+      {
+        "event_seq": 17,
+        "case": "absolute",
+        "arm": "exact_matching_failed_ci_context",
+        "routed_model": "multilingual",
+        "http_body_bytes": 2172,
+        "english_state_tokens": 696,
+        "english_state_kept": 443,
+        "english_full_sequence": 512,
+        "multilingual_state_tokens": 764,
+        "multilingual_state_kept": 764,
+        "multilingual_full_sequence": 834,
+        "actual_state_truncated": false
+      },
+      {
+        "event_seq": 19,
+        "case": "absolute",
+        "arm": "no_context",
+        "routed_model": "english",
+        "http_body_bytes": 1204,
+        "english_state_tokens": 274,
+        "english_state_kept": 274,
+        "english_full_sequence": 343,
+        "multilingual_state_tokens": 270,
+        "multilingual_state_kept": 270,
+        "multilingual_full_sequence": 340,
+        "actual_state_truncated": false
+      },
+      {
+        "event_seq": 21,
+        "case": "piecewise",
+        "arm": "no_context",
+        "routed_model": "english",
+        "http_body_bytes": 1142,
+        "english_state_tokens": 254,
+        "english_state_kept": 254,
+        "english_full_sequence": 321,
+        "multilingual_state_tokens": 241,
+        "multilingual_state_kept": 241,
+        "multilingual_full_sequence": 311,
+        "actual_state_truncated": false
+      },
+      {
+        "event_seq": 23,
+        "case": "piecewise",
+        "arm": "exact_matching_failed_ci_context",
+        "routed_model": "multilingual",
+        "http_body_bytes": 2113,
+        "english_state_tokens": 670,
+        "english_state_kept": 445,
+        "english_full_sequence": 512,
+        "multilingual_state_tokens": 733,
+        "multilingual_state_kept": 733,
+        "multilingual_full_sequence": 803,
+        "actual_state_truncated": false
+      }
+    ],
+    "hash_cost": {
+      "exact_context_each": "four 64-hex SHA-256 literals in intent",
+      "multilingual_token_count_of_four_hashes_by_case": {
+        "clamp": 224,
+        "compound-precedence": 226,
+        "absolute": 228,
+        "piecewise": 229
+      },
+      "intent_token_count_multilingual_by_case": {
+        "clamp": 431,
+        "compound-precedence": 466,
+        "absolute": 451,
+        "piecewise": 430
+      },
+      "interpretation": "The four SHA-256 strings consume about 48.5-53.3% of the exact intent tokens with the multilingual tokenizer. Their visual byte length understates their token cost."
+    }
+  },
+  "timing": {
+    "proxy_measured_latency_ms": {
+      "first_multilingual_exact_request": {
+        "event_seq": 5,
+        "invocation_order": 3,
+        "duration_ms": 2717.794167,
+        "resolver_ms": 2720.351,
+        "model": "multilingual"
+      },
+      "three_later_multilingual_exact_requests": {
+        "duration_ms": [
+          290.661292,
+          266.282208,
+          247.740292
+        ],
+        "mean_ms": 268.228,
+        "median_ms": 266.282
+      },
+      "english_calls_n8": {
+        "mean_ms": 260.319,
+        "median_ms": 240.791,
+        "range_ms": [
+          230.745167,
+          387.808916
+        ]
+      },
+      "english_calls_after_first_n7": {
+        "mean_ms": 242.106
+      },
+      "first_english_request": {
+        "event_seq": 1,
+        "duration_ms": 387.808916
+      }
+    },
+    "health_loaded_models_before": [
+      "english"
+    ],
+    "health_loaded_models_after": [
+      "english",
+      "multilingual"
+    ],
+    "classification": "Observed: the first multilingual-routed request is the lone 2.718 s proxy call; three later multilingual calls are 248-291 ms, and health state changes from English-only to English plus multilingual. This is consistent with a one-time lazy multilingual checkpoint/tokenizer load. The capture does not separate model load, tokenizer setup, CPU forward time, or other first-call work, so lazy loading is a supported explanation, not a measured decomposition. The first English call is also slower than the subsequent English calls even though health-before reports English loaded; it shows there are order/startup effects, but their source is not isolated.",
+    "no_warmup": true,
+    "run_metadata_timestamp_caveat": "Source inspection of scripts/run_laya_selection.py resolves the timestamp phase: the raw-capture block records elapsed_ms_including_health_and_sampler (10,861.549 ms) and initially sets completed_utc at line 892; report finalization later overwrites completed_utc at line 755 (finalize_existing) or line 979 (main). The saved completed_utc therefore labels finalization time, not the raw-capture endpoint. The start/completed UTC pair cannot establish capture wall time; use the separately recorded monotonic capture-phase duration and per-request event durations, keeping their scopes distinct.",
+    "capture_phase_elapsed_ms_including_health_and_sampler": 10861.549
+  },
+  "evidence_and_claim_limits": {
+    "quality_effect": "All four exact-context cases routed multilingual, and all eight baseline/rejected-stale cases routed English. The response differences therefore confound added context with checkpoint choice. Each intent-treatment cell has n=1; no 100% domain correctness or generalization claim follows.",
+    "robustness_or_accuracy": "The saved study is finite, and holdout scores are post-selection finite checks. It does not establish population accuracy or robustness under repeated runs.",
+    "route_detector_vs_model": "Language detection is deterministic local Python logic, not model inference. The output route is captured directly in each raw response.",
+    "raw_evidence": "All figures above are derived from the saved audit and locally cached tokenizer/code paths. No raw audit file was changed."
+  },
+  "recommended_next_experiments": [
+    {
+      "name": "Hold route fixed while changing CI context",
+      "design": "Use the supported top-level HTTP model field (an audit proxy can add model=english or model=multilingual while forwarding the compiler's state and questions byte-for-byte). Cross the four intents by no-context versus exact verified context by both pinned checkpoints; randomize order, record each returned routing.model, and score the existing finite training/holdout evidence. Replicate each cell if call budget allows.",
+      "control_note": "With the original long context, English defaults truncate every state at 512; multilingual defaults preserve the full state. Either keep this as the documented model-specific default-input comparison, or separately test a compact provenance summary that fits both defaults. Do not conflate those two estimands."
+    },
+    {
+      "name": "Measure route-marker sensitivity without inference",
+      "design": "Offline deterministic detector ablations over the saved input plus controlled variants of CI, expanded acronym, and neutral wording. Keep the state otherwise fixed, report each detected language and route. Include absolute's residual Italian trigger as its own case."
+    },
+    {
+      "name": "Separate cold load from warm prediction timing",
+      "design": "For each checkpoint, record a fresh-server first pinned request and several same-server repeats with identical payloads, plus health loaded-model state before and after. Run a separate warm comparison after preloading both checkpoints. Report proxy/CLI wall times and any directly instrumented load time separately; do not infer forward-only latency by subtracting unrelated timers."
+    }
+  ]
+}
