@@ -1,0 +1,80 @@
+{
+  "candidate_expression": "-input",
+  "candidate_id": "negate",
+  "candidate_partition": {
+    "holdout": {
+      "candidate_discriminating_indexes": [
+        3
+      ],
+      "candidate_invariant_indexes": [
+        0,
+        1,
+        2
+      ],
+      "total": 4
+    },
+    "training": {
+      "candidate_discriminating_indexes": [
+        0,
+        1,
+        2
+      ],
+      "candidate_invariant_indexes": [],
+      "total": 3
+    }
+  },
+  "compiled_case_count": 7,
+  "compiler_generated_digest": "sha256:235838c64080ac90a2d8cab9fd097f7f26c866c520336d104eb39a3afdb771f8",
+  "finite_scores": {
+    "holdout": {
+      "all_cases": {
+        "passed": 3,
+        "total": 4
+      },
+      "candidate_discriminating_cases": {
+        "passed": 0,
+        "total": 1
+      },
+      "candidate_invariant_cases": {
+        "passed": 3,
+        "total": 3
+      }
+    },
+    "training": {
+      "all_cases": {
+        "passed": 0,
+        "total": 3
+      },
+      "candidate_discriminating_cases": {
+        "passed": 0,
+        "total": 3
+      },
+      "candidate_invariant_cases": {
+        "passed": 0,
+        "total": 0
+      }
+    }
+  },
+  "go_test_exit_code": 1,
+  "go_test_expected_exit_code": 1,
+  "go_test_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "go_test_stdout_sha256": "8f096457140f63934345a6b5bb94e01ea33342b0c2d842808639625ee22d4ff8",
+  "holdout_score_reused_benchmark": {
+    "passed": 3,
+    "total": 4
+  },
+  "intent_id": "clamp",
+  "invocation_id": "warmup-multilingual",
+  "oracle_sha256": "b96c17efde2ab42606ebd6ab95b456fed6698fabbbdee3241bf1f0584ad0843f",
+  "schema": "gooo/pinned-context-independent-go-validation/v1",
+  "scope": "Independent compiled Go execution against the already-known finite oracle; holdout vectors are reused benchmark cases, not fresh unseen generalization evidence.",
+  "source_sha256": "235838c64080ac90a2d8cab9fd097f7f26c866c520336d104eb39a3afdb771f8",
+  "timing_unix_ns": {
+    "go_test_finished": 1790754470275124000,
+    "go_test_started": 1790754469754504000
+  },
+  "training_score": {
+    "passed": 0,
+    "total": 3
+  }
+}

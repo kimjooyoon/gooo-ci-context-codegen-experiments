@@ -1,0 +1,11 @@
+=== RUN   TestPinnedFiniteOracle
+    probe_test.go:18: PINNED_CASE_RESULT:{"suite":"training","index":0,"input":-3,"expected":3,"actual":3,"passed":true}
+    probe_test.go:18: PINNED_CASE_RESULT:{"suite":"training","index":1,"input":-2,"expected":2,"actual":2,"passed":true}
+    probe_test.go:18: PINNED_CASE_RESULT:{"suite":"training","index":2,"input":-1,"expected":1,"actual":1,"passed":true}
+    probe_test.go:18: PINNED_CASE_RESULT:{"suite":"holdout","index":0,"input":-9223372036854775808,"expected":-9223372036854775808,"actual":-9223372036854775808,"passed":true}
+    probe_test.go:18: PINNED_CASE_RESULT:{"suite":"holdout","index":1,"input":9223372036854775807,"expected":9223372036854775807,"actual":9223372036854775807,"passed":true}
+    probe_test.go:18: PINNED_CASE_RESULT:{"suite":"holdout","index":2,"input":0,"expected":0,"actual":0,"passed":true}
+    probe_test.go:18: PINNED_CASE_RESULT:{"suite":"holdout","index":3,"input":4,"expected":4,"actual":4,"passed":true}
+--- PASS: TestPinnedFiniteOracle (0.00s)
+PASS
+ok  	pinned-context-probe	0.357s

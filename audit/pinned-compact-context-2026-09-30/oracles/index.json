@@ -1,0 +1,35 @@
+{
+  "loaded_after_all_choice_posts_saved": true,
+  "oracle_count": 4,
+  "oracles": [
+    {
+      "bytes": 578,
+      "classification": "reused finite benchmark oracle; not fresh unseen cases",
+      "file": "oracles/clamp.oracle.json",
+      "intent_id": "clamp",
+      "sha256": "b96c17efde2ab42606ebd6ab95b456fed6698fabbbdee3241bf1f0584ad0843f"
+    },
+    {
+      "bytes": 732,
+      "classification": "reused finite benchmark oracle; not fresh unseen cases",
+      "file": "oracles/absolute.oracle.json",
+      "intent_id": "absolute",
+      "sha256": "be989f945bb16bc969790e3878f02c4879caa917499b2deeb3711624506adbdf"
+    },
+    {
+      "bytes": 500,
+      "classification": "reused finite benchmark oracle; not fresh unseen cases",
+      "file": "oracles/piecewise.oracle.json",
+      "intent_id": "piecewise",
+      "sha256": "3b8c9d76ea66492aa50fb9badb65d69173fa6f746c4dccfc0100b567b55bed48"
+    },
+    {
+      "bytes": 598,
+      "classification": "reused finite benchmark oracle; not fresh unseen cases",
+      "file": "oracles/compound-precedence.oracle.json",
+      "intent_id": "compound-precedence",
+      "sha256": "5b3597a5e890bb39ea7d14272a6bbacf6d346857f79deb83660eeec2cd6b90a6"
+    }
+  ],
+  "schema": "gooo/pinned-context-reused-oracle-index/v1"
+}

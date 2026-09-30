@@ -1,0 +1,80 @@
+{
+  "candidate_expression": "input",
+  "candidate_id": "identity",
+  "candidate_partition": {
+    "holdout": {
+      "candidate_discriminating_indexes": [
+        0
+      ],
+      "candidate_invariant_indexes": [
+        1,
+        2,
+        3
+      ],
+      "total": 4
+    },
+    "training": {
+      "candidate_discriminating_indexes": [
+        0,
+        1,
+        2
+      ],
+      "candidate_invariant_indexes": [],
+      "total": 3
+    }
+  },
+  "compiled_case_count": 7,
+  "compiler_generated_digest": "sha256:6f275b438ba66832f18f4acc9e3f4f82d99b4cf96f6c2ef2aef783a2ee2c2a45",
+  "finite_scores": {
+    "holdout": {
+      "all_cases": {
+        "passed": 4,
+        "total": 4
+      },
+      "candidate_discriminating_cases": {
+        "passed": 1,
+        "total": 1
+      },
+      "candidate_invariant_cases": {
+        "passed": 3,
+        "total": 3
+      }
+    },
+    "training": {
+      "all_cases": {
+        "passed": 0,
+        "total": 3
+      },
+      "candidate_discriminating_cases": {
+        "passed": 0,
+        "total": 3
+      },
+      "candidate_invariant_cases": {
+        "passed": 0,
+        "total": 0
+      }
+    }
+  },
+  "go_test_exit_code": 1,
+  "go_test_expected_exit_code": 1,
+  "go_test_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "go_test_stdout_sha256": "278149d456e456ab7cac65624b5019b4495f14d8b0a311432c671a2e690c3f3e",
+  "holdout_score_reused_benchmark": {
+    "passed": 4,
+    "total": 4
+  },
+  "intent_id": "absolute",
+  "invocation_id": "66-absolute-compact_external_feedback-multilingual-r3",
+  "oracle_sha256": "be989f945bb16bc969790e3878f02c4879caa917499b2deeb3711624506adbdf",
+  "schema": "gooo/pinned-context-independent-go-validation/v1",
+  "scope": "Independent compiled Go execution against the already-known finite oracle; holdout vectors are reused benchmark cases, not fresh unseen generalization evidence.",
+  "source_sha256": "6f275b438ba66832f18f4acc9e3f4f82d99b4cf96f6c2ef2aef783a2ee2c2a45",
+  "timing_unix_ns": {
+    "go_test_finished": 1790754488318500000,
+    "go_test_started": 1790754487778022000
+  },
+  "training_score": {
+    "passed": 0,
+    "total": 3
+  }
+}

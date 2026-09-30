@@ -1,0 +1,12 @@
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files: 100%|██████████| 5/5 [00:00<00:00, 6217.47it/s]
+/private/tmp/meta-ontology-go-laya-venv-20260930/lib/python3.11/site-packages/laya/router.py:456: RuntimeWarning: laya: this checkpoint ships invalid temperatures or values outside [0.5, 5]; using choice:11+=0.10058280825614929 -> 0.5. Treat confidence from the affected entries as uncalibrated.
+  agent = Agent(repo, **kwargs)
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files: 100%|██████████| 5/5 [00:00<00:00, 5501.45it/s]
+INFO:     Started server process [12451]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:58516 (Press CTRL+C to quit)
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [12451]

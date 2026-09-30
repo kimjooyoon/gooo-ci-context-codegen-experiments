@@ -1,0 +1,18 @@
+{
+  "schema": "gooo/ir-search-finite-oracle/v1",
+  "intent_id": "piecewise",
+  "integer_semantics": "signed int64",
+  "training": {
+    "inputs": [-3, -2, -1],
+    "expected": [7, 7, 7]
+  },
+  "holdout": {
+    "inputs": [-8, 0, 7, 8],
+    "expected": [7, 0, 7, 8]
+  },
+  "candidate_outputs": {
+    "identity": { "training": [-3, -2, -1], "holdout": [-8, 0, 7, 8] },
+    "zero": { "training": [0, 0, 0], "holdout": [0, 0, 7, 8] },
+    "seven": { "training": [7, 7, 7], "holdout": [7, 0, 7, 8] }
+  }
+}

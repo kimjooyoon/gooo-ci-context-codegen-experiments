@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/pinned-context-replay.yml'
       - 'scripts/validate_pinned_context_study.py'
+      - 'scripts/correct_pinned_context_summary.py'
       - 'scripts/prepare_pinned_context_study.py'
       - 'scripts/run_pinned_context_study.py'
       - 'scripts/test_pinned_capture_proxy.py'
@@ -19,6 +20,7 @@ on:
     paths:
       - '.github/workflows/pinned-context-replay.yml'
       - 'scripts/validate_pinned_context_study.py'
+      - 'scripts/correct_pinned_context_summary.py'
       - 'scripts/prepare_pinned_context_study.py'
       - 'scripts/run_pinned_context_study.py'
       - 'scripts/test_pinned_capture_proxy.py'

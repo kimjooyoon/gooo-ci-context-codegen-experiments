@@ -1,0 +1,18 @@
+{
+  "schema": "gooo/ir-search-finite-oracle/v1",
+  "intent_id": "absolute",
+  "integer_semantics": "signed two's-complement int64; negation wraps modulo 2^64; -MinInt64 == MinInt64",
+  "training": {
+    "inputs": [-3, -2, -1],
+    "expected": [3, 2, 1]
+  },
+  "holdout": {
+    "inputs": [-9223372036854775808, 9223372036854775807, 0, 4],
+    "expected": [-9223372036854775808, 9223372036854775807, 0, 4]
+  },
+  "candidate_outputs": {
+    "identity": { "training": [-3, -2, -1], "holdout": [-9223372036854775808, 9223372036854775807, 0, 4] },
+    "zero": { "training": [0, 0, 0], "holdout": [0, 9223372036854775807, 0, 4] },
+    "negate": { "training": [3, 2, 1], "holdout": [-9223372036854775808, 9223372036854775807, 0, 4] }
+  }
+}

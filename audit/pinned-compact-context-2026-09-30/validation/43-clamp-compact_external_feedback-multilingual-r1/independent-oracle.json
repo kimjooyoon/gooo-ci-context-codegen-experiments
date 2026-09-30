@@ -1,0 +1,18 @@
+{
+  "schema": "gooo/ir-search-finite-oracle/v1",
+  "intent_id": "clamp",
+  "integer_semantics": "signed int64; negate wraps modulo 2^64",
+  "training": {
+    "inputs": [-3, -2, -1],
+    "expected": [0, 0, 0]
+  },
+  "holdout": {
+    "inputs": [0, 1, 4, -9223372036854775808],
+    "expected": [0, 1, 4, 0]
+  },
+  "candidate_outputs": {
+    "identity": { "training": [-3, -2, -1], "holdout": [0, 1, 4, -9223372036854775808] },
+    "negate": { "training": [3, 2, 1], "holdout": [0, 1, 4, -9223372036854775808] },
+    "zero": { "training": [0, 0, 0], "holdout": [0, 1, 4, 0] }
+  }
+}

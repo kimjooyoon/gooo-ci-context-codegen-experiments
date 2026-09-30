@@ -1,0 +1,18 @@
+{
+  "schema": "gooo/ir-search-finite-oracle/v1",
+  "intent_id": "compound-precedence",
+  "integer_semantics": "signed int64; && binds more tightly than ||, matching Go",
+  "training": {
+    "inputs": [-1, 10, 11, 13],
+    "expected": [100, 100, 100, 100]
+  },
+  "holdout": {
+    "inputs": [0, 9, 12, 14],
+    "expected": [0, 9, 12, 100]
+  },
+  "candidate_outputs": {
+    "identity": { "training": [-1, 10, 11, 13], "holdout": [0, 9, 12, 14] },
+    "zero": { "training": [0, 0, 0, 0], "holdout": [0, 9, 12, 0] },
+    "hundred": { "training": [100, 100, 100, 100], "holdout": [0, 9, 12, 100] }
+  }
+}

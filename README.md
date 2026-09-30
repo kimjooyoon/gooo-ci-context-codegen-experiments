@@ -83,7 +83,7 @@ observations. The compact model input carries failed training triples and counts
 while provenance hashes stay in local receipts. Gooo still evaluates and
 typechecks the selected expression after the choice.
 
-The planned comparison has four existing intents, three arms (legacy input,
+The captured comparison has four existing intents, three arms (legacy input,
 compact input, compact input with actual earlier CI failures), two explicitly
 pinned models, and three repeats: **72 measured calls plus two separate warmups**.
 These are 24 distinct intent/arm/model cells, not 72 independent functional
@@ -98,8 +98,9 @@ The [final design](pinned-context-design/study-design.json) is frozen at SHA-256
 All 24 exact wire templates passed the cached-tokenizer preflight without state
 truncation: 272–415 tokens for English (512-token budget), and 244–416 for
 multilingual (1,024-token budget). Source-bound design validation passed with
-zero model inference calls. Model outcomes, timings, and memory use are counted
-only after raw captures and independent compiled-Go validation are saved.
+zero model inference calls. All 72 measured calls and two warmups were captured without retries. Independent
+compiled-Go replay passed for 74/74 emitted outputs, typed receipts, and model
+routes; all 72 measured model states matched their frozen input profiles.
 Failed invocations remain visible, and request digests, model routes, and actual
 receipts are checked separately.
 
@@ -108,6 +109,46 @@ records a retention failure: its original frozen design JSON was not preserved.
 Its digest, raw mock exchanges, and 74 plan files remain available; the plans are
 byte-identical to the final design. That preparation made zero inference calls
 and is excluded from measured results.
+
+## Pinned study measured results
+
+The [independent replay](audit/pinned-compact-context-2026-09-30/independent-replay/independent-replay-report.md)
+passed with zero additional model calls. Each row below comprises 12 selections
+across four known intents and three repeats. Training totals reuse 39 finite
+cases; evaluation totals reuse 48 cases, of which 12 distinguish the candidates.
+These percentages measure those cases, not a percentage of whole-language intent.
+
+| Model | Input | Training | Reused evaluation | Discriminating evaluation | Median CLI time |
+|---|---|---:|---:|---:|---:|
+| English | Legacy | 18/39 | 42/48 | 6/12 | 246.90 ms |
+| English | Compact | 18/39 | 42/48 | 6/12 | 214.72 ms |
+| English | Compact + failure feedback | 18/39 | 42/48 | 6/12 | 278.64 ms |
+| Multilingual | Legacy | 21/39 | 42/48 | 6/12 | 101.89 ms |
+| Multilingual | Compact | 30/39 | 45/48 | 9/12 | 86.52 ms |
+| Multilingual | Compact + failure feedback | 9/39 | 42/48 | 6/12 | 108.86 ms |
+
+Compact packaging improved the multilingual finite scores in this capture;
+adding failure feedback reduced its training score. English scores were unchanged.
+Three repeats of four known intents do not establish a general speed or causal
+accuracy improvement. Gooo selects from three declared expressions, typechecks,
+and emits the selected body; Laya is not credited with freely authoring those
+expressions. Local correction of a proposal is reported separately in receipts.
+
+The owned, preloaded Laya process used approximately 3,289–3,385 MiB sampled RSS.
+Its sampled process CPU ranged across groups from approximately 152% to 215%
+at per-invocation maxima, where 100% represents one core. These `ps` observations
+are rolling process CPU and sampled memory; they do not measure instantaneous
+forward-pass utilization or the increase in whole-machine CPU. CLI wall time
+includes the selection and compiler work, with provider POST timing recorded
+separately. Warmups are excluded from the table, and both model caches were loaded.
+
+The [original report](audit/pinned-compact-context-2026-09-30/report.json)
+retains its initial `PARTIAL_CAPTURE_OR_VALIDATION` label and incorrect 0/72
+feedback aggregate. A recorder bookkeeping omission caused that aggregate;
+raw requests and per-invocation checks independently pass 72/72. The
+[derived correction](audit/pinned-compact-context-2026-09-30/derived-correction/report.md)
+and its receipt change only that aggregate and the derived decision. Raw replies,
+selected candidates, timings, source, and scores remain unchanged.
 
 ## Reproduction
 

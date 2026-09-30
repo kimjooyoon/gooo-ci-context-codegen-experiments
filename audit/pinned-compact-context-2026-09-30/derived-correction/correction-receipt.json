@@ -1,0 +1,74 @@
+{
+  "capture_manifest_sha256": {
+    "capture_status": "c99f5fac6f4744c713cc8c57e32ebb5a6d18fbf19a58a5b8b67a097a41ef1b47",
+    "cli_invocation_records": "1fbf14e5f6458bfa961938d37bda51a7d34e6cdf0084e019d95279b6b6bef6e2",
+    "invocation_index": "fc02bf1916642f34275a78db3817824436f2aa7e168677109cedfe811db87a67",
+    "proxy_events": "d698d38daaec8ad608b21e715a2a19115fde85356ae40253473a428d8f66f2df",
+    "run_metadata": "eedc4cb98b248be1dfbcecda7f5bc9d6f4655eafe0e15661486786230fffff3d"
+  },
+  "correction_note": "The original request audit left provider_context_pin_match at its default false even after validating every raw serialized model state. Invocation result rows correctly recorded the state/profile checks. This derived copy aggregates the verified raw evidence into the intended 72/72 field.",
+  "corrector_script_sha256": "61b9b220a59bb139f8711359b69490b4520084a2397e812790868497506dddba",
+  "created_utc": "2026-09-30T07:54:10.936665+00:00",
+  "derived_report": {
+    "decision": "CAPTURED_AND_COMPILED",
+    "markdown_path": "report.md",
+    "markdown_sha256": "904677fa6d38a490d6653a36467ad0808872f229fdbf2d3066e7265a963fd25c",
+    "path": "report.json",
+    "sha256": "935ab92f0a9d92437a430e6bc85a8ce64f1fa0f7dda7ab5eef013413b698bb63"
+  },
+  "diff": [
+    {
+      "new": 72,
+      "old": 0,
+      "path": "capture.measured_requests_matching_plan_feedback.passed"
+    },
+    {
+      "new": "CAPTURED_AND_COMPILED",
+      "old": "PARTIAL_CAPTURE_OR_VALIDATION",
+      "path": "decision"
+    }
+  ],
+  "immutability": {
+    "model_calls_repeated": false,
+    "original_report_bytes_preserved": true,
+    "original_report_markdown_preserved": true,
+    "raw_requests_responses_and_replies_unchanged": true,
+    "scores_timings_resource_samples_and_candidate_choices_unchanged": true
+  },
+  "modified_field_whitelist": [
+    "capture.measured_requests_matching_plan_feedback.passed",
+    "decision"
+  ],
+  "original_report": {
+    "decision": "PARTIAL_CAPTURE_OR_VALIDATION",
+    "feedback_summary": {
+      "passed": 0,
+      "total": 72
+    },
+    "path": "../report.json",
+    "sha256": "1f079748a2ba2d4d75adc4f97b46fc3b090e726f7b587d193b8f1a1c28b29c74"
+  },
+  "raw_evidence_checks": {
+    "captured_response_routes_match_model_pin": 74,
+    "measured_calls": 72,
+    "measured_model_state_profiles_and_hashes_match": 72,
+    "original_request_audit_context_true_measured": 0,
+    "per_invocation_context_summaries_true_measured": 72,
+    "per_invocation_context_summaries_true_warmup": 2,
+    "planned_invocations": 74,
+    "raw_choice_posts": 74,
+    "typed_request_receipt_hashes_match": 74
+  },
+  "run_id": "pinned-compact-context-2026-09-30",
+  "schema": "gooo/pinned-context-derived-summary-correction/v1",
+  "status": "DERIVED_SUMMARY_CORRECTED_FROM_CAPTURED_EVIDENCE",
+  "study_provenance": {
+    "design_sha256": "00da5cae3ee097870a66320ae18cf3fcd510652a369eb8eef31b5e6b4c5fb896",
+    "preexecution_path": "../preexecution.json",
+    "preexecution_sha256": "26e01a2a3b05fc670db29953d80a3c0062c8f1f2f9bec46e2032945631692200",
+    "preparation_script_sha256": "a64d83c3fe97d10ea5f7df101ad4c6e99a3d8205a82f40b7a4cd83738d7025ae",
+    "public_frozen_checkpoint_revision": "9dc4beb54002880da2a919d2b9b65148718500f5",
+    "runner_script_sha256": "58b414b6dfa5070666514eae4bc044474c8ca19162a825fd2afc749023075dea",
+    "source_provenance_sha256": "a30a18f61982080ecf15538dc70188ca34f2daebf1fef2e44fc6be8a55a793aa"
+  }
+}

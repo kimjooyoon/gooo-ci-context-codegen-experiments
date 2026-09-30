@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter, defaultdict
+import copy
 import json
 import math
 import os
@@ -722,6 +723,146 @@ def verify_invocation_index(run_dir: Path, design: dict, plans: dict[str, dict],
     return by_id
 
 
+def verify_derived_correction(run_dir: Path, report: dict, report_bytes: bytes, metadata: dict,
+                              preexecution: dict, design: dict, invocation_results: list[dict],
+                              report_invocations: list[dict], events: list[dict], typed_hash_count: int,
+                              feedback_count: int, reply_route_count: int) -> dict:
+    """Validate the immutable runner report and its explicitly whitelisted derived copy."""
+    correction_dir = run_dir / "derived-correction"
+    receipt_path = correction_dir / "correction-receipt.json"
+    corrected_path = correction_dir / "report.json"
+    corrected_md_path = correction_dir / "report.md"
+    require(receipt_path.is_file() and corrected_path.is_file() and corrected_md_path.is_file(),
+            "derived correction receipt/report/markdown is incomplete")
+    receipt = read_json(receipt_path)
+    corrected_bytes = corrected_path.read_bytes()
+    corrected = json.loads(corrected_bytes)
+    original_sha = sha256(report_bytes)
+    corrected_sha = sha256(corrected_bytes)
+    design_sha = sha256((run_dir / "study-design.json").read_bytes())
+    preexecution_sha = sha256((run_dir / "preexecution.json").read_bytes())
+    source_provenance_sha = sha256((run_dir / "source-provenance.json").read_bytes())
+    checkpoint = preexecution.get("study_code_provenance", {}).get("public_frozen_checkpoint_revision")
+    study_provenance = receipt.get("study_provenance", {})
+    require(receipt.get("schema") == "gooo/pinned-context-derived-summary-correction/v1"
+            and receipt.get("status") == "DERIVED_SUMMARY_CORRECTED_FROM_CAPTURED_EVIDENCE"
+            and receipt.get("run_id") == run_dir.name,
+            "derived correction receipt identity/status mismatch")
+    require(receipt.get("original_report") == {
+                "path": "../report.json", "sha256": original_sha,
+                "decision": report.get("decision"),
+                "feedback_summary": report.get("capture", {}).get("measured_requests_matching_plan_feedback")}
+            and metadata.get("report_sha256") == original_sha,
+            "derived correction receipt or run metadata does not bind the immutable original report")
+    require(study_provenance == {
+                "design_sha256": design_sha,
+                "preexecution_path": "../preexecution.json",
+                "preexecution_sha256": preexecution_sha,
+                "preparation_script_sha256": preexecution.get("study_code_provenance", {}).get("preparation_script_sha256"),
+                "public_frozen_checkpoint_revision": checkpoint,
+                "runner_script_sha256": preexecution.get("study_code_provenance", {}).get("runner_script_sha256"),
+                "source_provenance_sha256": source_provenance_sha,
+            }, "derived correction receipt does not bind the frozen design/source/runtime provenance")
+    expected_capture_hashes = {
+        "capture_status": sha256((run_dir / "capture-status.json").read_bytes()),
+        "cli_invocation_records": sha256((run_dir / "cli-invocation-records.json").read_bytes()),
+        "invocation_index": sha256((run_dir / "invocation-index.json").read_bytes()),
+        "proxy_events": sha256((run_dir / "proxy-events.json").read_bytes()),
+        "run_metadata": sha256((run_dir / "run-metadata.json").read_bytes()),
+    }
+    require(receipt.get("capture_manifest_sha256") == expected_capture_hashes,
+            "derived correction receipt does not bind current raw capture manifests")
+    report_rows = {row.get("invocation_id"): row for row in report_invocations}
+    saved_audits = report.get("request_route_and_feedback_audits", [])
+    saved_audits_by_id = {row.get("invocation_id"): row for row in saved_audits}
+    own_by_id = {row.get("invocation_id"): row for row in invocation_results}
+    raw_posts = [event for event in events if event.get("kind") == "laya_choice"]
+    measured_own = [row for row in invocation_results if row.get("phase") == "measured"]
+    warmup_own = [row for row in invocation_results if row.get("phase") == "warmup"]
+    reply_routes = sum(row.get("provider_reply_route_verified") is True for row in invocation_results)
+    context_profiles = sum(row.get("provider_context_verified") is True for row in measured_own)
+    saved_context_measured = sum(row.get("provider_context_pin_match") is True
+                                 for row in report.get("invocation_results", [])
+                                 if row.get("phase") == "measured")
+    saved_context_warmups = sum(row.get("provider_context_pin_match") is True
+                                for row in report.get("invocation_results", [])
+                                if row.get("phase") == "warmup")
+    request_audit_context_measured = sum(row.get("provider_context_pin_match") is True
+                                         for row in saved_audits
+                                         if own_by_id.get(row.get("invocation_id"), {}).get("phase") == "measured")
+    expected_raw_checks = {
+        "captured_response_routes_match_model_pin": reply_routes,
+        "measured_calls": len(measured_own),
+        "measured_model_state_profiles_and_hashes_match": context_profiles,
+        "original_request_audit_context_true_measured": request_audit_context_measured,
+        "per_invocation_context_summaries_true_measured": saved_context_measured,
+        "per_invocation_context_summaries_true_warmup": saved_context_warmups,
+        "planned_invocations": len(report_rows),
+        "raw_choice_posts": len(raw_posts),
+        "typed_request_receipt_hashes_match": typed_hash_count,
+    }
+    require(receipt.get("raw_evidence_checks") == expected_raw_checks
+            and expected_raw_checks == {
+                "captured_response_routes_match_model_pin": 74,
+                "measured_calls": 72,
+                "measured_model_state_profiles_and_hashes_match": 72,
+                "original_request_audit_context_true_measured": 0,
+                "per_invocation_context_summaries_true_measured": 72,
+                "per_invocation_context_summaries_true_warmup": 2,
+                "planned_invocations": 74,
+                "raw_choice_posts": 74,
+                "typed_request_receipt_hashes_match": 74,
+            }, "derived correction's raw evidence counts differ from independent verification")
+    require(len(invocation_results) == 74 and len(measured_own) == 72 and len(warmup_own) == 2
+            and feedback_count == 72 and reply_route_count == 74 and typed_hash_count == 74
+            and all(row.get("provider_context_verified") is True
+                    and row.get("request_provider_model_verified") is True
+                    and row.get("provider_reply_route_verified") is True
+                    and row.get("typed_request_hash_verified") is True
+                    and row.get("provider_receipt_verified") is True
+                    and row.get("captured_choice_posts") == 1
+                    and row.get("captured_reply_matches_compiler_choice") is True
+                    and row.get("compiled_replay", {}).get("status") == "pass"
+                    and not row.get("issues") for row in invocation_results)
+            and all(row.get("decision") == "CAPTURED_AND_COMPILED" and row.get("cli_exit_code") == 0
+                    and row.get("choice_post_count") == 1 for row in report_invocations)
+            and metadata.get("health_after_validated") is True,
+            "independent raw routing/state/hash/compiled-source checks do not justify correcting the runner decision")
+
+    whitelist = ["capture.measured_requests_matching_plan_feedback.passed", "decision"]
+    require(receipt.get("modified_field_whitelist") == whitelist
+            and receipt.get("immutability") == {
+                "model_calls_repeated": False,
+                "original_report_bytes_preserved": True,
+                "original_report_markdown_preserved": True,
+                "raw_requests_responses_and_replies_unchanged": True,
+                "scores_timings_resource_samples_and_candidate_choices_unchanged": True,
+            }, "derived correction receipt has an incorrect whitelist or immutability claim")
+    corrected_decision = "CAPTURED_AND_COMPILED"
+    expected_corrected = copy.deepcopy(report)
+    expected_corrected["capture"]["measured_requests_matching_plan_feedback"]["passed"] = feedback_count
+    expected_corrected["decision"] = corrected_decision
+    expected_diff = [
+        {"path": whitelist[0], "old": 0, "new": feedback_count},
+        {"path": whitelist[1], "old": "PARTIAL_CAPTURE_OR_VALIDATION", "new": corrected_decision},
+    ]
+    require(receipt.get("diff") == expected_diff
+            and report.get("decision") == "PARTIAL_CAPTURE_OR_VALIDATION"
+            and report.get("capture", {}).get("measured_requests_matching_plan_feedback") == {"passed": 0, "total": 72}
+            and corrected == expected_corrected,
+            "derived report changed fields outside the two allowed paths or does not use independently verified values")
+    require(receipt.get("derived_report") == {
+                "path": "report.json", "sha256": corrected_sha, "decision": corrected_decision,
+                "markdown_path": "report.md", "markdown_sha256": sha256(corrected_md_path.read_bytes()),
+            }, "derived correction receipt does not bind its report and markdown bytes")
+    require(receipt.get("corrector_script_sha256") == sha256((ROOT / "scripts" / "correct_pinned_context_summary.py").read_bytes()),
+            "derived correction receipt does not bind the correction script")
+    return {"status": "VERIFIED_TWO_FIELD_DERIVATION", "original_report_sha256": original_sha,
+            "derived_report_sha256": corrected_sha, "modified_fields": whitelist,
+            "raw_model_state_matches": feedback_count, "raw_reply_routes_matched": reply_routes,
+            "typed_request_receipts_matched": typed_hash_count}
+
+
 def validate_run(run_dir: Path, output_dir: Path, required_go: str | None) -> dict:
     run_dir, output_dir = run_dir.resolve(), output_dir.resolve()
     require(not output_dir.exists(), f"refusing to overwrite replay output: {output_dir}")
@@ -764,7 +905,7 @@ def validate_run(run_dir: Path, output_dir: Path, required_go: str | None) -> di
     require(metadata.get("run_id") == run_dir.name
             and metadata.get("status") in ("CAPTURED", "CAPTURED_AND_COMPILED",
                                             "all_raw_calls_captured_before_runtime_oracle_validation",
-                                            "CAPTURED_AND_COMPILED")
+                                            "PARTIAL_CAPTURE_OR_VALIDATION")
             and metadata.get("model_revision") == EXPECTED_MODEL_REVISION
             and metadata.get("laya_version") == EXPECTED_LAYA_VERSION
             and "offline" in metadata.get("provider_policy", "").lower()
@@ -851,6 +992,7 @@ def validate_run(run_dir: Path, output_dir: Path, required_go: str | None) -> di
     request_hash_inputs = []
     request_hash_receipts = {}
     issues: list[str] = []
+    legacy_derived_issues: list[str] = []
     invocation_results = []
     independent_replays = []
     group_accumulators: dict[tuple[str, str], dict[str, Any]] = {}
@@ -1259,7 +1401,11 @@ def validate_run(run_dir: Path, output_dir: Path, required_go: str | None) -> di
     if saved_route != {"passed": request_route_count, "total": 72}:
         issues.append("runner measured request-route denominator/count differs from raw outer.model audit")
     if saved_feedback != {"passed": feedback_count, "total": 72}:
-        issues.append("runner measured feedback denominator/count differs from raw model-state audit")
+        legacy_derived_issues.append(
+            "original runner report measured feedback summary disagrees with raw model-state audit: "
+            f"reported {saved_feedback.get('passed')}/{saved_feedback.get('total')}, "
+            f"raw verified {feedback_count}/72; runner status was {metadata.get('status')}"
+        )
     saved_groups = {(item.get("context_treatment"), item.get("provider_model")): item
                     for item in report.get("results_by_context_and_model", [])}
     if set(saved_groups) != {(treatment, model) for treatment in TREATMENTS for model in MODELS}:
@@ -1290,6 +1436,12 @@ def validate_run(run_dir: Path, output_dir: Path, required_go: str | None) -> di
                 expected = own["compiled_finite_scores"][suite_name][scope]
                 if actual != expected:
                     issues.append(f"{own['treatment']}/{own['provider_model']}: runner {suite_name}/{scope} aggregate differs from independent compile")
+    typed_hash_count = sum(row.get("typed_request_hash_verified") is True for row in invocation_results)
+    reply_route_count = sum(row.get("provider_reply_route_verified") is True for row in invocation_results)
+    correction_validation = verify_derived_correction(
+        run_dir, report, report_bytes, metadata, preexecution, design, invocation_results,
+        report_invocations, events, typed_hash_count, feedback_count, reply_route_count,
+    )
     warmup_rows = [row for row in invocation_results if row["phase"] == "warmup"]
     report_out = {
         "schema": "gooo/pinned-context-independent-replay-report/v1",
@@ -1315,8 +1467,12 @@ def validate_run(run_dir: Path, output_dir: Path, required_go: str | None) -> di
         "invocation_results": invocation_results,
         "privacy_scan_count": len(privacy_results), "privacy_results": privacy_results,
         "issues": issues,
+        "legacy_derived_issues": legacy_derived_issues,
+        "derived_correction_validation": correction_validation,
         "decision": "PASS" if not issues and len(invocation_results) == 74
-                    and len(choice_events) == 74 and all(row["compiled_replay"] is not None for row in invocation_results)
+                    and len(choice_events) == 74 and all(row["compiled_replay"].get("status") == "pass"
+                                                         for row in invocation_results)
+                    and correction_validation.get("status") == "VERIFIED_TWO_FIELD_DERIVATION"
                     else "FAIL",
         "limitations": ["The holdout suite is a reused finite benchmark, not a fresh generalization sample.",
                         "Independent Go execution confirms emitted behavior on declared finite vectors only.",

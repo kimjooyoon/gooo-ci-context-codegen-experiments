@@ -1,0 +1,22 @@
+{
+  "cli_active_wall_ms": 292.5471670000004,
+  "cli_process": {
+    "cpu_seconds_delta_coarse": 0.0,
+    "measurement_note": "Process-level ps samples; CPU is cumulative and second-granularity; RSS and CPU-percent peaks are sampled.",
+    "pcpu_percent_max_sampled": 1.0,
+    "rss_peak_kb_sampled": 15072,
+    "sample_count": 3
+  },
+  "harness_sampling_window_ms": 297.0100000000002,
+  "owned_laya_server_process": {
+    "cpu_seconds_delta_coarse": 0.6500000000000021,
+    "measurement_note": "Process-level ps samples; CPU is cumulative and second-granularity; RSS and CPU-percent peaks are sampled.",
+    "pcpu_percent_max_sampled": 214.9,
+    "rss_peak_kb_sampled": 3465168,
+    "sample_count": 4
+  },
+  "process_completion_kind": "communicate_returned",
+  "raw_samples": "resource-samples.jsonl",
+  "sampling_interval_ms": 120.0,
+  "schema": "gooo/pinned-context-process-resource/v1"
+}

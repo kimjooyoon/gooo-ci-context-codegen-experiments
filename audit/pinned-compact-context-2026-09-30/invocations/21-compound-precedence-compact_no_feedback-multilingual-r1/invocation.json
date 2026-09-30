@@ -1,0 +1,92 @@
+{
+  "activity": "CompoundPrecedence",
+  "argv": [
+    "/private/tmp/gooo-pinned-context-final-20260930",
+    "body-codegen",
+    "--json",
+    "--fill-search",
+    "/Users/alice/meta-go/research/metaprogramming/gooo-ci-context-codegen-experiments/audit/pinned-compact-context-2026-09-30/invocations/21-compound-precedence-compact_no_feedback-multilingual-r1/plan.search-plan.json",
+    "--activity",
+    "CompoundPrecedence",
+    "/Users/alice/meta-go/research/metaprogramming/gooo-ci-context-codegen-experiments/audit/pinned-compact-context-2026-09-30/invocations/21-compound-precedence-compact_no_feedback-multilingual-r1/fixture.gooo.fixture"
+  ],
+  "choice_event_sequences": [
+    41
+  ],
+  "compiler_body_search_receipt_file": "compiler-body-search-receipt.json",
+  "compiler_body_search_receipt_sha256": "6e0e1fd4ad28028ac8752d961b6400d946357b3f927e34fd5f81029a32ef27a7",
+  "compiler_report_file": "compiler-report.json",
+  "compiler_report_sha256": "f81a65dda4757c2789e04cffd49f16a07472beed68ac3db83b32a03a30dc289c",
+  "event_sequences": [
+    41,
+    42
+  ],
+  "exit_code": 0,
+  "expected_input_token_budget": 1024,
+  "expected_input_token_count": 303,
+  "fixture_file": "fixture.gooo.fixture",
+  "fixture_sha256": "2578de3c0ee33d3e68c2dc8b7c3165316d322873cb50a4caf76ccb260e853eb3",
+  "fixture_source_path": "fixtures/compound-precedence.gooo.fixture",
+  "harness_completed_unix_ns": 1790754458522854000,
+  "harness_watchdog_seconds": 90,
+  "health_event_refs": [
+    {
+      "duration_ms": 0.9107500000009594,
+      "kind": "health_check",
+      "method": "GET",
+      "path": "/health",
+      "request_file": "proxy/requests/0042.request.raw",
+      "request_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "response_file": "proxy/responses/0042.response.raw",
+      "response_sha256": "6260e460622d6aec066ccefddaeaeac98c854058a5f4bdc9dc134ceeb38e2a81",
+      "selected_candidate_id": null,
+      "seq": 42,
+      "status": 200
+    }
+  ],
+  "intent_id": "compound-precedence",
+  "invocation_id": "21-compound-precedence-compact_no_feedback-multilingual-r1",
+  "model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+  "other_event_refs": [],
+  "pending_exchange_drain": {
+    "pending_sequences": [],
+    "settled": true,
+    "timeout_seconds": 13,
+    "upstream_timeout_seconds": 10
+  },
+  "phase": "measured",
+  "plan_file": "plan.search-plan.json",
+  "plan_sha256": "bd3363f76f3a9b93028a6a28c083142e2328152f238f972e8097468b38fa6f70",
+  "plan_source_path": "plans/21-compound-precedence-compact_no_feedback-multilingual-r1.search-plan.json",
+  "pre_next_call_review": {
+    "issues": [],
+    "passed": true
+  },
+  "process_completed_unix_ns": 1790754458518338000,
+  "provider_exchange_refs": [
+    {
+      "duration_ms": 89.6013749999991,
+      "kind": "laya_choice",
+      "method": "POST",
+      "path": "/v1/systemone",
+      "request_file": "proxy/requests/0041.request.raw",
+      "request_sha256": "49898846cc814ffdc3aa63feff13df89ae3797b9d227110ede8aee45f5a9eaeb",
+      "response_file": "proxy/responses/0041.response.raw",
+      "response_sha256": "1200be4e583b40921fa9f0709746f860c1334d2b3e282292341d6c3b57ec18d1",
+      "selected_candidate_id": "hundred",
+      "seq": 41,
+      "status": 200
+    }
+  ],
+  "provider_model": "multilingual",
+  "replicate": 1,
+  "resource_file": "resource.json",
+  "schema": "gooo/pinned-context-invocation/v1",
+  "sequence": 21,
+  "started_unix_ns": 1790754458419214000,
+  "started_utc": "2026-09-30T07:47:38.419206+00:00",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "0e9d2ddfe5db8c0ef6e9e2e4883ba580a81e8947deb9afb08f7f2a2860274808",
+  "training_cases_file": "training-cases.json",
+  "treatment": "compact_no_feedback"
+}

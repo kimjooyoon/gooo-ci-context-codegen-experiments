@@ -1,0 +1,92 @@
+{
+  "activity": "ClampNegativeToZero",
+  "argv": [
+    "/private/tmp/gooo-pinned-context-final-20260930",
+    "body-codegen",
+    "--json",
+    "--fill-search",
+    "/Users/alice/meta-go/research/metaprogramming/gooo-ci-context-codegen-experiments/audit/pinned-compact-context-2026-09-30/invocations/warmup-english/plan.search-plan.json",
+    "--activity",
+    "ClampNegativeToZero",
+    "/Users/alice/meta-go/research/metaprogramming/gooo-ci-context-codegen-experiments/audit/pinned-compact-context-2026-09-30/invocations/warmup-english/fixture.gooo.fixture"
+  ],
+  "choice_event_sequences": [
+    1
+  ],
+  "compiler_body_search_receipt_file": "compiler-body-search-receipt.json",
+  "compiler_body_search_receipt_sha256": "5ad7655110e74ce074855244bdb92e587e2c4b3087a5ac262994a445dc0ea156",
+  "compiler_report_file": "compiler-report.json",
+  "compiler_report_sha256": "4916adcaeb91745215c580fc9da87de89dfdda05f82aeea45954c61f223289b4",
+  "event_sequences": [
+    1,
+    2
+  ],
+  "exit_code": 0,
+  "expected_input_token_budget": 512,
+  "expected_input_token_count": 281,
+  "fixture_file": "fixture.gooo.fixture",
+  "fixture_sha256": "4a5870cea7474783c472c2c3c0b8c75641e3a09fc867f3038f94f893fcd80be1",
+  "fixture_source_path": "fixtures/clamp.gooo.fixture",
+  "harness_completed_unix_ns": 1790754455076028000,
+  "harness_watchdog_seconds": 90,
+  "health_event_refs": [
+    {
+      "duration_ms": 1.0777910000001611,
+      "kind": "health_check",
+      "method": "GET",
+      "path": "/health",
+      "request_file": "proxy/requests/0002.request.raw",
+      "request_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "response_file": "proxy/responses/0002.response.raw",
+      "response_sha256": "4a6215a2fd96b3af97b7261b87f7d81ee92c2f06150db4ce49336b3cc3223ec8",
+      "selected_candidate_id": null,
+      "seq": 2,
+      "status": 200
+    }
+  ],
+  "intent_id": "clamp",
+  "invocation_id": "warmup-english",
+  "model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+  "other_event_refs": [],
+  "pending_exchange_drain": {
+    "pending_sequences": [],
+    "settled": true,
+    "timeout_seconds": 13,
+    "upstream_timeout_seconds": 10
+  },
+  "phase": "warmup",
+  "plan_file": "plan.search-plan.json",
+  "plan_sha256": "c4ddcacc2e0443de08d0d2fff7ad2cc73367010d14498054f460c26598ec7809",
+  "plan_source_path": "plans/warmup-english.search-plan.json",
+  "pre_next_call_review": {
+    "issues": [],
+    "passed": true
+  },
+  "process_completed_unix_ns": 1790754455071637000,
+  "provider_exchange_refs": [
+    {
+      "duration_ms": 537.6279999999998,
+      "kind": "laya_choice",
+      "method": "POST",
+      "path": "/v1/systemone",
+      "request_file": "proxy/requests/0001.request.raw",
+      "request_sha256": "7a2095d628fe3776719e82957f26179f0f4d198411b68863768634e11498b745",
+      "response_file": "proxy/responses/0001.response.raw",
+      "response_sha256": "1154d398231adcd836506b803e16069a2fcb7b0a1d18e918423fea6c59c4d881",
+      "selected_candidate_id": "zero",
+      "seq": 1,
+      "status": 200
+    }
+  ],
+  "provider_model": "english",
+  "replicate": 0,
+  "resource_file": "resource.json",
+  "schema": "gooo/pinned-context-invocation/v1",
+  "sequence": 1,
+  "started_unix_ns": 1790754454485144000,
+  "started_utc": "2026-09-30T07:47:34.484735+00:00",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "13b33b962a8e5cc54b25ef23bf5e5026620dd29af69ffb882182f93384821dce",
+  "training_cases_file": "training-cases.json",
+  "treatment": "compact_no_feedback"
+}

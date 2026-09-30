@@ -1,0 +1,15 @@
+{
+  "device": "cpu",
+  "executable": "/private/tmp/meta-ontology-go-laya-venv-20260930/bin/laya-serve",
+  "host": "127.0.0.1",
+  "loaded_models": [
+    "english",
+    "multilingual"
+  ],
+  "owned_by_runner": true,
+  "pid": 12451,
+  "port": 58516,
+  "process_group_id": 12451,
+  "schema": "gooo/pinned-context-owned-process/v1",
+  "started_utc": "2026-09-30T07:47:29.400692+00:00"
+}

@@ -1,0 +1,62 @@
+{
+  "capture_proxy_url": "http://127.0.0.1:58526/v1/systemone",
+  "choice_post_count": 74,
+  "completed_invocations": 74,
+  "completed_utc": "2026-09-30T07:47:48.237998+00:00",
+  "design_sha256": "00da5cae3ee097870a66320ae18cf3fcd510652a369eb8eef31b5e6b4c5fb896",
+  "device": "cpu",
+  "final_pending_exchange_drain": {
+    "owned_laya_server_stopped_before_drain": true,
+    "pending_sequences": [],
+    "settled": true,
+    "timeout_seconds": 13
+  },
+  "health_after": {
+    "device": "cpu",
+    "loaded": [
+      "english",
+      "multilingual"
+    ],
+    "raw_sha256": "6260e460622d6aec066ccefddaeaeac98c854058a5f4bdc9dc134ceeb38e2a81",
+    "revisions": {
+      "english": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+      "multilingual": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+    },
+    "status": "ok"
+  },
+  "health_after_validated": true,
+  "health_before": {
+    "device": "cpu",
+    "loaded": [
+      "english",
+      "multilingual"
+    ],
+    "revisions": {
+      "english": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+      "multilingual": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+    }
+  },
+  "host_logical_cpu_count": 10,
+  "laya_port": 58516,
+  "laya_venv": "/private/tmp/meta-ontology-go-laya-venv-20260930",
+  "laya_version": "0.3.21",
+  "local_model_cache_binding": {
+    "claim_scope": "Local cache content binding only; does not establish remote model authenticity.",
+    "model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+    "schema": "gooo/pinned-context-local-model-cache-binding/v1",
+    "verified_cached_bytes": 2370592926,
+    "verified_cached_files": 15
+  },
+  "model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+  "planned_measured_invocations": 72,
+  "planned_warmups": 2,
+  "preexecution_sha256": "26e01a2a3b05fc670db29953d80a3c0062c8f1f2f9bec46e2032945631692200",
+  "provider_policy": "owned offline loopback-only Laya; credentials unset; cached models only; no downloads",
+  "report_sha256": "1f079748a2ba2d4d75adc4f97b46fc3b090e726f7b587d193b8f1a1c28b29c74",
+  "run_id": "pinned-compact-context-2026-09-30",
+  "runtime_validation_finished_utc": "2026-09-30T07:48:27.538731+00:00",
+  "schema": "gooo/pinned-context-run-metadata/v1",
+  "started_utc": "2026-09-30T07:47:29.398335+00:00",
+  "status": "PARTIAL_CAPTURE_OR_VALIDATION",
+  "threads": 4
+}

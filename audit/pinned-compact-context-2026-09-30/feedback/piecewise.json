@@ -1,0 +1,25 @@
+{
+  "candidate_id": "identity",
+  "observations": [
+    {
+      "actual": -3,
+      "expected": 7,
+      "input": -3,
+      "passed": false
+    },
+    {
+      "actual": -2,
+      "expected": 7,
+      "input": -2,
+      "passed": false
+    },
+    {
+      "actual": -1,
+      "expected": 7,
+      "input": -1,
+      "passed": false
+    }
+  ],
+  "source_digest": "sha256:266a5fa9e097eb3566ba820b7d83561fd4545c771cd5d0aadefd3aa481a2d622",
+  "training_suite_sha256": "sha256:aecdce3f251fd8057137619efdbd18f0fa5132a57e3a66ae6d62952878044f8c"
+}

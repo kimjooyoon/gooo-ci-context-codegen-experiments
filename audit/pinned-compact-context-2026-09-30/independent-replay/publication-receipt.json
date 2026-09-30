@@ -1,0 +1,12 @@
+{
+  "schema": "gooo/independent-replay-publication/v1",
+  "model_calls": 0,
+  "decision": "PASS",
+  "validator_sha256": "4e6fc96cf328c35c380da44d6997d100d96b187ca7cfbee0dd6d1edb6fbbe8da",
+  "original_capture_report_sha256": "1f079748a2ba2d4d75adc4f97b46fc3b090e726f7b587d193b8f1a1c28b29c74",
+  "reports": {
+    "independent-replay-report.json": "94f1f287239a5d882c0b08f6ff0aae619572da5aca2f8cae729d96413b1f8fe7",
+    "independent-replay-report.md": "af09e1d5bc84ced25e67ccaf1b23f0099cb2e96b82e13ddda0c7fa041bacb5a0"
+  },
+  "scope": "Independent model-free compiled-Go replay of 72 measured invocations and 2 separately counted warmups. Finite reused benchmark, not full-domain proof."
+}
