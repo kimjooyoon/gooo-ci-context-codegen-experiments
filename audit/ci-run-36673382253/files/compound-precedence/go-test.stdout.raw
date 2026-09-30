@@ -1,0 +1,13 @@
+=== RUN   TestKnownBadTrainingProbe
+    probe_test.go:24: PROBE_ACTUAL:{"index":0,"input":-1,"expected":100,"actual":-1,"passed":false}
+    probe_test.go:25: PROBE_MISMATCH:{"index":0,"input":-1,"expected":100,"actual":-1,"passed":false}
+    probe_test.go:24: PROBE_ACTUAL:{"index":1,"input":10,"expected":100,"actual":10,"passed":false}
+    probe_test.go:25: PROBE_MISMATCH:{"index":1,"input":10,"expected":100,"actual":10,"passed":false}
+    probe_test.go:24: PROBE_ACTUAL:{"index":2,"input":11,"expected":100,"actual":11,"passed":false}
+    probe_test.go:25: PROBE_MISMATCH:{"index":2,"input":11,"expected":100,"actual":11,"passed":false}
+    probe_test.go:24: PROBE_ACTUAL:{"index":3,"input":13,"expected":100,"actual":13,"passed":false}
+    probe_test.go:25: PROBE_MISMATCH:{"index":3,"input":13,"expected":100,"actual":13,"passed":false}
+--- FAIL: TestKnownBadTrainingProbe (0.00s)
+FAIL
+FAIL	ci-context-probe	0.002s
+FAIL

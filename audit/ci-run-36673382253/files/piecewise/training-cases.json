@@ -1,0 +1,14 @@
+[
+  {
+    "input": -3,
+    "expected": 7
+  },
+  {
+    "input": -2,
+    "expected": 7
+  },
+  {
+    "input": -1,
+    "expected": 7
+  }
+]

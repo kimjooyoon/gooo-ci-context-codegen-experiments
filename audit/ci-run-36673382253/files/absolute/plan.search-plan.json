@@ -1,0 +1,34 @@
+{
+  "schema": "gooo/body-codegen-ir-search-plan/v1",
+  "intent": "For signed int64, negate negative values and preserve nonnegative values; arithmetic wraps in two's-complement int64, so MinInt64 remains MinInt64.",
+  "hole_id": "magnitude",
+  "candidates": [
+    {
+      "id": "identity",
+      "expression": "input"
+    },
+    {
+      "id": "zero",
+      "expression": "0"
+    },
+    {
+      "id": "negate",
+      "expression": "-input"
+    }
+  ],
+  "test_cases": [
+    {
+      "input": -3,
+      "expected": 3
+    },
+    {
+      "input": -2,
+      "expected": 2
+    },
+    {
+      "input": -1,
+      "expected": 1
+    }
+  ],
+  "max_attempts": 1
+}

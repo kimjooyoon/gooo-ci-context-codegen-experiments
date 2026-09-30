@@ -1,0 +1,31 @@
+{
+  "schema": "gooo/downloaded-ci-artifact-record/v1",
+  "repository": "https://github.com/kimjooyoon/gooo-ci-context-codegen-experiments",
+  "workflow_run_id": 36673382253,
+  "workflow_run_url": "https://github.com/kimjooyoon/gooo-ci-context-codegen-experiments/actions/runs/36673382253",
+  "workflow_commit": "6aadd3d6a9e56c64f65941d9a4a8a0e5955b0c51",
+  "workflow_name": "Gooo CI failure-context probes",
+  "workflow_conclusion": "success",
+  "compiler_revision": "29d44bc778d85aee03b9af500bd83dc98f368189",
+  "artifact_id": 11078724047,
+  "artifact_name": "ci-context-probe-6aadd3d6a9e56c64f65941d9a4a8a0e5955b0c51",
+  "artifact_bytes": 65107,
+  "github_reported_archive_sha256": "48ae86337892d44b0f0e41bdf31ff033fd4052a265d5a4bc0f0a17f33ba1667a",
+  "downloaded_archive": "github-artifact.zip",
+  "extracted_directory": "files",
+  "all_plans_training_only": true,
+  "model_calls": 0,
+  "training_case_count": 13,
+  "expected_mismatch_count": 13,
+  "intent_results": {
+    "clamp": {"training_cases": 3, "mismatches": 3},
+    "absolute": {"training_cases": 3, "mismatches": 3},
+    "piecewise": {"training_cases": 3, "mismatches": 3},
+    "compound-precedence": {"training_cases": 4, "mismatches": 4}
+  },
+  "notes": [
+    "The workflow builds the compiler at the exact pinned revision and records the compiled binary SHA-256.",
+    "The expected Go test exit status is captured as evidence and normalized to a successful workflow only after artifact checks pass.",
+    "All behavioral denominators are finite training cases; no held-out vectors are in this artifact."
+  ]
+}

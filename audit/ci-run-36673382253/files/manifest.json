@@ -1,0 +1,92 @@
+{
+  "artifact_policy": "Persist raw body-codegen stdout/stderr, emitted Go, raw Go test stdout/stderr, training-only fixture and plan copies, and hash-bound receipts. Do not include any held-out vectors.",
+  "compiler_binary_sha256_local_reference": "f9f33b86c2114c1adeba01319fddb7d48f666e739aef768bbb5a580adfb7cda9",
+  "compiler_repository": "https://github.com/kimjooyoon/meta-ontology-go",
+  "compiler_revision": "29d44bc778d85aee03b9af500bd83dc98f368189",
+  "experiment_id": "gooo-ci-context-codegen-experiments",
+  "future_selection_treatments": [
+    {
+      "definition": "Use original intent and training suite without external failure context.",
+      "id": "no_context"
+    },
+    {
+      "definition": "Append a bounded training-failure summary to intent only after exact compiler, fixture, activity, plan, and emitted-source provenance matches.",
+      "id": "exact_matching_failed_ci_context"
+    },
+    {
+      "definition": "Reject context before provider dispatch whenever compiler, fixture, activity, plan, or emitted-source provenance differs.",
+      "id": "rejected_stale_source_context"
+    }
+  ],
+  "intents": [
+    {
+      "activity": "ClampNegativeToZero",
+      "expected_identity_actuals": [
+        -3,
+        -2,
+        -1
+      ],
+      "expected_mismatch_count": 3,
+      "fixture": "fixtures/clamp.gooo.fixture",
+      "id": "clamp",
+      "plan": "plans/clamp.search-plan.json",
+      "training_case_count": 3
+    },
+    {
+      "activity": "AbsWrapInt64",
+      "expected_identity_actuals": [
+        -3,
+        -2,
+        -1
+      ],
+      "expected_mismatch_count": 3,
+      "fixture": "fixtures/absolute.gooo.fixture",
+      "id": "absolute",
+      "plan": "plans/absolute.search-plan.json",
+      "training_case_count": 3
+    },
+    {
+      "activity": "NegativeToSeven",
+      "expected_identity_actuals": [
+        -3,
+        -2,
+        -1
+      ],
+      "expected_mismatch_count": 3,
+      "fixture": "fixtures/piecewise.gooo.fixture",
+      "id": "piecewise",
+      "plan": "plans/piecewise.search-plan.json",
+      "training_case_count": 3
+    },
+    {
+      "activity": "CompoundPrecedence",
+      "expected_identity_actuals": [
+        -1,
+        10,
+        11,
+        13
+      ],
+      "expected_mismatch_count": 4,
+      "fixture": "fixtures/compound-precedence.gooo.fixture",
+      "id": "compound-precedence",
+      "plan": "plans/compound-precedence.search-plan.json",
+      "training_case_count": 4
+    }
+  ],
+  "probe_policy": {
+    "expected_test_exit_code": 1,
+    "max_attempts": 1,
+    "selected_candidate_id": "identity",
+    "selection": "no-provider deterministic declared candidate order",
+    "workflow_passes_when": "the emitted source compiles, all training observations match the expected known-bad outputs, and every test mismatch is exactly the declared training mismatch"
+  },
+  "provider_policy": "no_laya_endpoint_no_api_key_no_model_download",
+  "schema": "gooo/ci-context-codegen-experiment/v1",
+  "scope_limits": [
+    "One deterministic candidate and one bounded attempt per intent.",
+    "Finite training behavior only; no full-domain correctness claim.",
+    "This workflow validates an external Go test probe and evidence binding; internal Gooo evaluation is not treated as external CI authority.",
+    "No model-selection treatment is executed in this phase."
+  ],
+  "status": "known_bad_training_probes_ready"
+}

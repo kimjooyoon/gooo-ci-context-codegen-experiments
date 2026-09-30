@@ -1,0 +1,85 @@
+{
+  "binding": {
+    "activity": "AbsWrapInt64",
+    "activity_id": "bodycodegen://activity/abs-wrap-int64",
+    "candidate_expression": "input",
+    "candidate_id": "identity",
+    "compiler_binary_sha256": "4fa2362f0c85dd29efd02fca29b22313fa5f75a4638d64126607828f27b8176b",
+    "compiler_generated_digest": "sha256:6f275b438ba66832f18f4acc9e3f4f82d99b4cf96f6c2ef2aef783a2ee2c2a45",
+    "compiler_program_digest": "sha256:b8ba5c3c3d8948e7dff58a6cf697ebfd4fbcfc53fb35146c695b7fbbead563f7",
+    "compiler_revision": "29d44bc778d85aee03b9af500bd83dc98f368189",
+    "compiler_source_digest": "sha256:dac34df94db0d3b8f26dfb6f3a1a08c6d0a300a78b77b1b5e9f8f12a068a0318",
+    "fixture_sha256": "28335004b1a83bbf2e0ddebf60665ff33bad4c0891affad9f5ae63bda7749463",
+    "generated_source_sha256": "6f275b438ba66832f18f4acc9e3f4f82d99b4cf96f6c2ef2aef783a2ee2c2a45",
+    "intent_id": "absolute",
+    "plan_sha256": "cd40d40cf58088af9516a13124d2a410086ed656520fc5df63146cd0f4f6e889",
+    "test_harness_sha256": "bdde24bf1b980712868166f08bc2cba978a90a32bd492d9f0021b51b795c86f3",
+    "test_output_sha256": "36b69e855390f0378d416723d1be8b0b044466a35d02d293c5cc0e01fa0c2bec",
+    "training_suite_sha256": "3e7113aec5d34913f551f244e6e307c9e8fd6a5ee1c5c5cc29042d4f0c574351"
+  },
+  "binding_sha256": "f021f3df411e3762effcc319ebc1549546f65a80f2691b3d254b2eb57547e425",
+  "cli_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "cli_stdout_sha256": "abe8f6ea44bc98156c94d453cda137c65b4d151b163a68bb6d581c8e691e9f35",
+  "expected_probe_exit_code": 1,
+  "go_test_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "go_test_stdout_sha256": "36b69e855390f0378d416723d1be8b0b044466a35d02d293c5cc0e01fa0c2bec",
+  "note": "External Go test evidence is finite to this saved training suite; it is not a full-domain correctness claim.",
+  "probe_exit_code": 1,
+  "raw_mismatch_records": [
+    {
+      "actual": -3,
+      "expected": 3,
+      "index": 0,
+      "input": -3,
+      "passed": false
+    },
+    {
+      "actual": -2,
+      "expected": 2,
+      "index": 1,
+      "input": -2,
+      "passed": false
+    },
+    {
+      "actual": -1,
+      "expected": 1,
+      "index": 2,
+      "input": -1,
+      "passed": false
+    }
+  ],
+  "result": "EXPECTED_TRAINING_MISMATCHES_REPRODUCED",
+  "schema": "gooo/ci-context-failure-evidence/v1",
+  "timing_unix_ns": {
+    "body_codegen_finished": 1790746014091949932,
+    "body_codegen_started": 1790746014086270120,
+    "go_test_finished": 1790746014273807798,
+    "go_test_started": 1790746014093415479
+  },
+  "training_case_count": 3,
+  "training_mismatch_count": 3,
+  "training_observations": [
+    {
+      "actual": -3,
+      "expected": 3,
+      "index": 0,
+      "input": -3,
+      "passed": false
+    },
+    {
+      "actual": -2,
+      "expected": 2,
+      "index": 1,
+      "input": -2,
+      "passed": false
+    },
+    {
+      "actual": -1,
+      "expected": 1,
+      "index": 2,
+      "input": -1,
+      "passed": false
+    }
+  ],
+  "training_pass_count": 0
+}

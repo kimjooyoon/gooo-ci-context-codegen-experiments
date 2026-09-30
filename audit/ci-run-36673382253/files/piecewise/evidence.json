@@ -1,0 +1,85 @@
+{
+  "binding": {
+    "activity": "NegativeToSeven",
+    "activity_id": "bodycodegen://activity/negative-to-seven",
+    "candidate_expression": "input",
+    "candidate_id": "identity",
+    "compiler_binary_sha256": "4fa2362f0c85dd29efd02fca29b22313fa5f75a4638d64126607828f27b8176b",
+    "compiler_generated_digest": "sha256:2f11f7666e17bbb4bd002ba22253388459afe4164739398246c2110820c26285",
+    "compiler_program_digest": "sha256:b8ba5c3c3d8948e7dff58a6cf697ebfd4fbcfc53fb35146c695b7fbbead563f7",
+    "compiler_revision": "29d44bc778d85aee03b9af500bd83dc98f368189",
+    "compiler_source_digest": "sha256:886717fde289c13fca4ec2f14f455356bea5019dc72faad273bdc0a26edd6e4b",
+    "fixture_sha256": "266a5fa9e097eb3566ba820b7d83561fd4545c771cd5d0aadefd3aa481a2d622",
+    "generated_source_sha256": "2f11f7666e17bbb4bd002ba22253388459afe4164739398246c2110820c26285",
+    "intent_id": "piecewise",
+    "plan_sha256": "81931f13b925a2c22ef8c5b036e0b6a7e6f8b2b596cf94c70be8ba30c7efeb52",
+    "test_harness_sha256": "8c757955a148c6cf548538222aa7e9f6192f5449c406dfe8cfaf0954d0675249",
+    "test_output_sha256": "c66fed7434f921b8730961898e64f0c2b3fbab39bd6c4befe5657eb711c78a7d",
+    "training_suite_sha256": "07d8ea76a698e5e0dfa05ae0ab3b4e870ae29347a3a77fea131e704475dd8ae9"
+  },
+  "binding_sha256": "6b2b3f44c2d7e4a8d8ff6f5f6d63bb9c0630b8a7b617dbabe67e67f0015cb7b6",
+  "cli_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "cli_stdout_sha256": "a724192c2b21e7d5d5c85da757dbf4f6bf6e484cd2adeb96a0e402474a5d8070",
+  "expected_probe_exit_code": 1,
+  "go_test_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "go_test_stdout_sha256": "c66fed7434f921b8730961898e64f0c2b3fbab39bd6c4befe5657eb711c78a7d",
+  "note": "External Go test evidence is finite to this saved training suite; it is not a full-domain correctness claim.",
+  "probe_exit_code": 1,
+  "raw_mismatch_records": [
+    {
+      "actual": -3,
+      "expected": 7,
+      "index": 0,
+      "input": -3,
+      "passed": false
+    },
+    {
+      "actual": -2,
+      "expected": 7,
+      "index": 1,
+      "input": -2,
+      "passed": false
+    },
+    {
+      "actual": -1,
+      "expected": 7,
+      "index": 2,
+      "input": -1,
+      "passed": false
+    }
+  ],
+  "result": "EXPECTED_TRAINING_MISMATCHES_REPRODUCED",
+  "schema": "gooo/ci-context-failure-evidence/v1",
+  "timing_unix_ns": {
+    "body_codegen_finished": 1790746014279961683,
+    "body_codegen_started": 1790746014274825592,
+    "go_test_finished": 1790746014463137184,
+    "go_test_started": 1790746014281554940
+  },
+  "training_case_count": 3,
+  "training_mismatch_count": 3,
+  "training_observations": [
+    {
+      "actual": -3,
+      "expected": 7,
+      "index": 0,
+      "input": -3,
+      "passed": false
+    },
+    {
+      "actual": -2,
+      "expected": 7,
+      "index": 1,
+      "input": -2,
+      "passed": false
+    },
+    {
+      "actual": -1,
+      "expected": 7,
+      "index": 2,
+      "input": -1,
+      "passed": false
+    }
+  ],
+  "training_pass_count": 0
+}

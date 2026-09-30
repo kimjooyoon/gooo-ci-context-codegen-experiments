@@ -1,0 +1,47 @@
+{
+  "compiler_binary_sha256": "4fa2362f0c85dd29efd02fca29b22313fa5f75a4638d64126607828f27b8176b",
+  "compiler_repository": "https://github.com/kimjooyoon/meta-ontology-go",
+  "compiler_revision": "29d44bc778d85aee03b9af500bd83dc98f368189",
+  "elapsed_ns": 8345475308,
+  "expected_probe_mismatch_total": 13,
+  "finished_at_utc": "2026-09-30T05:26:54.652825+00:00",
+  "go_version": "go version go1.27.0 linux/amd64",
+  "intent_count": 4,
+  "intents": [
+    {
+      "binding_sha256": "0363d9c4c1b5be0ac13bfb21c3cc6c672782ca8ef7179b9c4045d5bc5ad642cd",
+      "evidence_path": "clamp/evidence.json",
+      "intent_id": "clamp",
+      "mismatch_count": 3,
+      "training_case_count": 3
+    },
+    {
+      "binding_sha256": "f021f3df411e3762effcc319ebc1549546f65a80f2691b3d254b2eb57547e425",
+      "evidence_path": "absolute/evidence.json",
+      "intent_id": "absolute",
+      "mismatch_count": 3,
+      "training_case_count": 3
+    },
+    {
+      "binding_sha256": "6b2b3f44c2d7e4a8d8ff6f5f6d63bb9c0630b8a7b617dbabe67e67f0015cb7b6",
+      "evidence_path": "piecewise/evidence.json",
+      "intent_id": "piecewise",
+      "mismatch_count": 3,
+      "training_case_count": 3
+    },
+    {
+      "binding_sha256": "ee5c5a6f5b90255974864e67bca94e0efc5476dacf5981cd72e5609e39773e61",
+      "evidence_path": "compound-precedence/evidence.json",
+      "intent_id": "compound-precedence",
+      "mismatch_count": 4,
+      "training_case_count": 4
+    }
+  ],
+  "model_called": false,
+  "provider_api_key_configured": false,
+  "provider_endpoint_configured": false,
+  "schema": "gooo/ci-context-probe-run/v1",
+  "started_at_utc": "2026-09-30T05:26:46.307372+00:00",
+  "status": "PASS_EXPECTED_FAILURE_EVIDENCE",
+  "training_only": true
+}
