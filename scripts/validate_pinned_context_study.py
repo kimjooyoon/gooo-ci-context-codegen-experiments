@@ -281,7 +281,7 @@ def verify_design(run_dir: Path) -> tuple[dict, dict, dict, dict]:
 
 
 def validate_preflight(run_dir: Path, design: dict, rows_by_id: dict[str, dict],
-                       feedback_by_intent: dict[str, dict]) -> dict:
+                       feedback_by_intent: dict[str, dict], output_dir: Path) -> dict:
     preflight_rel = design.get("protocol_preflight", {}).get("path")
     require(isinstance(preflight_rel, str), "frozen design has no MOCK protocol-preflight path")
     summary_path = contained_file(run_dir, preflight_rel)
@@ -290,10 +290,13 @@ def validate_preflight(run_dir: Path, design: dict, rows_by_id: dict[str, dict],
     require(summary.get("schema") == "gooo/pinned-context-protocol-preflight/v1"
             and summary.get("status") == "PASS_CACHED_TOKENIZERS_NO_MODEL_INFERENCE"
             and summary.get("mock_choice_posts") == 24 and summary.get("actual_laya_calls") == 0
-            and summary.get("unique_intent_arm_model_templates") == 24,
+            and summary.get("provider_calls") == 0 and summary.get("mock_health_checks") == 24
+            and summary.get("unique_intent_arm_model_templates") == 24
+            and summary.get("model_revisions") == {model: EXPECTED_MODEL_REVISION for model in MODELS},
             "protocol preflight does not bind 24 local MOCK templates with zero model calls")
     require(design["protocol_preflight"].get("mock_choice_posts") == 24
             and design["protocol_preflight"].get("actual_laya_calls") == 0
+            and design["protocol_preflight"].get("mock_health_checks") == 24
             and design["protocol_preflight"].get("unique_intent_arm_model_templates") == 24,
             "design summary has incorrect MOCK preflight counts")
     mock_events = summary.get("mock_events", [])
@@ -306,6 +309,7 @@ def validate_preflight(run_dir: Path, design: dict, rows_by_id: dict[str, dict],
     snapshot_events = mock_snapshot.get("events", [])
     require(len(mock_events) == len(snapshot_events), "preflight event index and mock snapshot counts differ")
     template_events = []
+    typed_inputs = []
     event_keys = set()
     for event in mock_events:
         require(event.get("counted_as_laya_call") is False and event.get("response_status") == 200,
@@ -336,6 +340,13 @@ def validate_preflight(run_dir: Path, design: dict, rows_by_id: dict[str, dict],
             state = json.loads(state_wire)
             plan = json.loads(contained_file(DESIGN_DIR, row["plan_path"]).read_bytes())
             verify_model_state(state, row, plan, feedback_by_intent[row["intent_id"]])
+            expected_criteria = {candidate["id"]: "Try this exact expression: " + candidate["expression"]
+                                 for candidate in state["remaining_candidates"]}
+            question_map = request.get("questions", {})
+            require(len(question_map) == 1 and next(iter(question_map.values())).get("type") == "choice"
+                    and next(iter(question_map.values())).get("criteria") == expected_criteria,
+                    "MOCK Laya question options differ from typed candidate order")
+            typed_inputs.append(typed_input_from_wire(event["invocation_id"], request, state))
         else:
             require(event.get("kind") == "health_check" and event.get("method") == "GET"
                     and event.get("path") == "/health" and request_raw == b"",
@@ -363,6 +374,58 @@ def validate_preflight(run_dir: Path, design: dict, rows_by_id: dict[str, dict],
             event = event_by_template[(row["intent_id"], row["treatment"], row["provider_model"])]
             require(event.get("request_sha256") == row.get("protocol_preflight_request_sha256"),
                     f"{row['invocation_id']}: frozen plan preflight request hash mismatch")
+
+    exchange_records = summary.get("exchange_records", [])
+    require(len(exchange_records) == 24, "MOCK preflight omitted one or more compiler request receipts")
+    record_by_template = {}
+    for record in exchange_records:
+        key = (record.get("intent_id"), record.get("treatment"), record.get("provider_model"))
+        require(key in expected_templates and key not in record_by_template,
+                "MOCK compiler receipt has an unexpected or duplicate factorial template")
+        event = event_by_template[key]
+        row = rows_by_id[event["invocation_id"]]
+        require(record.get("representative_invocation_id") == event.get("invocation_id")
+                and record.get("plan_sha256") == row.get("plan_sha256")
+                and record.get("compiler_exit_code") == 0
+                and record.get("requested_provider_model") == record.get("provider_model")
+                and record.get("event", {}).get("request_sha256") == event.get("request_sha256"),
+                "MOCK compiler receipt does not bind its representative plan and request")
+        stdout = contained_file(attempt_dir, record["compiler_stdout_file"]).read_bytes()
+        stderr = contained_file(attempt_dir, record["compiler_stderr_file"]).read_bytes()
+        require(sha256(stdout) == record.get("compiler_stdout_sha256")
+                and sha256(stderr) == record.get("compiler_stderr_sha256"),
+                "MOCK compiler stdout/stderr differs from the saved receipt hashes")
+        payload = json.loads(stdout)
+        attempts = payload.get("report", {}).get("body_search", {}).get("attempts", [])
+        laya = [attempt.get("decision", {}) for attempt in attempts if attempt.get("decision", {}).get("mode") == "laya"]
+        require(len(laya) == 1 and laya[0].get("requested_provider_model") == row["provider_model"]
+                and laya[0].get("model_revision") == EXPECTED_MODEL_REVISION,
+                "MOCK compiler output lacks a model/revision-bound Laya receipt")
+        require(record.get("receipt_request_sha256") == laya[0].get("request_sha256")
+                and record.get("reconstructed_typed_request_sha256") == laya[0].get("request_sha256"),
+                "MOCK compiler typed-request digest summary differs from its receipt")
+        record_by_template[key] = record
+    go_bin = shutil.which("go")
+    require(go_bin is not None, "Go executable is unavailable for typed-request reconstruction")
+    go_env = os.environ.copy()
+    go_env.update({"GOTOOLCHAIN": "local", "GOPROXY": "off", "GOSUMDB": "off", "GOWORK": "off",
+                   "GOOO_LAYA_URL": "", "GOOO_LAYA_API_KEY": "", "HF_HUB_OFFLINE": "1",
+                   "TRANSFORMERS_OFFLINE": "1", "HF_DATASETS_OFFLINE": "1", "HF_HUB_DISABLE_TELEMETRY": "1"})
+    version = subprocess.run([go_bin, "version"], env=go_env, capture_output=True, text=True,
+                             timeout=30, check=True).stdout.strip()
+    require(EXPECTED_GO_VERSION in version, f"typed request reconstruction requires {EXPECTED_GO_VERSION}; got {version}")
+    reconstructed = typed_request_hashes(go_bin, output_dir, go_env, typed_inputs,
+                                         helper_name="mock-preflight-typed-request-hasher")
+    for record in exchange_records:
+        key = (record["intent_id"], record["treatment"], record["provider_model"])
+        inv_id = record["representative_invocation_id"]
+        actual = reconstructed[inv_id]
+        event = record["event"]
+        require(record.get("reconstructed_typed_request_sha256") == actual
+                and record.get("receipt_request_sha256") == actual,
+                f"{inv_id}: independently reconstructed MOCK typed-request hash differs from receipt")
+        require(event.get("token_budget", {}).get("request_sha256") == event.get("request_sha256"),
+                f"{inv_id}: token-budget preflight is not bound to the raw MOCK request")
     token_rows = summary.get("token_budget_rows", [])
     require(len(token_rows) == 24 and all(
         isinstance(row.get("token_count_exact_sequence"), int)
@@ -370,12 +433,17 @@ def validate_preflight(run_dir: Path, design: dict, rows_by_id: dict[str, dict],
         and row["token_count_exact_sequence"] <= row["model_max_len"]
         and row.get("state_truncated") is False for row in token_rows),
         "cached tokenizer preflight is incomplete, over budget, or truncated")
+    require({row.get("request_sha256") for row in token_rows} ==
+            {event.get("request_sha256") for event in template_events}
+            and all(row.get("tokenizer_revision") == EXPECTED_MODEL_REVISION for row in token_rows),
+            "tokenizer result rows do not bind all raw request hashes and the pinned revision")
     require(summary.get("tokenizer_output_sha256") == sha256((attempt_dir / "token-budget.json").read_bytes())
             and summary.get("tokenizer_input_sha256") == sha256((attempt_dir / "tokenizer-input.json").read_bytes()),
             "offline tokenizer preflight file hashes do not match its summary")
     return {"mock_choice_posts": len(template_events), "health_gets": len(mock_events) - len(template_events),
             "actual_laya_calls": 0, "unique_templates": len(unique_templates),
-            "token_budget_rows": len(token_rows)}
+            "token_budget_rows": len(token_rows), "mock_compiler_receipts": len(exchange_records),
+            "typed_request_hashes_verified": len(reconstructed), "provider_calls": 0}
 
 
 def verify_model_state(state: dict, row: dict, plan: dict, feedback: dict | None) -> None:
@@ -611,6 +679,22 @@ def verify_invocation_index(run_dir: Path, design: dict, plans: dict[str, dict],
                     and ref.get("request_sha256") == event.get("request_sha256")
                     and ref.get("response_sha256") == event.get("response_sha256"),
                     f"{inv_id}: provider exchange reference differs from raw proxy event")
+        health_refs = row.get("health_event_refs", [])
+        actual_health = sorted([event for event in events_by_id.get(inv_id, [])
+                                if event.get("kind") == "health_check"],
+                               key=lambda event: event["seq"])
+        require(len(health_refs) == len(actual_health)
+                and all(ref.get("seq") == event.get("seq")
+                        and ref.get("request_file") == event.get("request_file")
+                        and ref.get("response_file") == event.get("response_file")
+                        and ref.get("request_sha256") == event.get("request_sha256")
+                        and ref.get("response_sha256") == event.get("response_sha256")
+                        for ref, event in zip(health_refs, actual_health)),
+                f"{inv_id}: invocation index health references differ from raw proxy events")
+        cli = row["cli"]
+        resource_path = contained_file(run_dir, cli["resource_path"])
+        require(sha256(resource_path.read_bytes()) == cli.get("resource_sha256"),
+                f"{inv_id}: invocation index resource sample path/hash mismatch")
         report_ref = row.get("compiler_report", {})
         report_rel = report_ref.get("path")
         stdout_path = contained_file(run_dir, row["cli"]["stdout_path"])
@@ -645,15 +729,33 @@ def validate_run(run_dir: Path, output_dir: Path, required_go: str | None) -> di
     design, provenance, bridge, plans = verify_design(run_dir)
     manifest = read_json(ROOT / "manifest.json")
     feedback = verify_source_ci_and_feedback(manifest, design, run_dir)
-    preflight = validate_preflight(run_dir, design, plans, feedback)
+    preflight = validate_preflight(run_dir, design, plans, feedback, output_dir)
 
     preexecution = read_json(run_dir / "preexecution.json")
     metadata = read_json(run_dir / "run-metadata.json")
     capture_status = read_json(run_dir / "capture-status.json")
+    preexecution_raw = (run_dir / "preexecution.json").read_bytes()
+    cache_binding = read_json(contained_file(run_dir, design["local_model_cache_binding"]))
+    study_code = preexecution.get("study_code_provenance", {})
     require(preexecution.get("design_sha256") == sha256((run_dir / "study-design.json").read_bytes())
             and preexecution.get("holdout_vectors_loaded") is False
             and preexecution.get("laya_version") == EXPECTED_LAYA_VERSION,
             "preexecution receipt does not bind the frozen plan and offline runtime")
+    require(metadata.get("preexecution_sha256") == sha256(preexecution_raw),
+            "run metadata does not bind the exact preexecution receipt bytes")
+    require(study_code.get("runner_script_sha256") == sha256((ROOT / "scripts" / "run_pinned_context_study.py").read_bytes())
+            and study_code.get("preparation_script_sha256") == sha256((ROOT / "scripts" / "prepare_pinned_context_study.py").read_bytes())
+            and isinstance(study_code.get("public_frozen_checkpoint_revision"), str)
+            and len(study_code["public_frozen_checkpoint_revision"]) == 40
+            and all(char in "0123456789abcdef" for char in study_code["public_frozen_checkpoint_revision"]),
+            "preexecution receipt does not bind the raw-capture runner, preparation script, and public checkpoint")
+    model_cache_receipt = preexecution.get("local_model_cache_binding", {})
+    require(model_cache_receipt.get("schema") == cache_binding.get("schema")
+            and model_cache_receipt.get("model_revision") == EXPECTED_MODEL_REVISION
+            and model_cache_receipt.get("verified_cached_files") == len(cache_binding.get("cached_snapshot_files", []))
+            and model_cache_receipt.get("verified_cached_bytes") == cache_binding.get("cached_snapshot_total_bytes")
+            and model_cache_receipt.get("claim_scope") == cache_binding.get("claim_scope"),
+            "preexecution receipt does not bind the frozen local model-cache inventory")
     compiler = preexecution.get("compiler", {})
     require(compiler.get("sha256") == EXPECTED_BINARY_SHA256
             and compiler.get("source_revision") == EXPECTED_SOURCE_REVISION
@@ -735,6 +837,13 @@ def validate_run(run_dir: Path, output_dir: Path, required_go: str | None) -> di
             "capture does not contain 74 expected Laya choice POSTs")
     require(all(event.get("method") == "GET" and event.get("path") == "/health"
                 for event in health_events), "capture contains an unexpected non-choice provider event")
+    health_by_id: dict[str, list[dict]] = defaultdict(list)
+    for event in health_events:
+        health_by_id[event.get("invocation_id")].append(event)
+    require(len(health_events) == 74 and set(health_by_id) == set(plans)
+            and all(len(health_by_id[inv_id]) == 1 and health_by_id[inv_id][0].get("status") == 200
+                    for inv_id in plans),
+            "capture does not contain exactly one successful resolver health check per planned invocation")
     index_by_id = verify_invocation_index(run_dir, design, plans, records_by_id, events)
     events_by_id: dict[str, list[dict]] = defaultdict(list)
     privacy_results = []
@@ -745,16 +854,28 @@ def validate_run(run_dir: Path, output_dir: Path, required_go: str | None) -> di
     invocation_results = []
     independent_replays = []
     group_accumulators: dict[tuple[str, str], dict[str, Any]] = {}
-    for intent_id in INTENTS:
-        for treatment in TREATMENTS:
-            for model in MODELS:
-                group_accumulators[(treatment, model)] = {
-                    "planned": 12, "captured_posts": 0, "cli_successes": 0,
-                    "request_route_passed": 0, "reply_route_passed": 0, "receipt_route_passed": 0,
-                    "typed_digest_passed": 0, "feedback_passed": 0,
-                    "compiled": 0, "validated": 0, "training": Counter(), "holdout": Counter(),
-                    "discriminating": Counter(),
-                }
+    for treatment in TREATMENTS:
+        for model in MODELS:
+            group_accumulators[(treatment, model)] = {
+                "planned": 12, "captured_posts": 0, "cli_successes": 0,
+                "request_route_passed": 0, "reply_route_passed": 0, "receipt_route_passed": 0,
+                "typed_digest_passed": 0, "feedback_passed": 0,
+                "compiled": 0, "validated": 0, "training": Counter(), "holdout": Counter(),
+                "discriminating": Counter(),
+            }
+            accumulator = group_accumulators[(treatment, model)]
+            for suite_name in ("training", "holdout"):
+                for intent_id in INTENTS:
+                    oracle = oracles[intent_id]
+                    expected = oracle[suite_name]["expected"]
+                    candidate_vectors = {key: value[suite_name]
+                                         for key, value in oracle["candidate_outputs"].items()}
+                    discriminating = sum(
+                        len({vector[index] for vector in candidate_vectors.values()}) > 1
+                        for index in range(len(expected)))
+                    accumulator[suite_name]["all_cases_planned"] += 3 * len(expected)
+                    accumulator[suite_name]["candidate_discriminating_cases_planned"] += 3 * discriminating
+                    accumulator[suite_name]["candidate_invariant_cases_planned"] += 3 * (len(expected) - discriminating)
     for event in events:
         event_id = event.get("invocation_id")
         if event_id not in plans:
@@ -1090,11 +1211,13 @@ def validate_run(run_dir: Path, output_dir: Path, required_go: str | None) -> di
                 "independently_validated_invocations": values["validated"],
                 "compiled_finite_scores": {
                     suite: {
-                        "all_cases": {"passed": values[suite]["all_cases_passed"], "total": values[suite]["all_cases_total"]},
-                        "candidate_discriminating_cases": {"passed": values[suite]["candidate_discriminating_cases_passed"],
-                                                           "total": values[suite]["candidate_discriminating_cases_total"]},
-                        "candidate_invariant_cases": {"passed": values[suite]["candidate_invariant_cases_passed"],
-                                                       "total": values[suite]["candidate_invariant_cases_total"]},
+                        scope: {
+                            "passed": values[suite][scope + "_passed"],
+                            "observed_total": values[suite][scope + "_total"],
+                            "planned_total": values[suite][scope + "_planned"],
+                            "unknown_total": values[suite][scope + "_planned"] - values[suite][scope + "_total"],
+                        }
+                        for scope in ("all_cases", "candidate_discriminating_cases", "candidate_invariant_cases")
                     } for suite in ("training", "holdout")
                 },
             })
@@ -1165,7 +1288,7 @@ def validate_run(run_dir: Path, output_dir: Path, required_go: str | None) -> di
             for scope in ("all_cases", "candidate_discriminating_cases", "candidate_invariant_cases"):
                 actual = runner_scores.get(suite_name, {}).get(scope)
                 expected = own["compiled_finite_scores"][suite_name][scope]
-                if actual is not None and actual != expected:
+                if actual != expected:
                     issues.append(f"{own['treatment']}/{own['provider_model']}: runner {suite_name}/{scope} aggregate differs from independent compile")
     warmup_rows = [row for row in invocation_results if row["phase"] == "warmup"]
     report_out = {
@@ -1207,7 +1330,7 @@ def validate_run(run_dir: Path, output_dir: Path, required_go: str | None) -> di
     for group in group_results:
         training = group["compiled_finite_scores"]["training"]["all_cases"]
         holdout = group["compiled_finite_scores"]["holdout"]["all_cases"]
-        lines.append(f"| {group['treatment']} | {group['provider_model']} | {group['planned_invocations']} | {group['captured_choice_posts']} | {group['provider_route_verified']['passed']}/{group['provider_route_verified']['total']} | {group['provider_receipt_verified']['passed']}/{group['provider_receipt_verified']['total']} | {group['typed_request_digest_verified']['passed']}/{group['typed_request_digest_verified']['total']} | {group['source_feedback_verified']['passed']}/{group['source_feedback_verified']['total']} | {group['independent_compiled_invocations']}/12 | {training['passed']}/{training['total']} | {holdout['passed']}/{holdout['total']} |")
+        lines.append(f"| {group['treatment']} | {group['provider_model']} | {group['planned_invocations']} | {group['captured_choice_posts']} | {group['provider_route_verified']['passed']}/{group['provider_route_verified']['total']} | {group['provider_receipt_verified']['passed']}/{group['provider_receipt_verified']['total']} | {group['typed_request_digest_verified']['passed']}/{group['typed_request_digest_verified']['total']} | {group['source_feedback_verified']['passed']}/{group['source_feedback_verified']['total']} | {group['independent_compiled_invocations']}/12 | {training['passed']}/{training['planned_total']} (observed {training['observed_total']}, unknown {training['unknown_total']}) | {holdout['passed']}/{holdout['planned_total']} (observed {holdout['observed_total']}, unknown {holdout['unknown_total']}) |")
     lines.extend(["", f"MOCK preflight: {preflight['mock_choice_posts']} choice POST templates, {preflight['actual_laya_calls']} actual Laya calls.",
                   f"Privacy-scanned raw provider requests: {len(privacy_results)}.", "",
                   "## Invocation failures", ""])
@@ -1230,7 +1353,7 @@ def validate_design_only(design_dir: Path, output_dir: Path) -> dict:
     verify_source_ci_and_feedback(manifest, design, design_dir)
     preflight = validate_preflight(design_dir, design, plans,
                                    {intent_id: read_json(design_dir / "feedback" / f"{intent_id}.json")
-                                    for intent_id in INTENTS})
+                                    for intent_id in INTENTS}, output_dir)
     capture_dir = ROOT / "audit" / "pinned-compact-context-2026-09-30"
     capture_status_path = capture_dir / "capture-status.json"
     capture_artifact_present = capture_dir.exists()

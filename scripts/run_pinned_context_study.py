@@ -29,6 +29,7 @@ DEFAULT_RUN_ID = "pinned-compact-context-2026-09-30"
 DEFAULT_VENV = Path("/tmp/meta-ontology-go-laya-venv-20260930")
 LAYA_VERSION = "0.3.21"
 MODEL_REVISION = "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+FROZEN_PUBLIC_CHECKPOINT_REVISION = "9dc4beb54002880da2a919d2b9b65148718500f5"
 SAMPLE_INTERVAL = 0.12
 CALL_TIMEOUT_SECONDS = 90
 RESOLVER_REQUEST_BUDGET_SECONDS = 8
@@ -614,6 +615,8 @@ def invocation_completion_issues(row: dict, record: dict, run_dir: Path, events:
         issues.append(f"expected one provider POST, captured {len(posts)}")
     if any(event.get("status") != 200 for event in posts):
         issues.append("provider POST did not return HTTP 200; stop to prevent backend overlap")
+    if any(event.get("request_sha256") != row.get("protocol_preflight_request_sha256") for event in posts):
+        issues.append("raw provider POST differs from the exact frozen MOCK preflight template")
 
     replies = []
     for event in posts:
@@ -1028,7 +1031,8 @@ def validate_captured_calls(run_dir: Path, study: dict, cli_records: list[dict],
                 run_dir, row, source, item["activity"], oracle, oracle_bytes,
                 plan, selected_id, report, body, binary_env,
             )
-            result["decision"] = "CAPTURED_AND_COMPILED"
+            result["decision"] = ("CAPTURED_AND_COMPILED" if result["provider_receipt_route_pin_match"]
+                                  else "COMPILED_PROVIDER_ROUTE_MISMATCH")
             request_audits.append(request_check)
             result_rows.append(result)
     for intent_id in manifest_items:
@@ -1317,7 +1321,8 @@ def render_report(report: dict) -> str:
              "| Context | Explicit model | Go validations | Training all | Training candidate-discriminating | Reused holdout all | Reused holdout candidate-discriminating | Model receipt matches pin |", "|---|---|---:|---:|---:|---:|---:|---:|"]
 
     def fmt(score: dict | None) -> str:
-        return f"{score.get('passed')}/{score.get('total')}" if score else "n/a"
+        return (f"{score.get('passed')}/{score.get('planned_total')} (observed {score.get('observed_total')}, "
+                f"unknown {score.get('unknown_total')})") if score else "n/a"
 
     for group in report["results_by_context_and_model"]:
         scores = group["compiled_finite_scores"]
@@ -1441,6 +1446,11 @@ def main() -> None:
     preexecution = {
         "schema": "gooo/pinned-context-preexecution/v1", "study_id": design["study_id"],
         "status": "all_plans_frozen_before_laya_process_start", "design_sha256": design_sha,
+        "study_code_provenance": {
+            "runner_script_sha256": sha256(Path(__file__).read_bytes()),
+            "preparation_script_sha256": sha256((ROOT / "scripts" / "prepare_pinned_context_study.py").read_bytes()),
+            "public_frozen_checkpoint_revision": FROZEN_PUBLIC_CHECKPOINT_REVISION,
+        },
         "compiler": binary_receipt, "laya_version": version.stdout.strip(),
         "expected_model_revision": MODEL_REVISION, "runtime": design["laya"],
         "protocol_preflight": design["protocol_preflight"],
