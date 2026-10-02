@@ -1,5 +1,8 @@
 # Gooo CI failure context experiment
 
+[Gooo Wiki, 한국어](https://github.com/kimjooyoon/meta-ontology-go/wiki) explains
+the language, small-model integration, current measurements and research foundations.
+
 ## Development context — 2026-10-03
 
 This repository preserves the September CI-context and Laya selection studies.
